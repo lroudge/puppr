@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<link>
+  <title>PuppR</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="main.js"></script>
+
+</head>
+<body>
+  <div id="swiping">
+    <nav-bar></nav-bar>
+    <profile :profiles-list="profilesList" :current-profile="currentProfile"></profile>
+    <name-age :profiles-list="profilesList"  :current-profile="currentProfile"></name-age>
+      <div class="action">
+          <img class="pass" src="pass-icon.png" @click="nextProfile">
+          <img class="reverse" src="reverse-icon.png" @click="previousProfile">
+          <img class="like" src="heart-icon.png" @click="nextProfile">
+      </div>
+  </div>
+</body>
+</html>
