@@ -1,4 +1,10 @@
-body {
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,15 +16,24 @@ body {
     bottom: 0;
     right: 0;
     left: 0;
+    margin: 0 auto;
+    overflow-x: hidden;
+    height: 100%;
+    width: 100%;
 }
 
-#swiping {
+#app {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
+}
+
+.swiping, .matches {
+    height: 100%;
+    width: 100%;
 }
 
 .profile {
@@ -29,20 +44,26 @@ body {
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-end;
-    height: 90%;
+    height: 65%;
     width: 100%;
     max-width: 100%;
 }
 
 .name-age {
     color: #badfdb;
+    font-size: 2vh;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 15%;
+}
+
+.name-age h1, .name-age h2 {
+    margin: 0 auto;
     padding-bottom: .2em;
     padding-left: .2em;
-    font-size: 2vh;
-    justify-content: flex-start;
-    flex-direction: column;
-    align-items: flex-start;
-    width: 100%;
+    padding-top: .2em;
 }
 
 .profile h2 {
@@ -55,19 +76,19 @@ body {
     align-items: center;
     height: 10%;
     width: 100%;
-    color: #badfdb;
 }
 
-.nav-bar h1 {
-    font-size: 3.5em;
+#logo {
+    font-size: 5vh;
     padding-bottom: 0.2em;
+    color: #badfdb;
 }
 
 .profile-icon {
     height: 100%;
 }
 
-.matches {
+.match-icon {
     height: 100%;
 }
 
@@ -85,7 +106,7 @@ body {
 .profileInfo {
     color: #ffc5a1;
     width: 100%;
-    height: 90%;
+    height: 65%;
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -101,4 +122,53 @@ body {
 
 .profileInfo p {
     margin-left: 0.7em;
+}
+
+.matches {
+    display: flex;
+    flex-direction: column;
+}
+
+.my-matches {
+    color: #f8a978;
+    font-size: 2vh;
+    height: 10%;
+    padding-bottom: .2em;
+    padding-left: 1.2em;
+    padding-top: .2em;
+    display: flex;
+    align-items: center;
+}
+
+.match-list {
+    height: 100%;
+    color: #ffc5a1;
+}
+
+.match-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.match-list li {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 20%;
+    font-size: 2.5vh;
+    border: 1px solid #f8a978;
+    margin-bottom: -1px;
+    margin-top: -1px;
+}
+
+.match-list p {
+    margin-left: 1.2em;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.image-icon {
+    width: 5em;
+    height: 5em;
 }

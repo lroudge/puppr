@@ -8,8 +8,8 @@ window.onload = function () {
         template: `
           <div class="nav-bar">
             <img class="profile-icon" src="dog-icon.png">
-            <h1>PuppR</h1>
-            <img class="matches" src="match-icon.png">
+            <h1 id="logo">PuppR</h1>
+            <router-link to="/matches" class="match-icon"><img class="match-icon" src="match-icon.png"></router-link>
           </div>`
     })
 
@@ -64,6 +64,7 @@ window.onload = function () {
         mounted() {
             eventHub.$on('change-profile', idx => {
                 this.index = idx;
+                this.profileInfo = false;
             })
         }
     })
@@ -104,8 +105,8 @@ window.onload = function () {
     })
 
     // Hard coded profiles for testing
-
-    const profile1 = {
+    const profiles = [
+    {
         image: 'joey.jpg',
         name: 'Joey',
         age: 5,
@@ -113,9 +114,9 @@ window.onload = function () {
         bio: 'I am the goodest boi!',
         likes: 'I like small dogs',
         dislikes: 'Running after a ball'
-    }
+    },
 
-    const profile2 = {
+    {
         image: 'sasha.jpg',
         name: 'Sasha',
         age: 3,
@@ -123,9 +124,9 @@ window.onload = function () {
         bio: 'I am the goodest girle!',
         likes: 'I like running a lot',
         dislikes: 'When my owner leaves for work'
-    }
+    },
 
-    const profile3 = {
+    {
         image: 'riley.jpeg',
         name: 'Riley',
         age: 7,
@@ -133,15 +134,28 @@ window.onload = function () {
         bio: 'I am a model for Instagram and Twitter!',
         likes: 'I like rolling in the mud!',
         dislikes: 'Peanut butter, yuck'
-    }
+    }]
 
-    // View for the entire page, composed of all the above components (nav-bar, profile, name-age) and an action div
+
+    // Component: swiping, composed of all the above components (nav-bar, profile, name-age) and an action div
     // containing a pass, a previous and a like button that fire the change-profile event
-    const swiping = new Vue({
-        el: '#swiping',
-        data: {
-            profilesList: [profile1, profile2, profile3],
-            currentProfile: 0
+    const swiping = {
+        template: `
+        <div class="swiping">
+          <nav-bar></nav-bar>
+          <profile :profiles-list="profilesList" :current-profile="currentProfile"></profile>
+          <name-age :profiles-list="profilesList"  :current-profile="currentProfile"></name-age>
+          <div class="action">
+            <img class="pass" src="pass-icon.png" @click="nextProfile">
+            <img class="reverse" src="reverse-icon.png" @click="previousProfile">
+            <img class="like" src="heart-icon.png" @click="nextProfile">
+          </div>
+        </div>`,
+        data() {
+            return {
+                profilesList: profiles,
+                currentProfile: 0
+            }
         },
         methods: {
             nextProfile() {
@@ -162,6 +176,65 @@ window.onload = function () {
                 let idx = this.currentProfile;
                 eventHub.$emit('change-profile', idx);
             }
+        }
+    }
+
+    // Component: match-list
+    // Contains the list of matches for a user
+    Vue.component('match-list', {
+        props: {
+            profilesList: Array,
+            currentProfile: Number
+        },
+        template: `
+            <div class="match-list">
+                <ul>
+                    <li v-for="profile in profiles">
+                        <img :src=profile.image class="image-icon"><p>{{ profile.name }}</p>
+                    </li>
+                </ul>
+            </div>
+        `,
+        data() {
+            return {
+                profiles: profiles
+            }
+        }
+    })
+
+    // Component: matches, entire page for the route /matches,
+    // where a user can access their match-list
+    const matches = {
+        template: `
+        <div class="matches">
+            <nav-bar></nav-bar>
+            <div class="my-matches">
+                <h1>My matches</h1>
+            </div>
+            <match-list></match-list>
+        </div>`,
+    }
+
+    // Router for the entire app
+    // Each route leads to a different view (component)
+    const router = new VueRouter({
+       routes: [
+           {
+               path: '/',
+               component: swiping
+            },
+           {
+               path: '/matches',
+               component: matches
+           }]
+    })
+
+    // Vue instance for the entire app
+    const app = new Vue({
+        router,
+        el: '#app',
+        data: {
+            profiles
         }
     })
 }
