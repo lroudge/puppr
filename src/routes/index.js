@@ -1,4 +1,4 @@
-import Vue from 'vue'
+import Vue from 'vue/dist/vue.js'
 import Router from 'vue-router'
 import Login from '../components/Login'
 import Register from '../components/Register'
@@ -29,7 +29,7 @@ const router = new Router({
       component: Swiping
     },
     {
-      path: '/Matches',
+      path: '/matches',
       component: Matches
     },
     {

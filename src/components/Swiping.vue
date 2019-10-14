@@ -3,9 +3,9 @@
     <profile :profiles-list="profilesList" :current-profile="currentProfile"></profile>
     <name-age :profiles-list="profilesList" :current-profile="currentProfile"></name-age>
     <div class="action">
-      <img class="pass" src="pass-icon.png" @click="nextProfile" />
-      <img class="reverse" src="reverse-icon.png" @click="previousProfile" />
-      <img class="like" src="heart-icon.png" @click="nextProfile" />
+      <img class="pass" src="../static/images/pass-icon.png" @click="nextProfile" />
+      <img class="reverse" src="../static/images/reverse-icon.png" @click="previousProfile" />
+      <img class="like" src="../static/images/heart-icon.png" @click="nextProfile" />
     </div>
   </div>
 </template>
@@ -13,8 +13,9 @@
 <script>
 import firebase from "firebase";
 import { db , eventHub } from "../main";
-
 import { mapGetters } from "vuex";
+import Profile from "./Profile";
+import nameAge from "./NameAge";
 export default {
   computed: {
     // map `this.user` to `this.$store.getters.user`
@@ -54,6 +55,10 @@ export default {
     //   .then(function(doc) {
     //     that.profile = doc.data();
     //   });
-  }
+  },
+    components: {
+        Profile: Profile,
+        nameAge: nameAge,
+    }
 };
 </script>
