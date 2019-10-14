@@ -7,10 +7,23 @@ window.onload = function () {
     Vue.component('nav-bar', {
         template: `
           <div class="nav-bar">
-            <img class="profile-icon" src="dog-icon.png">
-            <h1 id="logo">PuppR</h1>
-            <router-link to="/matches" class="match-icon"><img class="match-icon" src="match-icon.png"></router-link>
-          </div>`
+          <div class="empty" v-if="currentRoute === '/settings'"></div>
+        <router-link to="settings" class="setting-icon" v-if="currentRoute === '/settings' || currentRoute === '/myprofile'"><img class="setting-icon" src="setting-icon.png"></router-link>
+        <router-link to="myprofile" class = "profile-icon" v-if="currentRoute === '/' || currentRoute === '/myprofile' || currentRoute === '/settings'"><img class="profile-icon" src="dog-icon.png"></router-link>
+            <router-link to="/" id="logo" v-if="currentRoute === '/' || currentRoute === '/myprofile' ||  currentRoute === '/matches'"><h1 id="logo">PuppR</h1></router-link>
+            <router-link to="/matches" class="match-icon" v-if="currentRoute === '/' || currentRoute === '/matches'"><img class="match-icon" src="match-icon.png"></router-link>
+            <div class="empty" v-if="currentRoute === '/matches'"></div>
+          </div>`,
+        data() {
+            return {
+                currentRoute: this.$route.path
+            }
+        },
+        watch: {
+            $route (to, from){
+                this.currentRoute = this.$route.path;
+            }
+        }
     })
 
     // Component: profile
@@ -142,7 +155,6 @@ window.onload = function () {
     const swiping = {
         template: `
         <div class="swiping">
-          <nav-bar></nav-bar>
           <profile :profiles-list="profilesList" :current-profile="currentProfile"></profile>
           <name-age :profiles-list="profilesList"  :current-profile="currentProfile"></name-age>
           <div class="action">
@@ -207,14 +219,27 @@ window.onload = function () {
     const matches = {
         template: `
         <div class="matches">
-            <nav-bar></nav-bar>
             <div class="my-matches">
                 <h1>My matches</h1>
             </div>
             <match-list></match-list>
-        </div>`,
+        </div>`
     }
 
+    const userProfile = {
+        template: `
+        <div class="user-profile">
+            <h1>My Profile</h1>
+        </div>
+        `
+    }
+
+    const settings = {
+        template: `
+        <div class="settings">
+            <h1>Settings</h1>
+        </div>`
+    }
     // Router for the entire app
     // Each route leads to a different view (component)
     const router = new VueRouter({
@@ -226,6 +251,14 @@ window.onload = function () {
            {
                path: '/matches',
                component: matches
+           },
+           {
+               path: '/myprofile',
+               component: userProfile
+           },
+           {
+               path: '/settings',
+               component: settings
            }]
     })
 
