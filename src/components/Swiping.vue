@@ -72,32 +72,11 @@ export default {
       this.$emit("change-profile", idx);
     }
   },
-  // computed: {
-  //   image() {
-  //     return this.profilesList[this.index].images[0];
-  //   },
-  //   funfacts() {
-  //     return this.profilesList[this.index].dogInfo.funFacts;
-  //   },
-  //   otherinfo() {
-  //     return this.profilesList[this.index].dogInfo.otherInfo;
-  //   },
-  //   name() {
-  //     return this.profilesList[this.index].dogInfo.name;
-  //   },
-  //   age() {
-  //     return this.profilesList[this.index].dogInfo.age;
-  //   },
-  //   city() {
-  //     return this.profilesList[this.index].zipcode;
-  //   },
-  //   breed() {
-  //     return this.profilesList[this.index].dogInfo.breed;
-  //   },
-  //   ...mapGetters({
-  //     User: "user"
-  //   })
-  // },
+  computed: {
+    ...mapGetters({
+      User: "user"
+    })
+  },
   firestore() {
     return {
       profilesList: db.collection("users")
