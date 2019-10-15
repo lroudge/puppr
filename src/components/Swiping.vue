@@ -12,7 +12,7 @@
 
 <script>
 import firebase from "firebase";
-import { db , eventHub } from "../main";
+import { db, eventHub } from "../main";
 import { mapGetters } from "vuex";
 import Profile from "./Profile";
 import nameAge from "./NameAge";
@@ -47,18 +47,32 @@ export default {
       eventHub.$emit("change-profile", idx);
     }
   },
-  updated() {
-    // let that = this;
-    // db.collection("users")
-    //   .doc(this.User.data.localId)
-    //   .get()
-    //   .then(function(doc) {
-    //     that.profile = doc.data();
-    //   });
+  created() {
+    let that = this;
+    const retList = []
+    const usersRef = db.collection("users");
+    const query = usersRef.where("zipcode", "==", 94107);
+    query.get()
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+          // doc.data() is never undefined for query doc snapshots
+          let newDict = {};
+          newDict = doc.data();
+          newDict['user_id'] = doc.id
+          retList.push(newDict);
+        });
+      })
+      .then(function () {
+        that.profilesList = retList
+        // console.log(that.profilesList)
+      })
+      .catch(function(error) {
+        console.log("Error getting documents: ", error);
+      });
   },
-    components: {
-        Profile: Profile,
-        nameAge: nameAge,
-    }
+  components: {
+    Profile: Profile,
+    nameAge: nameAge
+  }
 };
 </script>

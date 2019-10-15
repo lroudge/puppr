@@ -10,6 +10,10 @@ import { db , eventHub } from "../main";
 
 import { mapGetters } from "vuex";
 export default {
+  props: [
+    'profiles-list',
+    'current-profile'
+  ],
   data() {
     return {
       index: 0
@@ -17,13 +21,13 @@ export default {
   },
   computed: {
     name() {
-      return this.profilesList[this.index].name;
+      return this.profilesList[this.currentProfile].dogInfo.name;
     },
     age() {
-      return this.profilesList[this.currentProfile].age;
+      return this.profilesList[this.currentProfile].dogInfo.age;
     },
     city() {
-      return this.profilesList[this.currentProfile].city;
+      return this.profilesList[this.currentProfile].zipcode;
     }
   },
   mounted() {

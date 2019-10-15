@@ -1,5 +1,6 @@
 import Vue from "vue/dist/vue.js";
 import router from "./routes/index";
+import { firestorePlugin } from 'vuefire'
 import App from "./App.vue";
 // import Navbar from "./components/Navbar";
 // import Login from './components/Login';
@@ -34,6 +35,7 @@ firebase.auth().onAuthStateChanged(user => {
     store.dispatch("fetchUser", user);
 });
 
+Vue.use(firestorePlugin)
 export const db = firebase.firestore()
 
 export const eventHub = new Vue()

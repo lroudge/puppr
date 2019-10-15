@@ -20,10 +20,15 @@ import { db , eventHub } from "../main";
 
 import { mapGetters } from "vuex";
 export default {
+  props: [
+    'profiles-list',
+    'current-profile'
+  ],
   data() {
     return {
       index: 0,
-      profileInfo: false
+      profileInfo: false,
+      // image: this.profilesList[this.currentProfile].images[0]
     }
   },
   methods: {
@@ -36,16 +41,16 @@ export default {
   },
   computed: {
     image() {
-      return this.profilesList[this.index].image;
+      return this.profilesList[this.currentProfile].images[0];
     },
     bio() {
-      return this.profilesList[this.index].bio;
+      return this.profilesList[this.currentProfile].bio;
     },
     likes() {
-      return this.profilesList[this.index].likes;
+      return this.profilesList[this.currentProfile].likes;
     },
     dislikes() {
-      return this.profilesList[this.index].dislikes;
+      return this.profilesList[this.currentProfile].dislikes;
     }
   },
   mounted() {
