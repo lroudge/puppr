@@ -36,8 +36,6 @@ firebase.auth().onAuthStateChanged(user => {
 
 export const db = firebase.firestore()
 
-export const eventHub = new Vue()
-
 new Vue({
     router,
     store,
