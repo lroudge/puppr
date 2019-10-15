@@ -4,9 +4,9 @@
     <name-age :profiles-list="profilesList" :current-profile="currentProfile"></name-age>
 <!--   <derps @change-profile="myMethod" /> we need to un-nest components to make everything a part of swiping-->
     <div class="action">
-      <img class="pass" src="../static/images/pass-icon.png" @click="nextProfile">
-      <img class="reverse" src="../static/images/reverse-icon.png" @click="previousProfile">
-      <img class="like" src="../static/images/heart-icon.png" @click="nextProfile">
+      <img class="pass" src="./../../public/icons/pass02.png" @click="nextProfile">
+      <img class="reverse" src="./../../public/icons/previous02.png" @click="previousProfile">
+      <img class="like" src="./../../public/icons/like02.png" @click="nextProfile">
     </div>
   </div>
 </template>

@@ -76,12 +76,18 @@ body, html {
     align-items: center;
     height: 10%;
     width: 100%;
+    padding: 0.3em;
 }
 
-#logo {
+.logo {
     font-size: 5vh;
-    padding-bottom: 0.2em;
+    height: 100%;
+    width: 25%;
     color: #badfdb;
+}
+.logo-image {
+    height: 100%;
+    width: 100%;
 }
 
 .profile-icon {
@@ -97,6 +103,7 @@ body, html {
     height: 10%;
     width: 100%;
     justify-content: space-between;
+    padding: 0.3em;
 }
 
 .like, .pass, .reverse {
