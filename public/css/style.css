@@ -188,4 +188,36 @@ body, html {
 .user-profile, .settings {
     height: 90%;
     width: 100%;
+    color: #f8a978;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 1em;
+}
+
+.my-pictures {
+    height: 20%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.my-pictures img {
+    height: 100%;
+    width:25%;
+}
+
+.user-form {
+    height: 60%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.user-form input {
+    width: 100%;
+    border: 1px solid #ffc5a1;
+    height: 4em;
+    margin-top: .5em;
 }
