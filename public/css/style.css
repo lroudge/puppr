@@ -212,12 +212,33 @@ body, html {
     width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: space-between;
 }
 
-.user-form input {
+.user-form textarea {
     width: 100%;
     border: 1px solid #ffc5a1;
-    height: 4em;
     margin-top: .5em;
+    font-family: "Arial Rounded MT Bold";
+    font-size: small;
+    color: #ffc5a1;
+    background-color: #FCF9EA;
+}
+
+.submit {
+    width: 50%;
+    align-self: center;
+    /* border: 1px solid #ffc5a1; */
+    border-radius: 15px;
+}
+
+.submit input {
+    height: 2em;
+    width: 100%;
+    border: 1px solid #ffc5a1;
+    border-radius: 15px;
+    font-family: "Arial Rounded MT Bold";
+    font-size: medium;
+    color: #f8a978;
+    background-color: #badfdb91;
 }

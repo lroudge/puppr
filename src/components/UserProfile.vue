@@ -9,23 +9,22 @@
         <div class="user-form">
             <div>
                 <h2>Doggo's name</h2>
-                <input type="text" v-model="dogName"/>
+                <textarea v-model="dogName" rows="1"></textarea>
             </div>
             <div>
                 <h2>Likes</h2>
-                <input type="text" v-model="likes"/>
+                <textarea v-model="likes" rows="3"></textarea>
             </div>
             <div>
                 <h2>Dislikes</h2>
-                <input type="text" v-model="dislikes"/>
+                <textarea v-model="dislikes" rows="3"></textarea>
             </div>
             <div>
                 <h2>Bio</h2>
-                <input type="text" v-model="bio"/>
+                <textarea v-model="bio" rows="5"></textarea>
             </div>
-            <div>
-                <h2>Save my changes</h2>
-                <input type="submit" value="Submit" v-on:click="submit"/>
+            <div class="submit">
+                <input type="submit" value="Save my changes" v-on:click="submit"/>
             </div>
         </div>
     </div>
