@@ -10,8 +10,6 @@ import Matches from '../components/Matches'
 Vue.use(Router)
 
 const router = new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
   routes: [
     {
       path: '/login',
@@ -20,25 +18,27 @@ const router = new Router({
     },
     {
       path: '/register',
-      name: 'Register',
+      name: 'register',
       component: Register
     },
     {
       path: '/',
-      name: 'Swiping',
+      name: 'swiping',
       component: Swiping
     },
     {
       path: '/matches',
+      name: 'matches',
       component: Matches
     },
     {
       path: '/myprofile',
+      name: 'myprofile',
       component: UserProfile
     },
     {
       path: '/settings',
-      name: 'Settings',
+      name: 'settings',
       component: Settings
     }
   ]

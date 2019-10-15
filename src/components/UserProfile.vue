@@ -10,6 +10,7 @@ import { db , eventHub } from "../main";
 import { mapGetters } from "vuex";
 export default {
   data() {
+      return {}
 //     return {
 //       profiles: profiles
 //     };
