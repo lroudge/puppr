@@ -256,3 +256,17 @@ body, html {
 textarea:focus::placeholder{
     color:transparent;
 }
+
+.age-name {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.age-name div {
+    margin: .8em;
+    flex-direction: column;
+    align-items: center;
+}

@@ -3,6 +3,10 @@
     <h1>My Settings</h1>
     <div class="settings-form">
       <div>
+        <h2>Display Name</h2>
+        <textarea v-model="displayName" rows="1" placeholder="JaneDoe"></textarea>
+      </div>
+      <div>
         <h2>Email</h2>
         <textarea v-model="email" rows="1" placeholder="123@puppr.com"></textarea>
       </div>
