@@ -1,16 +1,43 @@
 <template>
-<div class="user-profile">
-          <h1>My Profile</h1>
-      </div>
+    <div class="user-profile">
+        <h1>My Profile</h1>
+        <div class="my-pictures">
+            <img src="./../static/images/joey.jpg">
+            <img src="./../static/images/joey.jpg">
+            <img src="./../static/images/joey.jpg">
+        </div>
+        <div class="user-form">
+            <div>
+                <h2>Doggo's name</h2>
+                <textarea v-model="dogName" rows="1" placeholder="Rintintin"></textarea>
+            </div>
+            <div>
+                <h2>Likes</h2>
+                <textarea v-model="likes" rows="2" placeholder="Peanut butter, running after pigeons..."></textarea>
+            </div>
+            <div>
+                <h2>Dislikes</h2>
+                <textarea v-model="dislikes" rows="2" placeholder="The mailman, cats..."></textarea>
+            </div>
+            <div>
+                <h2>Bio</h2>
+                <textarea v-model="bio" rows="4" placeholder="I am a happy pup who loves cuddling!"></textarea>
+            </div>
+            <div class="submit">
+                <input type="submit" value="Save my changes" v-on:click="submit"/>
+            </div>
+        </div>
+    </div>
 </template>
 <script>
-import firebase from "firebase";
-import { db , eventHub } from "../main";
+    import firebase from "firebase";
+    import {db, eventHub} from "../main";
 
-import { mapGetters } from "vuex";
-export default {
-  data() {
-      return {}
+    import {mapGetters} from "vuex";
+
+    export default {
+        data() {
+            return {}
 //     return {
 //       profiles: profiles
 //     };
@@ -26,6 +53,6 @@ export default {
 //       return this.profilesList[this.currentProfile].city;
 //     }
 //   }
-  }
-}
+        }
+    }
 </script>
