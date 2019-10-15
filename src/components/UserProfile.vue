@@ -1,27 +1,37 @@
 <template>
     <div class="user-profile">
-        <h1>My Profile</h1>
+        <h1>My Dog's Profile</h1>
         <div class="my-pictures">
             <img src="./../static/images/joey.jpg">
             <img src="./../static/images/joey.jpg">
             <img src="./../static/images/joey.jpg">
         </div>
         <div class="user-form">
-            <div>
-                <h2>Doggo's name</h2>
-                <textarea v-model="dogName" rows="1" placeholder="Rintintin"></textarea>
+            <div class="age-name">
+                <div>
+                    <h3>Name</h3>
+                    <textarea v-model="dogName" rows="1" placeholder="Rintintin"></textarea>
+                </div>
+                <div>
+                <h3>Age</h3>
+                <textarea v-model="dogAge" rows="1" placeholder="5"></textarea>
+                </div>
+                <div>
+                <h3>Sex</h3>
+                <textarea v-model="dogSex" rows="1" placeholder="Male"></textarea>
+                </div>
             </div>
             <div>
-                <h2>Likes</h2>
+                <h3>Likes</h3>
                 <textarea v-model="likes" rows="2" placeholder="Peanut butter, running after pigeons..."></textarea>
             </div>
             <div>
-                <h2>Dislikes</h2>
+                <h3>Dislikes</h3>
                 <textarea v-model="dislikes" rows="2" placeholder="The mailman, cats..."></textarea>
             </div>
             <div>
-                <h2>Bio</h2>
-                <textarea v-model="bio" rows="4" placeholder="I am a happy pup who loves cuddling!"></textarea>
+                <h3>Fun Facts</h3>
+                <textarea v-model="bio" rows="4" placeholder="I eat veggies and fruits!"></textarea>
             </div>
             <div class="submit">
                 <input type="submit" value="Save my changes" v-on:click="submit"/>

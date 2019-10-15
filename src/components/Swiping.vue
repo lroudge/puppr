@@ -1,12 +1,16 @@
 <template>
   <div :key="hello" class="swiping" @change-profile="myMethod">
     <div class="profileInfo" v-on:click="hideInfo" v-if="profileInfo">
-      <h2>Bio</h2>
-      <p>{{ profilesList[index].dogInfo.funFacts }}</p>
-      <h2>Info</h2>
-      <p>{{ profilesList[index].dogInfo.otherInfo }}</p>
-      <h2>Age</h2>
-      <p>{{ profilesList[index].dogInfo.age }}</p>
+      <h2>Fun Facts</h2>
+      <p>{{ profilesList[index].dogInfo.fun_facts }}</p>
+      <h2>Likes</h2>
+      <p>{{ profilesList[index].dogInfo.likes }}</p>
+      <h2>Dislikes</h2>
+      <p>{{ profilesList[index].dogInfo.dislikes }}</p>
+      <h2>Sex</h2>
+      <p>{{ profilesList[index].dogInfo.sex }}</p>
+      <h2>Breed</h2>
+      <p>{{ profilesList[index].dogInfo.breed }}</p>
     </div>
     <div
       class="profile"
@@ -17,7 +21,7 @@
     <!--    <profile :profiles-list="profilesList" :current-profile="currentProfile"></profile>-->
     <div class="name-age">
       <h1>{{ profilesList[index].dogInfo.name }}, {{ profilesList[index].dogInfo.age }}</h1>
-      <h2>{{ profilesList[index].dogInfo.city }}</h2>
+      <h2>{{ profilesList[index].city }}</h2>
     </div>
     <!--    <name-age :profiles-list="profilesList" :current-profile="currentProfile"></name-age>-->
     <!--   <derps @change-profile="myMethod" /> we need to un-nest components to make everything a part of swiping-->
@@ -42,10 +46,15 @@ export default {
       hello: 0,
       index: 0,
       profileInfo: false,
+      userLoggedIn: true
     };
   },
   methods: {
     showInfo() {
+      if (!this.userLoggedIn) {
+        alert('You need to log in or sign up to access that feature!');
+        return;
+      }
       this.profileInfo = true;
     },
     hideInfo() {
@@ -58,6 +67,10 @@ export default {
       this.hello++;
     },
     nextProfile() {
+      if (!this.userLoggedIn) {
+        alert('You need to log in or sign up to access that feature!');
+        return;
+      }
       if (this.index === this.profilesList.length - 1) this.index = 0;
       else this.index++;
       console.log(this.index);
@@ -65,6 +78,10 @@ export default {
       this.$emit("change-profile", idx);
     },
     previousProfile() {
+      if (!this.userLoggedIn) {
+        alert('You need to log in or sign up to access that feature!');
+        return;
+      }
       if (this.index === 0) this.index = this.profilesList.length - 1;
       else this.index--;
       console.log(this.index);
