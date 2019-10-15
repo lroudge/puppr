@@ -208,7 +208,7 @@ body, html {
 }
 
 .user-form {
-    height: 60%;
+    height: 70%;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -218,7 +218,10 @@ body, html {
 .user-form textarea {
     width: 100%;
     border: 1px solid #ffc5a1;
+    border-radius: 15px;
+    padding: 0.7em;
     margin-top: .5em;
+    margin-bottom: .5em;
     font-family: "Arial Rounded MT Bold";
     font-size: small;
     color: #ffc5a1;

@@ -13,15 +13,15 @@
             </div>
             <div>
                 <h2>Likes</h2>
-                <textarea v-model="likes" rows="3"></textarea>
+                <textarea v-model="likes" rows="2"></textarea>
             </div>
             <div>
                 <h2>Dislikes</h2>
-                <textarea v-model="dislikes" rows="3"></textarea>
+                <textarea v-model="dislikes" rows="2"></textarea>
             </div>
             <div>
                 <h2>Bio</h2>
-                <textarea v-model="bio" rows="5"></textarea>
+                <textarea v-model="bio" rows="4"></textarea>
             </div>
             <div class="submit">
                 <input type="submit" value="Save my changes" v-on:click="submit"/>
