@@ -1,21 +1,12 @@
-import Vue from "vue/dist/vue.js";
+import Vue from "vue";
 import router from "./routes/index";
 import App from "./App.vue";
-// import Navbar from "./components/Navbar";
-// import Login from './components/Login';
-// import Register from './components/Register';
-// import Swiping from './components/Swiping';
-// import UserProfile from './components/UserProfile';
-// import Settings from './components/Settings';
-// import Matches from './components/Matches';
-// import MatchList from './components/MatchList';
-// import Profile from './components/Profile';
-// import NameAge from './components/NameAge';
 import * as firebase from "firebase";
+import { firestorePlugin } from 'vuefire';
 import store from "./store";
 
 Vue.config.productionTip = false;
-// Vue.use(VueFire)
+Vue.use(firestorePlugin)
 
 const configOptions = {
     apiKey: "AIzaSyCxE9roondfXx86qpiV94hMK5v6NI7_G1g",
