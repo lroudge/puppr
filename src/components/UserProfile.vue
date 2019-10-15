@@ -9,19 +9,19 @@
         <div class="user-form">
             <div>
                 <h2>Doggo's name</h2>
-                <textarea v-model="dogName" rows="1"></textarea>
+                <textarea v-model="dogName" rows="1" placeholder="Rintintin"></textarea>
             </div>
             <div>
                 <h2>Likes</h2>
-                <textarea v-model="likes" rows="2"></textarea>
+                <textarea v-model="likes" rows="2" placeholder="Peanut butter, running after pigeons..."></textarea>
             </div>
             <div>
                 <h2>Dislikes</h2>
-                <textarea v-model="dislikes" rows="2"></textarea>
+                <textarea v-model="dislikes" rows="2" placeholder="The mailman, cats..."></textarea>
             </div>
             <div>
                 <h2>Bio</h2>
-                <textarea v-model="bio" rows="4"></textarea>
+                <textarea v-model="bio" rows="4" placeholder="I am a happy pup who loves cuddling!"></textarea>
             </div>
             <div class="submit">
                 <input type="submit" value="Save my changes" v-on:click="submit"/>

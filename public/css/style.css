@@ -1,8 +1,8 @@
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+     box-sizing: border-box;
+     margin: 0;
+     padding: 0;
+ }
 
 body, html {
     display: flex;
@@ -207,7 +207,7 @@ body, html {
     width:25%;
 }
 
-.user-form {
+.user-form, .settings-form {
     height: 70%;
     width: 100%;
     display: flex;
@@ -215,7 +215,7 @@ body, html {
     justify-content: space-between;
 }
 
-.user-form textarea {
+.user-form textarea, .settings-form textarea {
     width: 100%;
     border: 1px solid #ffc5a1;
     border-radius: 15px;
@@ -226,6 +226,7 @@ body, html {
     font-size: small;
     color: #ffc5a1;
     background-color: #FCF9EA;
+    text-align: start;
 }
 
 .submit {
@@ -244,4 +245,14 @@ body, html {
     font-size: medium;
     color: #f8a978;
     background-color: #badfdb91;
+}
+
+::placeholder {
+    color: #8bd6ce;
+    opacity: 0.5;
+    font-style: italic;
+}
+
+textarea:focus::placeholder{
+    color:transparent;
 }
