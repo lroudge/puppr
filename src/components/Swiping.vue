@@ -38,7 +38,6 @@ import firebase from "firebase";
 import { db } from "../main";
 import { mapGetters } from "vuex";
 
-
 export default {
   data: function() {
     return {
@@ -46,7 +45,7 @@ export default {
       hello: 0,
       index: 0,
       profileInfo: false,
-      userLoggedIn: true
+      userLoggedIn: this.$store.state.user.loggedIn,
     };
   },
   methods: {
@@ -91,12 +90,15 @@ export default {
   },
   computed: {
     ...mapGetters({
-      User: "user"
+      user: "user"
     })
   },
-  firestore() {
+  firestore () {
+    let zipcode = this.$store.state.user.profile.zipcode
+    console.log("hellos")
+    console.log(this.$store.state.user.profile.zipcode)
     return {
-      profilesList: db.collection("users")
+      profilesList: db.collection("users").where("zipcode", "==", zipcode)
     };
   }
 };

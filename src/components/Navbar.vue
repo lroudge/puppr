@@ -16,6 +16,7 @@
                      @click="areYouLoggedIn">
             <img class="match-icon" src="./../../public/icons/matches.png"></router-link>
         <div class="empty" v-if="routeName === 'matches'"></div>
+        <button @click="signOut">Log Out</button>
     </div>
 </template>
 <script>
@@ -44,6 +45,7 @@
                     .auth()
                     .signOut()
                     .then(() => {
+                        console.log("Logged Out")
                         // this.$router.replace({
                         //   name: "home"
                         // });
