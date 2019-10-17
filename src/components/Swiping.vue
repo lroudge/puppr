@@ -47,6 +47,7 @@ export default {
       index: 0,
       profileInfo: false,
       userLoggedIn: this.$store.state.user.loggedIn,
+      profilesList: []
     };
   },
   methods: {
@@ -89,45 +90,35 @@ export default {
       this.$emit("change-profile", idx);
     }
   },
-<<<<<<< HEAD
-  created() {
-    let that = this;
-    const retList = []
-    const usersRef = db.collection("users");
-    const query = usersRef.where("zipcode", "==", 94107);
-    query.get()
-      .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-          // doc.data() is never undefined for query doc snapshots
-          let newDict = {};
-          newDict = doc.data();
-          newDict['user_id'] = doc.id
-          retList.push(newDict);
-        });
-      })
-      .then(function () {
-        that.profilesList = retList
-        // console.log(that.profilesList)
-      })
-      .catch(function(error) {
-        console.log("Error getting documents: ", error);
-      });
-  },
-  components: {
-    Profile: Profile,
-    nameAge: nameAge
-=======
+  // created() {
+  //   let that = this;
+  //   const retList = []
+  //   const usersRef = db.collection("users");
+  //   const query = usersRef.where("zipcode", "==", 94107);
+  //   query.get()
+  //     .then(function(querySnapshot) {
+  //       querySnapshot.forEach(function(doc) {
+  //         // doc.data() is never undefined for query doc snapshots
+  //         let newDict = {};
+  //         newDict = doc.data();
+  //         newDict['user_id'] = doc.id
+  //         retList.push(newDict);
+  //       });
+  //     })
+  //     .then(function () {
+  //       that.profilesList = retList
+  //       // console.log(that.profilesList)
+  //     })
+  //     .catch(function(error) {
+  //       console.log("Error getting documents: ", error);
+  //     });
+  // },
   computed: {
-    profilesList() {
-      return this.$store.getters.profiles;
-    },
     ...mapGetters({
-      user: "user",
-      profilesList: "profiles"
+      user: "user"
     }),
     ...mapState({
-      user: state => state.user,
-      profilesList: state => state.profiles
+      user: state => state.user
     })
   },
   // beforeRouteEnter (f, t, next) {
@@ -136,13 +127,9 @@ export default {
   //   })
   // },
   firestore () {
-    const zipCode = this.$store.getters.user.profile.zipcode
-    console.log("hellos")
-    console.log(this.$store.getters.user.profile.zipcode)
     return {
-      profilesList: db.collection("users").where("zipcode", "==", zipCode).get()
+      profilesList: db.collection("users")
     };
->>>>>>> b235f3d9e500c2fe7dd76b286ca87de41fb989da
   }
 };
 </script>

@@ -20,19 +20,14 @@ export default new Vuex.Store({
     user: {
       loggedIn: false,
       data: null,
-      profile: null,
-      profile_list: null
-    },
-    // profiles: []
+      profile: null
+    }
   },
 
   getters: {
     user (state) {
       return state.user
-    },
-    // profiles (state) {
-    //   return state.profiles
-    // }
+    }
   },
   mutations: {
     SET_LOGGED_IN(state, value) {
@@ -43,10 +38,7 @@ export default new Vuex.Store({
     },
     SET_PROFILE(state, profile) {
       state.user.profile = profile;
-    },
-    // SET_PROFILE_LIST(state, profiles) {
-    //   state.profiles = profiles;
-    // }
+    }
   },
   actions: {
     fetchUser({ commit }, user) {
@@ -68,7 +60,7 @@ export default new Vuex.Store({
         commit('SET_USER', null);
         commit('SET_PROFILE', null)
       }
-    },
+    }
     // fetchProfiles(state) {
     //   // commit("SET_PROFILE_LIST", profiles != null);
     //   const zipCode = state.user.profile.zipcode;

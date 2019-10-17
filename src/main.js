@@ -3,7 +3,6 @@ import router from "./routes/index";
 import { firestorePlugin } from 'vuefire'
 import App from "./App.vue";
 import * as firebase from "firebase";
-import { firestorePlugin } from 'vuefire';
 import store from "./store";
 
 Vue.config.productionTip = false;
