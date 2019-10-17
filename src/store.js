@@ -4,23 +4,12 @@ import { db } from "./main";
 
 Vue.use(Vuex);
 
-
-const getProfile = function (uid) {
-  const ref = db.collection('users').doc('GB02IDTM2913786375393')
-  ref.get().then(function (doc) {
-    console.log(doc.data())
-    return (doc.data())
-  }
-  )
-}
-
 export default new Vuex.Store({
   state: {
     user: {
       loggedIn: false,
       data: null,
-      profile: null,
-      profile_list: null
+      profile: null
     }
   },
 
@@ -38,9 +27,6 @@ export default new Vuex.Store({
     },
     SET_PROFILE(state, profile) {
       state.user.profile = profile;
-    },
-    SET_PROFILE_LIST(state, profiles) {
-      state.user.profile = profile_list;
     }
   },
   actions: {

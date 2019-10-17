@@ -1,5 +1,5 @@
 <template>
-  <div :key="hello" class="swiping" @change-profile="myMethod">
+  <div v-if="profilesList" :key="hello" class="swiping" @change-profile="myMethod">
     <div class="profileInfo" v-on:click="hideInfo" v-if="profileInfo">
       <h2>Fun Facts</h2>
       <p>{{ profilesList[index].dogInfo.fun_facts }}</p>
@@ -41,16 +41,16 @@ import { mapGetters } from "vuex";
 export default {
   data: function() {
     return {
-      profilesList: [],
+      profilesList: null,
       hello: 0,
       index: 0,
       profileInfo: false,
-      userLoggedIn: this.$store.state.user.loggedIn,
+      // userLoggedIn: this.$store.state.user.loggedIn,
     };
   },
   methods: {
     showInfo() {
-      if (!this.userLoggedIn) {
+      if (!this.user.loggedIn) {
         alert('You need to log in or sign up to access that feature!');
         return;
       }
@@ -66,7 +66,7 @@ export default {
       this.hello++;
     },
     nextProfile() {
-      if (!this.userLoggedIn) {
+      if (!this.user.loggedIn) {
         alert('You need to log in or sign up to access that feature!');
         return;
       }
@@ -77,7 +77,7 @@ export default {
       this.$emit("change-profile", idx);
     },
     previousProfile() {
-      if (!this.userLoggedIn) {
+      if (!this.user.loggedIn) {
         alert('You need to log in or sign up to access that feature!');
         return;
       }
@@ -91,14 +91,33 @@ export default {
   computed: {
     ...mapGetters({
       user: "user"
-    })
+    }),
+    zipcode () {
+      return this.$store.state.user.profile.zipcode
+    },
+    filteredList () {
+      // console.log(profilesList.filter(function (profile) {return profile}))
+      // return (profilesList.filter(function (profile) {return profile}))
+      return (profilesList.filter(function (profile) {return profile}))
+    }
   },
+  // watch: {
+  //   user: {
+  //     immediate: true,
+  //     handler(user) {
+  //       // console.log(user)
+  //       this.$bind('profilesList', db.collection("users").where("zipcode", "==", "94107"))
+  //     },
+  //   }
+  // 
   firestore () {
-    let zipcode = this.$store.state.user.profile.zipcode
-    console.log("hellos")
-    console.log(this.$store.state.user.profile.zipcode)
+    // let zipcode = 94107
+    console.log("hello")
+    // let zipcode = (this.zipcode ? this.zipcode : 94107)
     return {
-      profilesList: db.collection("users").where("zipcode", "==", zipcode)
+      profilesList: db.collection("users")
+      // profilesList: db.collection("users").where("zipcode", "==", 94107)
+
     };
   }
 };

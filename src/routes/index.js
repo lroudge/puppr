@@ -10,7 +10,7 @@ import Matches from '../components/Matches'
 Vue.use(Router)
 
 const router = new Router({
-  // mode: 'history',
+  mode: 'history',
   routes: [
     {
       path: '/login',
