@@ -42,17 +42,15 @@ import { store } from "../store";
 export default {
   data: function() {
     return {
-      // profilesList: [],
       hello: 0,
       index: 0,
       profileInfo: false,
-      userLoggedIn: this.$store.state.user.loggedIn,
       profilesList: []
     };
   },
   methods: {
     showInfo() {
-      if (!this.userLoggedIn) {
+      if (!this.user.loggedIn) {
         alert('You need to log in or sign up to access that feature!');
         return;
       }
@@ -68,7 +66,7 @@ export default {
       this.hello++;
     },
     nextProfile() {
-      if (!this.userLoggedIn) {
+      if (!this.user.loggedIn) {
         alert('You need to log in or sign up to access that feature!');
         return;
       }
@@ -79,7 +77,7 @@ export default {
       this.$emit("change-profile", idx);
     },
     previousProfile() {
-      if (!this.userLoggedIn) {
+      if (!this.user.loggedIn) {
         alert('You need to log in or sign up to access that feature!');
         return;
       }
