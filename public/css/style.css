@@ -40,8 +40,8 @@ body, html {
 
 .profile {
     /* background-image: url("joey.jpg"); */
-    background-size: cover;
-    background-position: center;
+    /*background-size: cover;*/
+    /*background-position: center;*/
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -49,6 +49,14 @@ body, html {
     height: 75%;
     width: 100%;
     max-width: 100%;
+}
+
+.profile-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0px 3px 3px grey;
 }
 
 .name-age {
@@ -122,6 +130,8 @@ body, html {
     flex-direction: column;
     border: 2px solid;
     font-size: 2vh;
+    border-radius: 15px;
+    box-shadow: 0px 3px 3px grey;
 }
 
 .profileInfo h2 {
