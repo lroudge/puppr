@@ -26,9 +26,10 @@
         <input id="zipcode" class="form-control" name="zipcode" required v-model="form.zipcode" />
       </div>
       <div class="form-group">
-        <h4>Dog Owners Name</h4>
+        <h4>Dog Owners Info</h4>
         <input required autofocus v-model="form.firstname" placeholder="First Name" />
         <input required autofocus v-model="form.lastname" placeholder="Last Name" />
+        <input required autofocus v-model="form.city" placeholder="City Name" />
       </div>
     </form>
     <div class="signup-user-profile">
@@ -105,7 +106,10 @@ export default {
         dogBreed: "",
         likes: "",
         dislikes: "",
-        funfacts: ""
+        funfacts: "",
+        firstname: "",
+        lastname: "",
+        city: ""
       },
       error: null
     };
@@ -117,21 +121,21 @@ export default {
         .createUserWithEmailAndPassword(this.form.email, this.form.password)
         .then(data => {
           let uid = data.user.uid;
-          let displayName = data.user.displayName;
-          let email = data.user.email;
           db.collection("users")
             .doc(uid)
             .set({
               email: this.form.email,
               zipcode: this.form.zipcode,
+              first_name: this.form.firstname,
+              last_name: this.form.lastname,
+              city: this.form.city,
               dogInfo: {
                 name: this.form.dogName,
                 age: this.form.dogAge,
                 breed: this.form.dogBreed,
                 fun_facts: this.form.funfacts,
                 likes: this.form.likes,
-                dislikes: this.form.dislikes,
-                first_name: this.form.displayName
+                dislikes: this.form.dislikes
               }
             })
             .then(function() {
