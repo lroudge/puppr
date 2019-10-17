@@ -5,29 +5,34 @@ import { db } from "./main";
 Vue.use(Vuex);
 
 
-const getProfile = function (uid) {
-  const ref = db.collection('users').doc('GB02IDTM2913786375393')
-  ref.get().then(function (doc) {
-    console.log(doc.data())
-    return (doc.data())
-  }
-  )
-}
+// const getProfile = function (uid) {
+//   const ref = db.collection('users').doc('GB02IDTM2913786375393')
+//   ref.get().then(function (doc) {
+//     console.log(doc.data())
+//     return (doc.data())
+//   }
+//   )
+// }
 
 export default new Vuex.Store({
+  name: "store",
   state: {
     user: {
       loggedIn: false,
       data: null,
       profile: null,
       profile_list: null
-    }
+    },
+    // profiles: []
   },
 
   getters: {
     user (state) {
       return state.user
-    }
+    },
+    // profiles (state) {
+    //   return state.profiles
+    // }
   },
   mutations: {
     SET_LOGGED_IN(state, value) {
@@ -39,9 +44,9 @@ export default new Vuex.Store({
     SET_PROFILE(state, profile) {
       state.user.profile = profile;
     },
-    SET_PROFILE_LIST(state, profiles) {
-      state.user.profile = profile_list;
-    }
+    // SET_PROFILE_LIST(state, profiles) {
+    //   state.profiles = profiles;
+    // }
   },
   actions: {
     fetchUser({ commit }, user) {
@@ -60,9 +65,19 @@ export default new Vuex.Store({
           )
         })
       } else {
-        commit('SET_USER', null)
+        commit('SET_USER', null);
         commit('SET_PROFILE', null)
       }
-    }
+    },
+    // fetchProfiles(state) {
+    //   // commit("SET_PROFILE_LIST", profiles != null);
+    //   const zipCode = state.user.profile.zipcode;
+    //   const ref = db.collection('users').where("zipcode", "==", zipCode)
+    //   ref.get().then(function (doc) {
+    //     state.dispatch('SET_PROFILE_LIST',
+    //         doc.data()
+    //     )
+    //   })
+    // }
   }
 });

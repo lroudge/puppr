@@ -270,3 +270,58 @@ textarea:focus::placeholder{
     flex-direction: column;
     align-items: center;
 }
+
+.login {
+    height: 90%;
+    width: 100%;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    color: #f8a978;
+}
+
+.login form {
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    color: #f8a978;
+}
+
+.form-group {
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-between;
+    width: 75%;
+}
+
+.form-group input {
+    height: 2em;
+    width: 100%;
+    border: 1px solid #ffc5a1;
+    border-radius: 15px;
+    font-family: "Arial Rounded MT Bold";
+    font-size: medium;
+    color: #f8a978;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    background-color: #badfdb91;
+}
+
+.meet-dogs {
+    height: 20%;
+    text-align: center;
+}
+
+.dog-pictures {
+    height: 70%;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+button {
+    font-family: inherit;
+    color: #badfdb;
+}

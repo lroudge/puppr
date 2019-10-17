@@ -36,12 +36,13 @@
 <script>
 import firebase from "firebase";
 import { db } from "../main";
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
+import { store } from "../store";
 
 export default {
   data: function() {
     return {
-      profilesList: [],
+      // profilesList: [],
       hello: 0,
       index: 0,
       profileInfo: false,
@@ -89,16 +90,29 @@ export default {
     }
   },
   computed: {
+    profilesList() {
+      return this.$store.getters.profiles;
+    },
     ...mapGetters({
-      user: "user"
+      user: "user",
+      profilesList: "profiles"
+    }),
+    ...mapState({
+      user: state => state.user,
+      profilesList: state => state.profiles
     })
   },
+  // beforeRouteEnter (f, t, next) {
+  //   next( async (vm) => {
+  //     await this.$store.dispatch('fetchUser');
+  //   })
+  // },
   firestore () {
-    let zipcode = this.$store.state.user.profile.zipcode
+    const zipCode = this.$store.getters.user.profile.zipcode
     console.log("hellos")
-    console.log(this.$store.state.user.profile.zipcode)
+    console.log(this.$store.getters.user.profile.zipcode)
     return {
-      profilesList: db.collection("users").where("zipcode", "==", zipcode)
+      profilesList: db.collection("users").where("zipcode", "==", zipCode).get()
     };
   }
 };
