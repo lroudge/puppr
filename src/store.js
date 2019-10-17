@@ -5,6 +5,7 @@ import { db } from "./main";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  name: "store",
   state: {
     user: {
       loggedIn: false,
@@ -46,9 +47,19 @@ export default new Vuex.Store({
           )
         })
       } else {
-        commit('SET_USER', null)
+        commit('SET_USER', null);
         commit('SET_PROFILE', null)
       }
     }
+    // fetchProfiles(state) {
+    //   // commit("SET_PROFILE_LIST", profiles != null);
+    //   const zipCode = state.user.profile.zipcode;
+    //   const ref = db.collection('users').where("zipcode", "==", zipCode)
+    //   ref.get().then(function (doc) {
+    //     state.dispatch('SET_PROFILE_LIST',
+    //         doc.data()
+    //     )
+    //   })
+    // }
   }
 });

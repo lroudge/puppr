@@ -1,8 +1,8 @@
 import Vue from "vue";
 import router from "./routes/index";
+import { firestorePlugin } from 'vuefire'
 import App from "./App.vue";
 import * as firebase from "firebase";
-import { firestorePlugin } from 'vuefire';
 import store from "./store";
 
 Vue.config.productionTip = false;
@@ -23,8 +23,10 @@ firebase.initializeApp(configOptions);
 
 firebase.auth().onAuthStateChanged(user => {
     store.dispatch("fetchUser", user);
+    // store.dispatch("fetchProfiles");
 });
 
+Vue.use(firestorePlugin)
 export const db = firebase.firestore()
 
 new Vue({

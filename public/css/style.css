@@ -29,6 +29,8 @@ body, html {
     align-items: center;
     width: 100%;
     height: 100%;
+    overflow-y: scroll;
+    margin-bottom: 1em;
 }
 
 .swiping, .matches {
@@ -38,8 +40,8 @@ body, html {
 
 .profile {
     /* background-image: url("joey.jpg"); */
-    background-size: cover;
-    background-position: center;
+    /*background-size: cover;*/
+    /*background-position: center;*/
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -47,6 +49,14 @@ body, html {
     height: 75%;
     width: 100%;
     max-width: 100%;
+}
+
+.profile-img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+    box-shadow: 0px 3px 3px grey;
 }
 
 .name-age {
@@ -74,7 +84,7 @@ body, html {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 10%;
+    height: 5em;
     width: 100%;
     padding: 0.3em;
 }
@@ -120,6 +130,8 @@ body, html {
     flex-direction: column;
     border: 2px solid;
     font-size: 2vh;
+    border-radius: 15px;
+    box-shadow: 0px 3px 3px grey;
 }
 
 .profileInfo h2 {
@@ -196,7 +208,6 @@ body, html {
 }
 
 .my-pictures {
-    height: 20%;
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -269,4 +280,89 @@ textarea:focus::placeholder{
     margin: .8em;
     flex-direction: column;
     align-items: center;
+}
+
+.login {
+    height: 90%;
+    width: 100%;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    color: #f8a978;
+    overflow-y: scroll;
+}
+
+.login form {
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    color: #f8a978;
+}
+
+.form-group {
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.form-group input {
+    height: 2em;
+    width: 100%;
+    border: 1px solid #ffc5a1;
+    border-radius: 15px;
+    font-family: "Arial Rounded MT Bold";
+    font-size: medium;
+    color: #ffc5a1 !important;
+    padding: .2em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    background-color: #FCF9EA !important;
+}
+
+.meet-dogs {
+    height: 20%;
+    text-align: center;
+}
+
+.dog-pictures {
+    height: 70%;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.signup {
+    width: 100%;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    color: #f8a978;
+    overflow-y: scroll;
+}
+
+.signup form {
+    height: 70%;
+    width: 70%;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    color: #f8a978;
+}
+
+.signup-user-profile {
+    width: 100%;
+    color: #f8a978;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+button {
+    font-family: inherit;
+    color: #badfdb;
 }
