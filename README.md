@@ -2,7 +2,7 @@
 
 ![logo](https://i.imgur.com/zg49V5K.png)
 
-**Anything is pawssible**
+                                                 *Anything is pawssible*
 
 ## Introduction
 
@@ -19,9 +19,9 @@ This project is our Portfolio Project, concluding our Foundations Year at Holber
 # The Team
 We are three dog enthusiasts who are passionate about coding but also like to keep it fun!
 
-* *Marc Cavigli* [@MarcCavigli](https://twitter.com/MarcCavigli) - Singer, Musician, song-writer and composer, but also a very talented Software Engineer.
-* *Drew Maring* [@drewmaring](https://twitter.com/drewmaring) - Dog owner and great Software Engineer, formerly working at Docker as a Solutions Architect / Technical Account Manager.
-* *Laura Roudge* [@LRoudge](https://twitter.com/LRoudge) - Former Dancer and Comedian, the "french touch" Software Engineer of the team.
+* **Marc Cavigli** [@MarcCavigli](https://twitter.com/MarcCavigli) - Singer, Musician, song-writer and composer, but also a very talented Software Engineer.
+* **Drew Maring** [@drewmaring](https://twitter.com/drewmaring) - Dog owner and great Software Engineer, formerly working at Docker as a Solutions Architect / Technical Account Manager.
+* **Laura Roudge** [@LRoudge](https://twitter.com/LRoudge) - Former Dancer and Comedian, the "french touch" Software Engineer of the team.
 
 Follow us on Twitter for more dog and tech related awesomeness!
 
