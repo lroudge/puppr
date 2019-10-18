@@ -119,7 +119,7 @@
                       console.log("Error getting documents: ", error);
                   });
               that.dataLoaded = true;
-            }, 1000);
+            }, 10000);
         },
         computed: {
             ...mapGetters({

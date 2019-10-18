@@ -2,12 +2,14 @@
   <div>
     <h1>Upload your image</h1>
     <form action="#">
-      <div class="form-group">
-        <h4>image</h4>
-        <input type="file" accept="image/*" @change="onFileChanged" required autofocus />
-      </div>
-      <button type="button" @click.prevent="onUpload">Upload!</button>
+      <b-form-group placeholder="Choose a file..." label="" label-for="file-large" label-cols-sm="2" label-size="lg">
+        <b-form-file id="file-large" size="lg" @change="onFileChanged"></b-form-file>
+      </b-form-group>
+      <b-button type="button" @click.prevent="onUpload">Upload</b-button>
     </form>
+    <div class="myspinner" v-if="spinnerOn">
+        <b-spinner label="Loading..."></b-spinner>
+    </div>
   </div>
 </template>
 
@@ -20,7 +22,8 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      selectedFile: null
+      selectedFile: null,
+      spinnerOn: false,
     };
   },
   computed: {
@@ -36,26 +39,8 @@ export default {
         alert("Image size must be 4MB or smaller");
       }
     },
-    // onUpload() {
-    //   const ref = firebase
-    //     .storage()
-    //     .ref()
-    //     .child(this.user.data.localId + "/" + this.selectedFile.name);
-    //   ref
-    //     .put(this.selectedFile)
-    //     .then(function(snapshot) {
-    //         // firestore call to add new image location to user images list
-    //         // get new image location from snapshot
-
-    //         // add image path to user's profile
-    //       alert("Uploaded image successfully!");
-    //     })
-    //     .catch(function(err) {
-    //       alert(err);
-    //     });
-    // },
     onUpload() {
-        const that = this
+      const that = this
       let storageRef = firebase.storage().ref();
       let uploadTask = storageRef
         .child(this.user.data.localId + "/" + this.selectedFile.name)
@@ -72,6 +57,7 @@ export default {
           let progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log("Upload is " + progress + "% done");
+          that.spinnerOn = true
           switch (snapshot.state) {
             case firebase.storage.TaskState.PAUSED: // or 'paused'
               console.log("Upload is paused");
@@ -83,6 +69,7 @@ export default {
         },
         function(error) {
           // Handle unsuccessful uploads
+          that.spinnerOn = false
           alert(error);
         },
         function() {
@@ -98,10 +85,12 @@ export default {
                     [downloadURL]
               })
               .then(function() {
+                that.spinnerOn = false
                 console.log("Document successfully updated!");
               })
               .catch(function(error) {
                 // The document probably doesn't exist.
+                that.spinnerOn = false
                 console.error("Error updating document: ", error);
               });
           });
@@ -111,3 +100,16 @@ export default {
   }
 };
 </script>
+
+<style  scoped>
+.myspinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 100;
+}
+/* :not(.myspinner) {
+    opacity: .5;
+} */
+
+</style>
