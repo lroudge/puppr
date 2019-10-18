@@ -23,7 +23,6 @@ firebase.initializeApp(configOptions);
 
 firebase.auth().onAuthStateChanged(user => {
     store.dispatch("fetchUser", user);
-    // store.dispatch("fetchProfiles");
 });
 
 Vue.use(firestorePlugin)

@@ -325,6 +325,10 @@ textarea:focus::placeholder{
     background-color: #FCF9EA !important;
 }
 
+.form-group h4 {
+    text-align: initial;
+}
+
 .meet-dogs {
     height: 20%;
     text-align: center;
@@ -339,11 +343,21 @@ textarea:focus::placeholder{
 
 .signup {
     width: 100%;
+    height: 90%;
     padding: 1em;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     color: #f8a978;
     overflow-y: scroll;
+}
+
+.signup-transitions {
+    width: 100%;
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    color: #f8a978;
+    overflow: scroll;
 }
 
 .signup form {
@@ -365,7 +379,37 @@ textarea:focus::placeholder{
     justify-content: space-around;
 }
 
+.signup-user-profile h2 {
+    margin: .7em;
+}
+
 button {
     font-family: inherit;
-    color: #badfdb;
+    color: #f8a978;
+    border: 1px solid #f8a978;
+    border-radius: 15px;
+    padding: .7em;
+    background-color: #badfdb91;
+    font-size: large;
+    margin-right: 1em;
+}
+
+.slide-leave-active,
+.slide-enter-active {
+    transition: .5s;
+}
+.slide-enter {
+    transform: translate(100%, 0);
+}
+.slide-leave-to {
+    transform: translate(-100%, 0);
+}
+
+.signup-0, .signup-1, .signup-2 {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
