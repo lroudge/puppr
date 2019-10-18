@@ -1,9 +1,12 @@
 import Vue from "vue";
+import BootstrapVue from 'bootstrap-vue'
 import router from "./routes/index";
 import { firestorePlugin } from 'vuefire'
 import App from "./App.vue";
 import * as firebase from "firebase";
 import store from "./store";
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 Vue.config.productionTip = false;
 Vue.use(firestorePlugin)
@@ -26,6 +29,7 @@ firebase.auth().onAuthStateChanged(user => {
 });
 
 Vue.use(firestorePlugin)
+Vue.use(BootstrapVue)
 export const db = firebase.firestore()
 
 new Vue({

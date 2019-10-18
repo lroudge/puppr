@@ -7,6 +7,7 @@ import Swiping from '../components/Swiping'
 import UserProfile from '../components/UserProfile'
 import Settings from '../components/Settings'
 import Matches from '../components/Matches'
+import ImageUpload from '../components/ImageUpload'
 
 Vue.use(Router)
 
@@ -47,6 +48,11 @@ export default new Router({
             path: '/settings',
             name: 'settings',
             component: Settings
+        },
+        {
+            path: '/upload',
+            name: 'imageupload',
+            component: ImageUpload
         }
     ]
 })

@@ -71,7 +71,7 @@
                     //     console.log('Promise returned from replace');
                     // })
                     .catch(err => {
-                        this.error = err.message;
+                        console.log(this.error = err.message);
                     });
             }
         },
