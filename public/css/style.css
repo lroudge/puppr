@@ -394,15 +394,20 @@ button {
     margin-right: 1em;
 }
 
-.slide-leave-active,
-.slide-enter-active {
-    transition: .5s;
+.slide-enter-active,
+.slide-leave-active
+{
+    transition: transform 0.5s ease;
 }
+
 .slide-enter {
-    transform: translate(100%, 0);
+    transform: translateX(100%);
+    transition: all 200ms ease-in 0s;
 }
+
 .slide-leave-to {
-    transform: translate(-100%, 0);
+    transform: translateX(-100%);
+    transition: all 200ms ease-in 0s;
 }
 
 .signup-0, .signup-1, .signup-2 {

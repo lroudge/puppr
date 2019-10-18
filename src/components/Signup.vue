@@ -20,8 +20,11 @@
                                 class="form-control"
                                 name="password"
                                 required
-                                v-model="form.password"
+                                v-model="form.confirmPwd"
                         />
+                    </div>
+                    <div class="form-group">
+                        <router-link :to="{ name: 'login' }">Already have an account? Sign in here!</router-link>
                     </div>
                     <div class="form-group">
                         <button type="submit" @click="submit">Next</button>
@@ -89,16 +92,14 @@
                     </div>
                     <div class="form-group">
                         <button @click="goBack0">Previous</button>
-                        <button type="submit" @click="signUp">Next</button>
-                    </div>
-                    <div class="form-group">
-                        <router-link to="/login">Already have an account? Sign in here!</router-link>
+                        <button @click="signUp">Next</button>
                     </div>
                 </div>
             </div>
         </transition>
         <transition name="slide">
             <div class="signup-2" v-if="signup2">
+                <div class="uploaded-image"></div>
                 <div>
                     <h1>Upload your image</h1>
                     <form action="#">
@@ -112,16 +113,14 @@
                         <b-spinner label="Loading..."></b-spinner>
                     </div>
                 </div>
-                <!--                <div class="my-pictures">-->
-                <!--                    <img src="./../static/images/joey.jpg"/>-->
-                <!--                    <img src="./../static/images/joey.jpg"/>-->
-                <!--                    <img src="./../static/images/joey.jpg"/>-->
-                <!--                </div>-->
+                <div class="form-group">
+                    <button @click="goBack1">Previous</button>
+                    <router-link :to="{ name: 'swiping'}"><button>Get started!</button></router-link>
+                </div>
             </div>
         </transition>
     </div>
 </template>
-
 <script>
     import firebase from "firebase";
     import {db, storage} from "../main";
@@ -139,6 +138,7 @@
                 form: {
                     email: "",
                     password: "",
+                    confirmPwd: "",
                     zipcode: "",
                     dogName: "",
                     dogAge: "",
@@ -163,6 +163,10 @@
             goBack0() {
                 this.signup0 = true;
                 this.signup1 = false;
+            },
+            goBack1() {
+                this.signup1 = true;
+                this.signup2 = false;
             },
             submit() {
                 let that = this;
