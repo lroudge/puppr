@@ -2,10 +2,9 @@
   <div>
     <h1>Upload your image</h1>
     <form action="#">
-      <div class="form-group">
-        <h4>image</h4>
-        <input type="file" accept="image/*" @change="onFileChanged" required autofocus />
-      </div>
+      <b-form-group placeholder="Choose a file..." label="" label-for="file-large" label-cols-sm="2" label-size="lg">
+        <b-form-file id="file-large" size="lg" @change="onFileChanged"></b-form-file>
+      </b-form-group>
       <button type="button" @click.prevent="onUpload">Upload!</button>
     </form>
   </div>
@@ -36,24 +35,6 @@ export default {
         alert("Image size must be 4MB or smaller");
       }
     },
-    // onUpload() {
-    //   const ref = firebase
-    //     .storage()
-    //     .ref()
-    //     .child(this.user.data.localId + "/" + this.selectedFile.name);
-    //   ref
-    //     .put(this.selectedFile)
-    //     .then(function(snapshot) {
-    //         // firestore call to add new image location to user images list
-    //         // get new image location from snapshot
-
-    //         // add image path to user's profile
-    //       alert("Uploaded image successfully!");
-    //     })
-    //     .catch(function(err) {
-    //       alert(err);
-    //     });
-    // },
     onUpload() {
         const that = this
       let storageRef = firebase.storage().ref();
