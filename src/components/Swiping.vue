@@ -29,7 +29,7 @@
         <div class="action">
             <img class="pass" src="./../../public/icons/pass02.png" @click="nextProfile"/>
             <img class="reverse" src="./../../public/icons/previous02.png" @click="previousProfile"/>
-            <img class="like" src="./../../public/icons/like02.png" @click="nextProfile"/>
+            <img class="like" src="./../../public/icons/like02.png" @click="likeProfile"/>
         </div>
     </div>
 </template>
@@ -68,6 +68,13 @@
                 this.hello++;
             },
             nextProfile() {
+                if (this.index === this.profilesList.length - 1) this.index = 0;
+                else this.index++;
+                console.log(this.index);
+                let idx = this.index;
+                this.$emit("change-profile", idx);
+            },
+            likeProfile() {
                 if (!this.user.loggedIn) {
                     alert('You need to log in or sign up to access that feature!');
                     return;
@@ -79,10 +86,6 @@
                 this.$emit("change-profile", idx);
             },
             previousProfile() {
-                if (!this.user.loggedIn) {
-                    alert('You need to log in or sign up to access that feature!');
-                    return;
-                }
                 if (this.index === 0) this.index = this.profilesList.length - 1;
                 else this.index--;
                 console.log(this.index);

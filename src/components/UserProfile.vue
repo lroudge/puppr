@@ -36,6 +36,9 @@
             <div class="submit">
                 <input type="submit" value="Save my changes" v-on:click="submit"/>
             </div>
+            <div class="submit">
+                <router-link :to="{ name: 'swiping' }"><input value="Log Out" v-on:click="signOut"/></router-link>
+            </div>
         </div>
     </div>
 </template>
@@ -48,21 +51,19 @@
     export default {
         data() {
             return {}
-//     return {
-//       profiles: profiles
-//     };
-//   },
-//   computed: {
-//     name() {
-//       return this.profilesList[this.index].name;
-//     },
-//     age() {
-//       return this.profilesList[this.currentProfile].age;
-//     },
-//     city() {
-//       return this.profilesList[this.currentProfile].city;
-//     }
-//   }
+        },
+        methods: {
+            signOut() {
+                firebase
+                    .auth()
+                    .signOut()
+                    .then(() => {
+                        console.log("Logged Out")
+                        // this.$router.replace({
+                        //   name: "home"
+                        // });
+                    });
+            },
         }
     }
 </script>

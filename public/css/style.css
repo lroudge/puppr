@@ -198,8 +198,8 @@ body, html {
 }
 
 .user-profile, .settings {
-    height: 90%;
     width: 100%;
+    height: 100%;
     color: #f8a978;
     display: flex;
     flex-direction: column;
@@ -245,6 +245,7 @@ body, html {
     align-self: center;
     /* border: 1px solid #ffc5a1; */
     border-radius: 15px;
+    text-align: center;
 }
 
 .submit input {
@@ -256,6 +257,8 @@ body, html {
     font-size: medium;
     color: #f8a978;
     background-color: #badfdb91;
+    text-align: center;
+    margin: .5em;
 }
 
 ::placeholder {
