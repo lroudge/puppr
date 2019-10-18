@@ -28,7 +28,7 @@
         <!--   <derps @change-profile="myMethod" /> we need to un-nest components to make everything a part of swiping-->
         <div class="action">
             <img class="pass" src="./../../public/icons/pass02.png" @click="nextProfile"/>
-            <img class="reverse" src="./../../public/icons/previous02.png" @click="previousProfile"/>
+            <img class="reverse" src="./../../public/icons/previous_new.png" @click="previousProfile"/>
             <img class="like" src="./../../public/icons/like02.png" @click="likeProfile"/>
         </div>
     </div>
