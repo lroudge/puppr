@@ -88,20 +88,63 @@ export default {
         return;
       }
       // check the other user's profile for likes
-      const otherUserUid = this.profilesList[this.index].user_id
-      const otherUserLikes = this.profilesList[this.index].likes
-      const loggedInUid = this.user.data.localId
-      const loggedInLikes = this.user.profile.likes
+      const otherUserPro = this.profilesList[this.index];
+      const loggedInPro = this.user.profile;
+      const otherUserUid = this.profilesList[this.index].user_id;
+      const otherUserLikes = this.profilesList[this.index].likes;
+      const loggedInUid = this.user.data.localId;
+      const loggedInLikes = this.user.profile.likes;
       // returns -1 if index is not found
-      let userIdx = otherUserLikes.indexOf(loggedInUid)
+      let userIdx = otherUserLikes.indexOf(loggedInUid);
       // if logged in user in other user's likes --> create match
       if (userIdx !== -1) {
-          // create new match
-          // remove loggedInUser from otherUserLikes
+        // create new match in matches collection
+        db.collection("matches")
+          .add({
+            user1: {
+              user_id: otherUserPro.user_id,
+              displayName: otherUserPro.displayName,
+              image: otherUserPro.images[0],
+              dogName: otherUserPro.dogInfo.name
+            },
+            user2: {
+              user_id: loggedInUid,
+              displayName: loggedInPro.displayName,
+              image: loggedInPro.images[0],
+              dogName: otherUserPro.dogInfo.name
+            },
+            messages: [],
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+          })
+          .then(function(docRef) {
+            console.log("Document written with ID: ", docRef.id);
+            // remove like from other user like list
+            // let newLikes = otherUserPro.likes.slice(0)
+            // newLikes.splice(userIdx, 1)
+            // console.log(newLikes)
+            db.collection('users').doc(otherUserPro.user_id)
+            .update({
+                "likes": firebase.firestore.FieldValue.arrayRemove(userIdx)
+            }).then(function() {
+                console.log("Document successfully updated and like REMOVED!")
+                aler("You have a new match!")
+
+            }).catch(function(error) {
+                console.error("Error updating like in document: ", error);
+          })
+          .catch(function(error) {
+            console.error("Error adding document: ", error);
+            });
+          })
+        // remove loggedInUser from otherUserLikes
       } else {
-          // add other otherUserId to loggedInUser likes
-          loggedInLikes.push(otherUserUid)
-          console.log("Like added")
+        // add other otherUserId to loggedInUser likes
+        db.collection('users').doc(loggedInUid)
+            .update({
+                "likes": firebase.firestore.FieldValue.arrayUnion(otherUserUid)
+            }).then(function() {
+                console.log("Document successfully updated and like ADDED!")
+            });
       }
       // else, add the user to logged in user's array
       if (this.index === this.profilesList.length - 1) this.index = 0;
@@ -126,7 +169,7 @@ export default {
         const query = usersRef.where(
           "zipcode",
           "==",
-          that.$store.state.user.profile.zipcode
+          that.user.profile.zipcode
         );
         query
           .get()
@@ -153,7 +196,7 @@ export default {
   },
   created() {
     //   console.log(this.user)
-      this.getMatches()
+    this.getMatches();
   },
   computed: {
     ...mapGetters({
