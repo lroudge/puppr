@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <nav-bar></nav-bar>
+        <nav-bar v-show="$route.path === '/landing' ? false : true"></nav-bar>
         <router-view></router-view>
     </div>
 </template>

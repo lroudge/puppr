@@ -8,6 +8,7 @@ import UserProfile from '../components/UserProfile'
 import Settings from '../components/Settings'
 import Matches from '../components/Matches'
 import ImageUpload from '../components/ImageUpload'
+import Landing from '../components/Landing'
 
 Vue.use(Router)
 
@@ -53,6 +54,11 @@ export default new Router({
             path: '/upload',
             name: 'imageupload',
             component: ImageUpload
+        },
+        {
+            path: '/landing',
+            name: 'landing',
+            component: Landing
         }
     ]
 })
