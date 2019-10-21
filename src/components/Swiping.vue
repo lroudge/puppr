@@ -87,6 +87,23 @@ export default {
         alert("You need to log in or sign up to access that feature!");
         return;
       }
+      // check the other user's profile for likes
+      const otherUserUid = this.profilesList[this.index].user_id
+      const otherUserLikes = this.profilesList[this.index].likes
+      const loggedInUid = this.user.data.localId
+      const loggedInLikes = this.user.profile.likes
+      // returns -1 if index is not found
+      let userIdx = otherUserLikes.indexOf(loggedInUid)
+      // if logged in user in other user's likes --> create match
+      if (userIdx !== -1) {
+          // create new match
+          // remove loggedInUser from otherUserLikes
+      } else {
+          // add other otherUserId to loggedInUser likes
+          loggedInLikes.push(otherUserUid)
+          console.log("Like added")
+      }
+      // else, add the user to logged in user's array
       if (this.index === this.profilesList.length - 1) this.index = 0;
       else this.index++;
       console.log(this.index);
@@ -135,7 +152,7 @@ export default {
     }
   },
   created() {
-      console.log(this.user)
+    //   console.log(this.user)
       this.getMatches()
   },
   computed: {
