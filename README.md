@@ -53,3 +53,13 @@ Another interesting point about Vue.js is that it allowed us to use a store, def
 ## Google Cloud Storage
 
 # Acknowledgments
+
+* Holberton School staff - For the help, advice and resources they provided us with during this project and during all our curriculum.
+
+* Our dogs (or friends' dogs) - For the inspiration, courage and love they brought us when we were working hard and tired.
+
+* Romain Bonhomme - For his incredible Vue.js knowledge and overall front-end good practices.
+
+* Valentin Roudge - For his help and advice in Node.js and architecture best practices.
+
+* YOU - For reading this documentation and testing out PuppR. We hope you enjoyed the ride!
