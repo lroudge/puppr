@@ -44,7 +44,7 @@
 
 <script>
     import firebase from "firebase";
-    import {store} from "../main";
+    import { db, store } from "../main";
 
     export default {
         data() {
@@ -58,14 +58,21 @@
         },
         methods: {
             submit() {
+                const that = this
                 firebase
                     .auth()
                     .signInWithEmailAndPassword(this.form.email, this.form.password)
-                    .then(() => {
-                        this.$router.replace({name: "swiping"})
+                    .then((data) => {
+                        // load the profile of the user in Vuex store
+                        console.log(data.user.uid)
+                        const ref = db.collection('users').doc(data.user.uid)
+                        ref.get().then(function (doc) {
+                            that.$store.commit('SET_PROFILE', doc.data())
+                            that.$router.replace({name: "swiping"})
                             .then(() => {
                                 console.log('Promise returned from replace');
-                            });
+                            })
+                        })
                     })
                     // .then(() => {
                     //     console.log('Promise returned from replace');

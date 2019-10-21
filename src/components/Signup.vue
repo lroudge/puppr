@@ -191,7 +191,7 @@
                     .doc(uid)
                     .set({
                         email: this.form.email,
-                        zipcode: this.form.zipcode,
+                        zipcode: Number(this.form.zipcode),
                         displayname: this.form.displayname,
                         // first_name: this.form.firstname,
                         // last_name: this.form.lastname,
@@ -203,7 +203,9 @@
                             fun_facts: this.form.funfacts,
                             likes: this.form.likes,
                             dislikes: this.form.dislikes
-                        }
+                        },
+                        likes: [],
+                        matches: {}
                     })
                     .then(function () {
                         console.log("Document successfully written!");
