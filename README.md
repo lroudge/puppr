@@ -25,6 +25,31 @@ Follow us on Twitter for more dog and tech related awesomeness!
 
 # Tutorial
 
+## Take a tour of the deployed version
+## Run PuppR with Vue-CLI
+## Known bugs
+
 # Architecture
+
+## Overview
+Our web app is a single-page app, coded mainly in Node.js. PuppR is front-end heavy, meaning that we focused our time and energy in developping a simple but easy to use and fun app. We designed most of the User Interface, using plain CSS and some native Vue transitions and animations. We also incorporated some BootstrapVue elements which offered a simple solution for some features like image uploading.
+
+## Vue.js
+For this project, we decided to focus on learning a new front-end framework. Following the advice of mentors and professionals, we chose to learn and use Vue.js.
+
+Every different section of the app is a Vue component, and all the components can be found in the directory [src/components/](./src/components/). The main component "App" is defined in [App.vue](./src/App.vue), and is the entry point of the app.
+
+All the components are linked together thanks to a VueRouter instance, defined in [index.js](./routes/index.js). Each component is linked to a route, which path is appended automatically at the end of our URL.
+
+The [main.js](./src/main.js) file contains the instanciation of the Vue for the entire app, as well as the config options, database session and authentication session.
+
+Another interesting point about Vue.js is that it allowed us to use a store, defined in [store.js](./src/store.js). This store is a front-end store that keep strack of the state of components and data throughout the app. This is were the data from our database requests is stored and updated before going back in the database. This store also allows to not pass props from each component to all its children components, and to access data from anywhere without having to use and event bus.
+
+## Firebase
+
+### Firestore
+### Fire auth
+
+## Google Cloud Storage
 
 # Acknowledgments
