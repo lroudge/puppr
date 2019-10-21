@@ -394,18 +394,22 @@ button {
     margin-right: 1em;
 }
 
-.slide-enter-active,
-.slide-leave-active
+.slide-left-enter-active,
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active
 {
     transition: transform 0.5s ease;
 }
 
-.slide-enter {
+.slide-left-enter,
+.slide-right-leave-active {
     transform: translateX(100%);
     transition: all 200ms ease-in 0s;
 }
 
-.slide-leave-to {
+.slide-left-leave-active,
+.slide-right-enter {
     transform: translateX(-100%);
     transition: all 200ms ease-in 0s;
 }

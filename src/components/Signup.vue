@@ -1,6 +1,6 @@
 <template>
     <div class="signup">
-        <transition name="slide">
+        <transition :name="transitionName">
             <div class="signup-0" v-if="signup0">
                 <h1>Sign Up</h1>
                 <form action="#" @submit.prevent="submit">
@@ -32,7 +32,7 @@
                 </form>
             </div>
         </transition>
-        <transition name="slide">
+        <transition :name="transitionName">
             <div class="signup-user-profile signup-1" v-if="signup1">
                 <h2>My Dog's Profile</h2>
                 <div class="user-form">
@@ -97,7 +97,7 @@
                 </div>
             </div>
         </transition>
-        <transition name="slide">
+        <transition :name="transitionName">
             <div class="signup-2" v-if="signup2">
                 <div class="uploaded-image"></div>
                 <div>
@@ -130,6 +130,7 @@
     export default {
         data() {
             return {
+                transitionName: "slide-left",
                 selectedFile: null,
                 spinnerOn: false,
                 signup0: true,
@@ -157,20 +158,29 @@
         computed: {
             ...mapGetters({
                 user: "user"
-            }),
+            })
         },
         methods: {
             goBack0() {
-                this.signup0 = true;
-                this.signup1 = false;
+                this.transitionName = "slide-right";
+                const that = this;
+                setTimeout(function() {
+                    that.signup0 = true;
+                    that.signup1 = false;
+                    }, 500);
+                setTimeout(function() { that.transitionName = "slide-left";}, 1000);
             },
             goBack1() {
-                this.signup1 = true;
-                this.signup2 = false;
+                this.transitionName = "slide-right";
+                const that = this;
+                setTimeout(function() {
+                    that.signup1 = true;
+                    that.signup2 = false;
+                }, 500);
+                setTimeout(function() { that.transitionName = "slide-left";}, 1000);
             },
             submit() {
                 let that = this;
-                // this.current += 1;
                 that.signup0 = false;
                 that.signup1 = true;
                 firebase
