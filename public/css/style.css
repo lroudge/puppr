@@ -341,14 +341,22 @@ textarea:focus::placeholder{
 }
 
 .meet-dogs {
-    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-bottom: 1em !important;
 }
 
-.dog-pictures {
-    height: 70%;
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-between;
+.meet-dogs img {
+    height: 10em;
+    width: 10em;
+    border-radius: 15px;
+    box-shadow: 0px 3px 3px grey;
+}
+
+.bottom-signin {
+    text-align: center;
+    align-items: center;
 }
 
 .signup {

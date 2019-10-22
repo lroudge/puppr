@@ -27,16 +27,18 @@
                 />
             </div>
             <div>
-                <button type="submit">Login</button>
+                <button type="submit">Log In</button>
             </div>
             <div class="form-group">
                 <router-link to="/signup">Don't have an account? Sign up here!</router-link>
             </div>
         </form>
-        <div class="meet-dogs">
-            <div class="dog-pictures"></div>
-            <h3>Here are some doggos playing in your area!</h3>
-            <router-link :to="{ name: 'swiping' }">Take a tour of all the doggos in your area without signing in
+        <div class="bottom-signin">
+            <div class="meet-dogs">
+                <img src="../../public/images/poppy.png">
+                <img src="../../public/images/joey.jpg">
+            </div>
+            <router-link :to="{ name: 'swiping' }">Try out PuppR without signing in
             </router-link>
         </div>
     </div>
