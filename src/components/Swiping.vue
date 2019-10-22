@@ -55,6 +55,7 @@ export default {
       index: 0,
       profileInfo: false,
       profilesList: [],
+      filteredList: [],
       dataLoaded: false
     };
   },
@@ -111,32 +112,40 @@ export default {
               user_id: loggedInUid,
               displayName: loggedInPro.displayName,
               image: loggedInPro.images[0],
-              dogName: otherUserPro.dogInfo.name
+              dogName: loggedInPro.dogInfo.name
             },
             messages: [],
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
           })
           .then(function(docRef) {
             console.log("Document written with ID: ", docRef.id);
-            // remove like from other user like list
-            // let newLikes = otherUserPro.likes.slice(0)
-            // newLikes.splice(userIdx, 1)
-            // console.log(newLikes)
+            // remove like from other user like list and add match object to
+            // other user's matches list
             db.collection('users').doc(otherUserPro.user_id)
             .update({
-                "likes": firebase.firestore.FieldValue.arrayRemove(userIdx)
+                "likes": firebase.firestore.FieldValue.arrayRemove(userIdx),
+                "matches": firebase.firestore.FieldValue.arrayUnion({
+                    [loggedInUid]: docRef.id
+                })
+                // add match object to both user's profiles match list
+                // key: other user's uid, value: matchId
             }).then(function() {
-                console.log("Document successfully updated and like REMOVED!")
-                aler("You have a new match!")
-
-            }).catch(function(error) {
-                console.error("Error updating like in document: ", error);
+                db.collection('users').doc(loggedInUid)
+                    .update({
+                        "matches": firebase.firestore.FieldValue.arrayUnion({
+                            [otherUserUid]: docRef.id
+                        })
+                    }).then(function () {
+                        console.log("Document successfully updated and like REMOVED! from")
+                        alert("You have a new match!")
+                        })
+                }).catch(function(error) {
+                    console.error("Error updating like in document: ", error);
           })
           .catch(function(error) {
             console.error("Error adding document: ", error);
             });
           })
-        // remove loggedInUser from otherUserLikes
       } else {
         // add other otherUserId to loggedInUser likes
         db.collection('users').doc(loggedInUid)
@@ -146,7 +155,6 @@ export default {
                 console.log("Document successfully updated and like ADDED!")
             });
       }
-      // else, add the user to logged in user's array
       if (this.index === this.profilesList.length - 1) this.index = 0;
       else this.index++;
       console.log(this.index);
@@ -162,7 +170,7 @@ export default {
     },
     getMatches() {
       let that = this;
-      setTimeout(function() {
+      if (that.user.loggedIn) {
         const retList = [];
         const usersRef = db.collection("users");
 
@@ -191,7 +199,7 @@ export default {
             console.log("Error getting documents: ", error);
           });
         that.dataLoaded = true;
-      }, 0);
+      }
     }
   },
   created() {
@@ -204,7 +212,37 @@ export default {
     }),
     ...mapState({
       user: state => state.user
-    })
+    }),
+    filteredProfiles () {
+      const that = this
+        if (this.profilesList.length > 0) {
+            // filter out my profile
+            let list = this.profilesList.filter(function (item) {
+              return (item.user_id !== that.user.data.localId)
+            })
+            // filter out my likes
+            list = list.filter(function (item) {
+              return !(that.user.profile.likes.includes(item.user_id))
+            })
+            // filter out matches
+            let matchList = []
+            // TODO FILTER OUT MATCHES
+            that.user.profile.matches.forEach(function (match) {
+              // console.log("hello")
+              // test if matches has anything in it
+              if (match) {
+                // console.log("there")
+                // matchList.concat(match.keys())
+              }
+            })
+            list = list.filter(function (item) {
+            return !(matchList.includes(item.user_id))
+            })
+            
+            return list
+            }
+        }
+    }
   }
   // beforeRouteEnter (f, t, next) {
   //   next( async (vm) => {
@@ -216,5 +254,5 @@ export default {
   //     profilesList: db.collection("users")
   //   };
   // }
-};
+;
 </script>
