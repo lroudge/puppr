@@ -101,7 +101,9 @@
             <div class="signup-2" v-if="signup2">
                 <div class="upload">
                     <h1>Upload your image</h1>
-                    <div class="uploaded-image"></div>
+                    <div class="uploaded-image" v-if="form.image">
+                        <img :src="form.image">
+                    </div>
                     <form action="#" class="image-form">
                         <b-form-group placeholder="Choose a file...">
                             <b-form-file id="file-large" size="lg" @change="onFileChanged"></b-form-file>
@@ -150,7 +152,8 @@
                     firstname: "",
                     lastname: "",
                     displayname: "",
-                    city: ""
+                    city: "",
+                    image: ""
                 }
             };
         },
@@ -194,29 +197,32 @@
                     });
             },
             signUp() {
+                const docData = {
+                    email: this.form.email,
+                    zipcode: Number(this.form.zipcode),
+                    displayname: this.form.displayname,
+                    // first_name: this.form.firstname,
+                    // last_name: this.form.lastname,
+                    city: this.form.city,
+                    dogInfo: {
+                        name: this.form.dogName,
+                        age: this.form.dogAge,
+                        breed: this.form.dogBreed,
+                        fun_facts: this.form.funfacts,
+                        likes: this.form.likes,
+                        dislikes: this.form.dislikes
+                    },
+                    likes: [],
+                    matches: {}
+                };
                 let that = this;
                 let uid = this.user.data.localId;
                 db.collection("users")
                     .doc(uid)
-                    .set({
-                        email: this.form.email,
-                        zipcode: Number(this.form.zipcode),
-                        displayname: this.form.displayname,
-                        // first_name: this.form.firstname,
-                        // last_name: this.form.lastname,
-                        city: this.form.city,
-                        dogInfo: {
-                            name: this.form.dogName,
-                            age: this.form.dogAge,
-                            breed: this.form.dogBreed,
-                            fun_facts: this.form.funfacts,
-                            likes: this.form.likes,
-                            dislikes: this.form.dislikes
-                        },
-                        likes: [],
-                        matches: {}
-                    })
+                    .set(docData)
                     .then(function () {
+                        // Set the db and then set the store
+                        that.$store.commit('SET_PROFILE', docData);
                         console.log("Document successfully written!");
                         that.signup1 = false;
                         that.signup2 = true;
@@ -233,7 +239,7 @@
                 }
             },
             onUpload() {
-                const that = this
+                const that = this;
                 let storageRef = firebase.storage().ref();
                 let uploadTask = storageRef
                     .child(this.user.data.localId + "/" + this.selectedFile.name)
@@ -262,7 +268,7 @@
                     },
                     function (error) {
                         // Handle unsuccessful uploads
-                        that.spinnerOn = false
+                        that.spinnerOn = false;
                         alert(error);
                     },
                     function () {
@@ -271,6 +277,7 @@
                         uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
                             // api call to store DownloadURL to user profile
                             console.log("File available at", downloadURL);
+                            that.form.image = downloadURL;
                             let userRef = db.collection("users").doc(that.user.data.localId);
                             return userRef
                                 .update({
@@ -278,12 +285,12 @@
                                         [downloadURL]
                                 })
                                 .then(function () {
-                                    that.spinnerOn = false
+                                    that.spinnerOn = false;
                                     console.log("Document successfully updated!");
                                 })
                                 .catch(function (error) {
                                     // The document probably doesn't exist.
-                                    that.spinnerOn = false
+                                    that.spinnerOn = false;
                                     console.error("Error updating document: ", error);
                                 });
                         });
