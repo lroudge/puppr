@@ -1,23 +1,28 @@
 <template>
-    <div class="nav-bar">
-        <div class="empty" v-if="routeName === 'settings' || routeName === 'login' || routeName === 'signup'"></div>
-        <router-link :to="{ name: 'settings' }" class="setting-icon"
-                     v-if="routeName === 'settings' || routeName === 'myprofile'">
-            <img class="setting-icon" src="./../../public/icons/settings.png"></router-link>
-        <router-link :to="{ name: 'myprofile' }" @click="areYouLoggedIn"
-                     class="profile-icon"
-                     v-if="routeName === 'swiping' || routeName === 'myprofile' || routeName === 'settings'">
-            <img class="profile-icon" src="./../../public/icons/profile blue.png" @click="areYouLoggedIn"></router-link>
-        <router-link :to="{ name: 'swiping' }" class="logo"
-                     v-if="routeName === 'swiping' || routeName === 'myprofile' ||  routeName === 'matches' || routeName === 'login' || routeName === 'signup'">
-            <img class="logo-image" src="./../../public/icons/logo.png"></router-link>
-        <router-link :to="{ name: 'matches' }" @click="areYouLoggedIn"
-                     class="match-icon"
-                     v-if="routeName === 'swiping' || routeName === 'matches'">
-            <img class="match-icon" src="./../../public/icons/matches.png" @click="areYouLoggedIn"></router-link>
-        <div class="empty" v-if="routeName === 'matches'"></div>
-        <router-link :to="{ name: 'login'}" v-if="!userLoggedIn"><button>Log In</button></router-link>
-    </div>
+    <transition :name="transitionName">
+        <div class="nav-bar">
+            <div class="empty" v-if="routeName === 'settings' || routeName === 'login' || routeName === 'signup'"></div>
+            <router-link :to="{ name: 'settings' }" class="setting-icon"
+                         v-if="routeName === 'settings' || routeName === 'myprofile'">
+                <img class="setting-icon" src="./../../public/icons/settings.png"></router-link>
+            <router-link :to="{ name: 'myprofile' }" @click="areYouLoggedIn"
+                         class="profile-icon"
+                         v-if="routeName === 'swiping' || routeName === 'myprofile' || routeName === 'settings'">
+                <img class="profile-icon" src="./../../public/icons/profile blue.png" @click="areYouLoggedIn">
+            </router-link>
+            <router-link :to="{ name: 'swiping' }" class="logo"
+                         v-if="routeName === 'swiping' || routeName === 'myprofile' ||  routeName === 'matches' || routeName === 'login' || routeName === 'signup'">
+                <img class="logo-image" src="./../../public/icons/logo.png"></router-link>
+            <router-link :to="{ name: 'matches' }" @click="areYouLoggedIn"
+                         class="match-icon"
+                         v-if="routeName === 'swiping' || routeName === 'matches'">
+                <img class="match-icon" src="./../../public/icons/matches.png" @click="areYouLoggedIn"></router-link>
+            <div class="empty" v-if="routeName === 'matches'"></div>
+            <router-link :to="{ name: 'login'}" v-if="!userLoggedIn">
+                <button>Log In</button>
+            </router-link>
+        </div>
+    </transition>
 </template>
 <script>
     import {mapGetters} from "vuex";
@@ -25,8 +30,9 @@
 
     export default {
         data() {
-          return {
-          }
+            return {
+                transitionName: "slide-left"
+            }
         },
         computed: {
             // map `this.user` to `this.$store.getters.user`
@@ -66,6 +72,21 @@
                         //   name: "home"
                         // });
                     });
+            }
+        },
+        watch: {
+            '$route' (to, from, next) {
+                const toPath = to.path;
+                const fromPath = from.path;
+                if (fromPath === '/swiping' && toPath === '/myprofile')
+                    this.transitionName = 'slide-right';
+                else if (fromPath === '/myprofile' && toPath === '/settings')
+                    this.transitionName = 'slide-right';
+                else if (fromPath === '/matches' && toPath === '/swiping')
+                    this.transitionName = 'slide-right';
+                else
+                    this.transitionName = 'slide-left';
+                //setTimeout(function() { next()}, 1000);
             }
         }
     };

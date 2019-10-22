@@ -48,7 +48,7 @@
         }
  
         .login-button {
-            margin-bottom: -400px;
+            margin-bottom: -400px !important;
             opacity: 0.9;
             height: 60px;
         }
@@ -86,7 +86,7 @@
         }
 
         .login-button {
-            margin-bottom: -400px;
+            margin-bottom: -400px !important;
             opacity: 0.9;
             height: 120px;
         

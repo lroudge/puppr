@@ -3,34 +3,34 @@
     <div
       class="profileInfo"
       v-on:click="hideInfo"
-      v-if="profileInfo && dataLoaded && profilesList[index]"
+      v-if="profileInfo && dataLoaded && filteredProfiles[index]"
     >
       <h2>Fun Facts</h2>
-      <p>{{ profilesList[index].dogInfo.fun_facts }}</p>
+      <p>{{ filteredProfiles[index].dogInfo.fun_facts }}</p>
       <h2>Likes</h2>
-      <p>{{ profilesList[index].dogInfo.likes }}</p>
+      <p>{{ filteredProfiles[index].dogInfo.likes }}</p>
       <h2>Dislikes</h2>
-      <p>{{ profilesList[index].dogInfo.dislikes }}</p>
+      <p>{{ filteredProfiles[index].dogInfo.dislikes }}</p>
       <h2>Sex</h2>
-      <p>{{ profilesList[index].dogInfo.sex }}</p>
+      <p>{{ fileteredProfiles[index].dogInfo.sex }}</p>
       <h2>Breed</h2>
-      <p>{{ profilesList[index].dogInfo.breed }}</p>
+      <p>{{ filteredProfiles[index].dogInfo.breed }}</p>
     </div>
     <div
       class="profile"
       v-on:click="showInfo"
-      v-if="dataLoaded && !profileInfo && profilesList[index]"
+      v-if="dataLoaded && !profileInfo && filteredProfiles[index]"
     >
       <img
         class="profile-img"
-        :src="profilesList[index].images[0]"
-        v-if="profilesList[index].images[0]"
+        :src="filteredProfiles[index].images[0]"
+        v-if="filteredProfiles[index].images[0]"
       />
     </div>
     <!--    <profile :profiles-list="profilesList" :current-profile="currentProfile"></profile>-->
-    <div class="name-age" v-if="profilesList[index]">
-      <h1>{{ profilesList[index].dogInfo.name }}, {{ profilesList[index].dogInfo.age }}</h1>
-      <h2>{{ profilesList[index].city }}</h2>
+    <div class="name-age" v-if="filteredProfiles[index]">
+      <h1>{{ filteredProfiles[index].dogInfo.name }}, {{ filteredProfiles[index].dogInfo.age }}</h1>
+      <h2>{{ filteredProfiles[index].city }}</h2>
     </div>
     <!--    <name-age :profiles-list="profilesList" :current-profile="currentProfile"></name-age>-->
     <!--   <derps @change-profile="myMethod" /> we need to un-nest components to make everything a part of swiping-->
@@ -55,7 +55,6 @@ export default {
       index: 0,
       profileInfo: false,
       profilesList: [],
-      filteredList: [],
       dataLoaded: false
     };
   },
@@ -77,7 +76,7 @@ export default {
       this.hello++;
     },
     nextProfile() {
-      if (this.index === this.profilesList.length - 1) this.index = 0;
+      if (this.index === this.filteredProfiles.length - 1) this.index = 0;
       else this.index++;
       console.log(this.index);
       let idx = this.index;
@@ -89,10 +88,10 @@ export default {
         return;
       }
       // check the other user's profile for likes
-      const otherUserPro = this.profilesList[this.index];
-      const loggedInPro = this.user.profile;
-      const otherUserUid = this.profilesList[this.index].user_id;
-      const otherUserLikes = this.profilesList[this.index].likes;
+      const otherUserPro = this.filteredProfiles[this.index];
+      const loggedInPro = this.filteredProfiles.profile;
+      const otherUserUid = this.filteredProfiles[this.index].user_id;
+      const otherUserLikes = this.filteredProfiles[this.index].likes;
       const loggedInUid = this.user.data.localId;
       const loggedInLikes = this.user.profile.likes;
       // returns -1 if index is not found
@@ -123,7 +122,7 @@ export default {
             // other user's matches list
             db.collection('users').doc(otherUserPro.user_id)
             .update({
-                "likes": firebase.firestore.FieldValue.arrayRemove(userIdx),
+                // "likes": firebase.firestore.FieldValue.arrayRemove(userIdx),
                 "matches": firebase.firestore.FieldValue.arrayUnion({
                     [loggedInUid]: docRef.id
                 })
@@ -155,14 +154,14 @@ export default {
                 console.log("Document successfully updated and like ADDED!")
             });
       }
-      if (this.index === this.profilesList.length - 1) this.index = 0;
+      if (this.index === this.filteredProfiles.length - 1) this.index = 0;
       else this.index++;
       console.log(this.index);
       let idx = this.index;
       this.$emit("change-profile", idx);
     },
     previousProfile() {
-      if (this.index === 0) this.index = this.profilesList.length - 1;
+      if (this.index === 0) this.index = this.filteredProfiles.length - 1;
       else this.index--;
       console.log(this.index);
       let idx = this.index;
@@ -174,11 +173,16 @@ export default {
         const retList = [];
         const usersRef = db.collection("users");
 
-        const query = usersRef.where(
-          "zipcode",
-          "==",
-          that.user.profile.zipcode
-        );
+        let query;
+        if (!that.$store.state.user.loggedIn) {
+          query = usersRef;
+        } else {
+          query = usersRef.where(
+                  "zipcode",
+                  "==",
+                  that.$store.state.user.profile.zipcode
+          );
+        }
         query
           .get()
           .then(function(querySnapshot) {
@@ -192,7 +196,7 @@ export default {
           })
           .then(function() {
             that.profilesList = retList;
-            console.log(that.profilesList);
+            // console.log(that.profilesList);
             that.dataLoaded = true;
           })
           .catch(function(error) {
@@ -204,6 +208,9 @@ export default {
   },
   created() {
     //   console.log(this.user)
+      this.getMatches();
+  },
+  updated() {
     this.getMatches();
   },
   computed: {

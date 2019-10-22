@@ -1,6 +1,6 @@
 <template>
     <div class="signup">
-        <transition name="slide">
+        <transition :name="transitionName">
             <div class="signup-0" v-if="signup0">
                 <h1>Sign Up</h1>
                 <form action="#" @submit.prevent="submit">
@@ -32,7 +32,7 @@
                 </form>
             </div>
         </transition>
-        <transition name="slide">
+        <transition :name="transitionName">
             <div class="signup-user-profile signup-1" v-if="signup1">
                 <h2>My Dog's Profile</h2>
                 <div class="user-form">
@@ -90,21 +90,22 @@
                                       rows="1"></textarea>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="previous-next">
                         <button @click="goBack0">Previous</button>
                         <button @click="signUp">Next</button>
                     </div>
                 </div>
             </div>
         </transition>
-        <transition name="slide">
+        <transition :name="transitionName">
             <div class="signup-2" v-if="signup2">
-                <div class="uploaded-image"></div>
-                <div>
+                <div class="upload">
                     <h1>Upload your image</h1>
-                    <form action="#">
-                        <b-form-group placeholder="Choose a file..." label="" label-for="file-large" label-cols-sm="2"
-                                      label-size="lg">
+                    <div class="uploaded-image" v-if="form.image">
+                        <img :src="form.image">
+                    </div>
+                    <form action="#" class="image-form">
+                        <b-form-group placeholder="Choose a file...">
                             <b-form-file id="file-large" size="lg" @change="onFileChanged"></b-form-file>
                         </b-form-group>
                         <b-button type="button" @click.prevent="onUpload">Upload</b-button>
@@ -113,7 +114,7 @@
                         <b-spinner label="Loading..."></b-spinner>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="previous-next">
                     <button @click="goBack1">Previous</button>
                     <router-link :to="{ name: 'swiping'}"><button>Get started!</button></router-link>
                 </div>
@@ -130,6 +131,7 @@
     export default {
         data() {
             return {
+                transitionName: "slide-left",
                 selectedFile: null,
                 spinnerOn: false,
                 signup0: true,
@@ -150,27 +152,37 @@
                     firstname: "",
                     lastname: "",
                     displayname: "",
-                    city: ""
+                    city: "",
+                    image: ""
                 }
             };
         },
         computed: {
             ...mapGetters({
                 user: "user"
-            }),
+            })
         },
         methods: {
             goBack0() {
-                this.signup0 = true;
-                this.signup1 = false;
+                this.transitionName = "slide-right";
+                const that = this;
+                setTimeout(function() {
+                    that.signup0 = true;
+                    that.signup1 = false;
+                    }, 500);
+                setTimeout(function() { that.transitionName = "slide-left";}, 1000);
             },
             goBack1() {
-                this.signup1 = true;
-                this.signup2 = false;
+                this.transitionName = "slide-right";
+                const that = this;
+                setTimeout(function() {
+                    that.signup1 = true;
+                    that.signup2 = false;
+                }, 500);
+                setTimeout(function() { that.transitionName = "slide-left";}, 1000);
             },
             submit() {
                 let that = this;
-                // this.current += 1;
                 that.signup0 = false;
                 that.signup1 = true;
                 firebase
@@ -185,29 +197,32 @@
                     });
             },
             signUp() {
+                const docData = {
+                    email: this.form.email,
+                    zipcode: Number(this.form.zipcode),
+                    displayname: this.form.displayname,
+                    // first_name: this.form.firstname,
+                    // last_name: this.form.lastname,
+                    city: this.form.city,
+                    dogInfo: {
+                        name: this.form.dogName,
+                        age: this.form.dogAge,
+                        breed: this.form.dogBreed,
+                        fun_facts: this.form.funfacts,
+                        likes: this.form.likes,
+                        dislikes: this.form.dislikes
+                    },
+                    likes: [],
+                    matches: {}
+                };
                 let that = this;
                 let uid = this.user.data.localId;
                 db.collection("users")
                     .doc(uid)
-                    .set({
-                        email: this.form.email,
-                        zipcode: Number(this.form.zipcode),
-                        displayname: this.form.displayname,
-                        // first_name: this.form.firstname,
-                        // last_name: this.form.lastname,
-                        city: this.form.city,
-                        dogInfo: {
-                            name: this.form.dogName,
-                            age: this.form.dogAge,
-                            breed: this.form.dogBreed,
-                            fun_facts: this.form.funfacts,
-                            likes: this.form.likes,
-                            dislikes: this.form.dislikes
-                        },
-                        likes: [],
-                        matches: {}
-                    })
+                    .set(docData)
                     .then(function () {
+                        // Set the db and then set the store
+                        that.$store.commit('SET_PROFILE', docData);
                         console.log("Document successfully written!");
                         that.signup1 = false;
                         that.signup2 = true;
@@ -224,7 +239,7 @@
                 }
             },
             onUpload() {
-                const that = this
+                const that = this;
                 let storageRef = firebase.storage().ref();
                 let uploadTask = storageRef
                     .child(this.user.data.localId + "/" + this.selectedFile.name)
@@ -253,7 +268,7 @@
                     },
                     function (error) {
                         // Handle unsuccessful uploads
-                        that.spinnerOn = false
+                        that.spinnerOn = false;
                         alert(error);
                     },
                     function () {
@@ -262,6 +277,7 @@
                         uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
                             // api call to store DownloadURL to user profile
                             console.log("File available at", downloadURL);
+                            that.form.image = downloadURL;
                             let userRef = db.collection("users").doc(that.user.data.localId);
                             return userRef
                                 .update({
@@ -269,12 +285,12 @@
                                         [downloadURL]
                                 })
                                 .then(function () {
-                                    that.spinnerOn = false
+                                    that.spinnerOn = false;
                                     console.log("Document successfully updated!");
                                 })
                                 .catch(function (error) {
                                     // The document probably doesn't exist.
-                                    that.spinnerOn = false
+                                    that.spinnerOn = false;
                                     console.error("Error updating document: ", error);
                                 });
                         });
