@@ -90,7 +90,7 @@
                                       rows="1"></textarea>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="previous-next">
                         <button @click="goBack0">Previous</button>
                         <button @click="signUp">Next</button>
                     </div>
@@ -99,12 +99,11 @@
         </transition>
         <transition :name="transitionName">
             <div class="signup-2" v-if="signup2">
-                <div class="uploaded-image"></div>
-                <div>
+                <div class="upload">
                     <h1>Upload your image</h1>
-                    <form action="#">
-                        <b-form-group placeholder="Choose a file..." label="" label-for="file-large" label-cols-sm="2"
-                                      label-size="lg">
+                    <div class="uploaded-image"></div>
+                    <form action="#" class="image-form">
+                        <b-form-group placeholder="Choose a file...">
                             <b-form-file id="file-large" size="lg" @change="onFileChanged"></b-form-file>
                         </b-form-group>
                         <b-button type="button" @click.prevent="onUpload">Upload</b-button>
@@ -113,7 +112,7 @@
                         <b-spinner label="Loading..."></b-spinner>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="previous-next">
                     <button @click="goBack1">Previous</button>
                     <router-link :to="{ name: 'swiping'}"><button>Get started!</button></router-link>
                 </div>

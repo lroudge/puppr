@@ -26,8 +26,8 @@
                         v-model="form.password"
                 />
             </div>
-            <div class="form-group row mb-0">
-                <button type="submit" class="btn btn-primary">Login</button>
+            <div>
+                <button type="submit">Login</button>
             </div>
             <div class="form-group">
                 <router-link to="/signup">Don't have an account? Sign up here!</router-link>

@@ -123,11 +123,16 @@ export default {
         const retList = [];
         const usersRef = db.collection("users");
 
-        const query = usersRef.where(
-          "zipcode",
-          "==",
-          that.$store.state.user.profile.zipcode
-        );
+        let query;
+        if (!that.$store.state.user.loggedIn) {
+          query = usersRef;
+        } else {
+          query = usersRef.where(
+                  "zipcode",
+                  "==",
+                  that.$store.state.user.profile.zipcode
+          );
+        }
         query
           .get()
           .then(function(querySnapshot) {
@@ -141,7 +146,7 @@ export default {
           })
           .then(function() {
             that.profilesList = retList;
-            console.log(that.profilesList);
+            // console.log(that.profilesList);
             that.dataLoaded = true;
           })
           .catch(function(error) {
@@ -153,7 +158,10 @@ export default {
   },
   created() {
     //   console.log(this.user)
-      this.getMatches()
+      this.getMatches();
+  },
+  updated() {
+    this.getMatches();
   },
   computed: {
     ...mapGetters({
