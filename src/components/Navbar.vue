@@ -29,9 +29,9 @@
     import firebase from "firebase";
 
     export default {
-        props: ['transitionName'],
         data() {
             return {
+                transitionName: "slide-left"
             }
         },
         computed: {
