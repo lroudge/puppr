@@ -38,7 +38,7 @@
                     <input type="submit" value="Save my changes" v-on:click="submit"/>
                 </div>
                 <div class="submit">
-                    <router-link :to="{ name: 'swiping' }"><input value="Log Out" v-on:click="signOut"/></router-link>
+                    <router-link :to="{ name: 'login' }"><input value="Log Out" v-on:click="signOut"/></router-link>
                 </div>
             </div>
         </div>
