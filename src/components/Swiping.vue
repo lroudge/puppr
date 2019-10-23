@@ -122,7 +122,7 @@ export default {
             // other user's matches list
             db.collection('users').doc(otherUserPro.user_id)
             .update({
-                "likes": firebase.firestore.FieldValue.arrayRemove(userIdx),
+                // "likes": firebase.firestore.FieldValue.arrayRemove(userIdx),
                 "matches": firebase.firestore.FieldValue.arrayUnion({
                     [loggedInUid]: docRef.id
                 })
@@ -222,34 +222,21 @@ export default {
     }),
     filteredProfiles () {
       const that = this
+      let list = []
         if (this.profilesList.length > 0) {
             // filter out my profile
-            let list = this.profilesList.filter(function (item) {
+            list = this.profilesList.filter(function (item) {
               return (item.user_id !== that.user.data.localId)
             })
             // filter out my likes
             list = list.filter(function (item) {
               return !(that.user.profile.likes.includes(item.user_id))
             })
-            // filter out matches
-            let matchList = []
-            // TODO FILTER OUT MATCHES
-            that.user.profile.matches.forEach(function (match) {
-              // console.log("hello")
-              // test if matches has anything in it
-              if (match) {
-                // console.log("there")
-                // matchList.concat(match.keys())
-              }
-            })
-            list = list.filter(function (item) {
-            return !(matchList.includes(item.user_id))
-            })
-            
-            return list
+            // TODO filter out matches
             }
-        }
-    }
+        return list
+        } 
+    }   
   }
   // beforeRouteEnter (f, t, next) {
   //   next( async (vm) => {
