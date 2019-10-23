@@ -12,7 +12,7 @@
       <h2>Dislikes</h2>
       <p>{{ filteredProfiles[index].dogInfo.dislikes }}</p>
       <h2>Sex</h2>
-      <p>{{ fileteredProfiles[index].dogInfo.sex }}</p>
+      <p>{{ filteredProfiles[index].dogInfo.sex }}</p>
       <h2>Breed</h2>
       <p>{{ filteredProfiles[index].dogInfo.breed }}</p>
     </div>
