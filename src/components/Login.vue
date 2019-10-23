@@ -38,8 +38,7 @@
                 <img src="../../public/images/poppy.png">
                 <img src="../../public/images/joey.jpg">
             </div>
-            <router-link :to="{ name: 'swiping' }">Try out PuppR without signing in
-            </router-link>
+            <p>These dogs are waiting to meet yours!</p>
         </div>
     </div>
 </template>
