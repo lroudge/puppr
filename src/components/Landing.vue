@@ -1,6 +1,6 @@
 <template>
     <div class="landing_page">
-        <router-link :to="{ name: 'swiping' }">
+        <router-link :to="{ name: 'login' }">
             <img class="login-button" src="./../../public/icons/login_button.png">
         </router-link>
     </div>
