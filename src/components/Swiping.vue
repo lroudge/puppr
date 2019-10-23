@@ -122,7 +122,7 @@ export default {
             // other user's matches list
             db.collection('users').doc(otherUserPro.user_id)
             .update({
-                // "likes": firebase.firestore.FieldValue.arrayRemove(userIdx),
+                "likes": firebase.firestore.FieldValue.arrayRemove(userIdx),
                 "matches": firebase.firestore.FieldValue.arrayUnion({
                     [loggedInUid]: docRef.id
                 })
