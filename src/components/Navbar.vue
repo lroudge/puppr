@@ -5,18 +5,18 @@
             <router-link :to="{ name: 'settings' }" class="setting-icon"
                          v-if="routeName === 'settings' || routeName === 'myprofile'">
                 <img class="setting-icon" src="./../../public/icons/settings.png"></router-link>
-            <router-link :to="{ name: 'myprofile' }" @click="areYouLoggedIn"
+            <router-link :to="{ name: 'myprofile' }"
                          class="profile-icon"
                          v-if="routeName === 'swiping' || routeName === 'myprofile' || routeName === 'settings'">
-                <img class="profile-icon" src="./../../public/icons/profile blue.png" @click="areYouLoggedIn">
+                <img class="profile-icon" src="./../../public/icons/profile blue.png">
             </router-link>
             <router-link :to="{ name: 'swiping' }" class="logo"
                          v-if="routeName === 'swiping' || routeName === 'myprofile' ||  routeName === 'matches' || routeName === 'login' || routeName === 'signup'">
                 <img class="logo-image" src="./../../public/icons/logo.png"></router-link>
-            <router-link :to="{ name: 'matches' }" @click="areYouLoggedIn"
+            <router-link :to="{ name: 'matches' }"
                          class="match-icon"
                          v-if="routeName === 'swiping' || routeName === 'matches'">
-                <img class="match-icon" src="./../../public/icons/matches.png" @click="areYouLoggedIn"></router-link>
+                <img class="match-icon" src="./../../public/icons/matches.png"></router-link>
             <div class="empty" v-if="routeName === 'matches'"></div>
             <router-link :to="{ name: 'login'}" v-if="!userLoggedIn">
                 <button>Log In</button>
@@ -54,14 +54,6 @@
             }
         },
         methods: {
-            areYouLoggedIn() {
-                if (!this.userLoggedIn) {
-                    alert('You need to log in or sign up to access that feature!');
-                    this.dontMove = true;
-                    // This is a hacky way of preventing the route from changing
-                    // this.$router.push('/');
-                }
-            },
             signOut() {
                 firebase
                     .auth()
