@@ -189,9 +189,9 @@ body, html {
 }
 
 .match-list p {
-    margin-left: 1.2em;
-    margin-top: 0;
-    margin-bottom: 0;
+    margin-left: 1.2em !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
 }
 
 .image-icon {
