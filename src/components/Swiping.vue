@@ -89,7 +89,7 @@ export default {
       }
       // check the other user's profile for likes
       const otherUserPro = this.filteredProfiles[this.index];
-      const loggedInPro = this.filteredProfiles.profile;
+      const loggedInPro = this.user.profile;
       const otherUserUid = this.filteredProfiles[this.index].user_id;
       const otherUserLikes = this.filteredProfiles[this.index].likes;
       const loggedInUid = this.user.data.localId;
