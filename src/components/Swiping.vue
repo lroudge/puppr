@@ -244,8 +244,19 @@
                         return !(that.user.profile.likes.includes(item.user_id))
                     })
                     // TODO filter out matches
-                }
+                    let user = this.$store.getters.user;
+                    let matchList = user.profile.matches;
+                    let filterMatchList = []
+                    if (matchList.length > 0) {
+                        matchList.forEach((item) => {
+                            filterMatchList.push(Object.keys(item)[0]);
+                        })
+                    }
+                    list = list.filter(function(item) {
+                        return !(filterMatchList.includes(item.user_id))
+                    })
                 return list
+                }
             }
         }
     }
@@ -259,5 +270,5 @@
     //     profilesList: db.collection("users")
     //   };
     // }
-    ;
+    
 </script>
