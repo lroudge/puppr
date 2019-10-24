@@ -64,6 +64,7 @@ Another interesting point about Vue.js is that it allowed us to use a store, def
 ### List of components
 
 These components make up what a user experiences when they check out **PuppR**. Each component contains the code for a specific page of the app. These components can be located in [src/components](./src/components).
+
 | Component | Description |
 |-----------|-------------|
 | [Landing.vue](./src/components/Landing.vue) | The landing page a user sees when they navigate to **PuppR**. |
