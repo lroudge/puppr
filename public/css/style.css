@@ -1,8 +1,8 @@
 * {
-     box-sizing: border-box !important;
-     margin: 0 !important;
-     padding: 0 !important;
- }
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
 
 body, html {
     display: flex !important;
@@ -65,8 +65,7 @@ body, html {
     box-shadow: 0px 3px 3px grey;
 }
 
-.flip-enter-active
-{
+.flip-enter-active {
     transition: transform 0.5s ease;
 }
 
@@ -102,6 +101,7 @@ body, html {
     opacity: 0.8;
     font-size: 2.5em;
 }
+
 .nav-bar {
     display: flex;
     justify-content: space-between;
@@ -116,6 +116,7 @@ body, html {
     width: 6em;
     color: #badfdb;
 }
+
 .logo-image {
     height: 4em;
     width: 100%;
@@ -140,10 +141,93 @@ body, html {
 
 .like, .pass {
     height: 100%;
+    animation-iteration-count: 0;
 }
 
 .reverse {
     height: 60%;
+    animation-iteration-count: 0;
+}
+
+.rotate {
+    animation: rotate 0.5s;
+    animation-iteration-count: 1;
+    height: 60%;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(359deg);
+    }
+    to {
+        transform: rotate(0deg);
+    }
+}
+
+.beating {
+    animation: beat 0.5s;
+    animation-iteration-count: 1;
+    height: 100%;
+}
+
+@keyframes beat {
+    0% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.1);
+    }
+    40% {
+        transform: scale(1);
+    }
+    60% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.shake-it {
+    animation: shake 0.5s;
+    animation-iteration-count: 1;
+    height: 100%;
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
 }
 
 .profileInfo {
@@ -236,6 +320,21 @@ body, html {
     text-align: end;
 }
 
+.no-matches {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 70%;
+    text-align: center;
+    padding: 1em !important;
+}
+
+.sorry {
+    height: 15em;
+    width: 16em;
+}
+
 .image-icon {
     width: 5em;
     height: 5em;
@@ -264,7 +363,7 @@ body, html {
 
 .my-pictures img {
     height: 100%;
-    width:25%;
+    width: 25%;
 }
 
 .user-form, .settings-form {
@@ -320,8 +419,8 @@ body, html {
     font-style: italic;
 }
 
-textarea:focus::placeholder{
-    color:transparent;
+textarea:focus::placeholder {
+    color: transparent;
 }
 
 .age-name {
@@ -501,8 +600,7 @@ a:hover {
 .slide-left-enter-active,
 .slide-left-leave-active,
 .slide-right-enter-active,
-.slide-right-leave-active
-{
+.slide-right-leave-active {
     transition: transform 0.5s ease;
 }
 

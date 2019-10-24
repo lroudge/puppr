@@ -39,9 +39,9 @@
         <!--    <name-age :profiles-list="profilesList" :current-profile="currentProfile"></name-age>-->
         <!--   <derps @change-profile="myMethod" /> we need to un-nest components to make everything a part of swiping-->
         <div class="action">
-            <img class="pass" src="./../../public/icons/pass02.png" @click="nextProfile"/>
-            <img class="reverse" src="./../../public/icons/previous_new.png" @click="previousProfile"/>
-            <img class="like" src="./../../public/icons/like02.png" @click="likeProfile"/>
+            <img :class="realPassName" src="./../../public/icons/pass02.png" @click="nextProfile"/>
+            <img :class="realReverseName" src="./../../public/icons/previous_new.png" @click="previousProfile"/>
+            <img :class="realLikeName" src="./../../public/icons/like02.png" @click="likeProfile"/>
         </div>
     </div>
 </template>
@@ -58,7 +58,10 @@
                 index: 0,
                 profileInfo: false,
                 profilesList: [],
-                dataLoaded: false
+                dataLoaded: false,
+                likeName: "like",
+                passName: "pass",
+                reverseName: "reverse"
             };
         },
         methods: {
@@ -72,24 +75,26 @@
             hideInfo() {
                 this.profileInfo = false;
             },
-            refreshProfile() {
-
-            },
             myMethod(idx) {
-                // Change this when un-nesting components
                 console.log(idx);
                 this.index = idx;
                 this.hello++;
             },
             nextProfile() {
+                this.passName = "shake-it";
+                let that = this;
                 if (this.index === this.filteredProfiles.length - 1) this.index = 0;
                 else this.index++;
                 console.log(this.index);
                 let idx = this.index;
                 this.$emit("change-profile", idx);
+                setTimeout(function () {
+                    that.passName = "pass";
+                }, 500);
             },
             likeProfile() {
-                let that = this
+                this.likeName = "beating";
+                let that = this;
                 if (!this.user.loggedIn) {
                     alert("You need to log in or sign up to access that feature!");
                     return;
@@ -170,13 +175,21 @@
                 // console.log(this.index);
                 let idx = this.index;
                 this.$emit("change-profile", idx);
+                setTimeout(function () {
+                    that.likeName = "like";
+                }, 500);
             },
             previousProfile() {
+                this.reverseName = "rotate";
+                let that = this;
                 if (this.index === 0) this.index = this.filteredProfiles.length - 1;
                 else this.index--;
                 console.log(this.index);
                 let idx = this.index;
                 this.$emit("change-profile", idx);
+                setTimeout(function () {
+                    that.reverseName = "reverse";
+                }, 500);
             },
             getMatches() {
                 let that = this;
@@ -231,6 +244,15 @@
             ...mapState({
                 user: state => state.user
             }),
+            realLikeName() {
+              return this.likeName;
+            },
+            realPassName() {
+                return this.passName;
+            },
+            realReverseName() {
+                return this.reverseName;
+            },
             filteredProfiles() {
                 const that = this
                 let list = []
@@ -243,7 +265,7 @@
                     list = list.filter(function (item) {
                         return !(that.user.profile.likes.includes(item.user_id))
                     })
-                    // TODO filter out matches
+                    // filter out my matches
                     let user = this.$store.getters.user;
                     let matchList = user.profile.matches;
                     let filterMatchList = []

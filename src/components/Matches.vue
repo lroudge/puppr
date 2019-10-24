@@ -13,6 +13,10 @@
                     </div>
                 </li>
             </ul>
+            <div class="no-matches" v-else>
+                <h4>Sorry, there doesn't seem to be anything here...</h4>
+                <img src="../../public/icons/profile blue.png" class="sorry">
+            </div>
         </div>
     </div>
 </template>
