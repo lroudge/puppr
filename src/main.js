@@ -7,6 +7,7 @@ import * as firebase from "firebase";
 import store from "./store";
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import VueFlip from 'vue-flip';
 
 Vue.config.productionTip = false;
 Vue.use(firestorePlugin)
@@ -30,6 +31,7 @@ firebase.auth().onAuthStateChanged(user => {
 
 Vue.use(firestorePlugin)
 Vue.use(BootstrapVue)
+Vue.use(VueFlip);
 export const db = firebase.firestore()
 
 new Vue({
