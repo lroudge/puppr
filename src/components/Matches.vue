@@ -6,8 +6,11 @@
         <div class="match-list">
             <ul v-if="profiles.length">
                 <li v-for="profile in profiles">
-                    <img :src="profile.images[0]" class="image-icon"/>
-                    <p>{{ profile.dogInfo.name }}</p>
+                    <div class="dropdown-match">
+                        <img :src="profile.images[0]" class="image-icon"/>
+                        <p>{{ profile.dogInfo.name }}</p>
+                        <div class="popover-match">{{ profile.email }}</div>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -30,13 +33,10 @@
         computed: {
             ...mapGetters({
                 user: "user"
-            }),
-            // profilesList() {
-            //     return this.profiles;
-            // }
+            })
         },
         methods: {
-            loadProfiles: function() {
+            loadProfiles: function () {
                 const that = this;
                 let user = this.$store.getters.user;
                 let matchList = user.profile.matches;

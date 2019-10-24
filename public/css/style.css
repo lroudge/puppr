@@ -209,6 +209,33 @@ body, html {
     margin-bottom: 0 !important;
 }
 
+.dropdown-match {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.dropdown-match:hover .popover-match {
+    width: 60%;
+    height: 100%;
+    text-align: end;
+    margin-right: 1em !important;
+    opacity: 1;
+    color: #8bd6ce;
+}
+
+.popover-match {
+    opacity: 0;
+    z-index: 1;
+    margin-right: 1em !important;
+    transition: opacity .5s ease-in;
+    color: #8bd6ce;
+    width: 60%;
+    height: 100%;
+    text-align: end;
+}
+
 .image-icon {
     width: 5em;
     height: 5em;
