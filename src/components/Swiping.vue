@@ -72,6 +72,9 @@
             hideInfo() {
                 this.profileInfo = false;
             },
+            refreshProfile() {
+
+            },
             myMethod(idx) {
                 // Change this when un-nesting components
                 console.log(idx);
@@ -86,6 +89,7 @@
                 this.$emit("change-profile", idx);
             },
             likeProfile() {
+                let that = this
                 if (!this.user.loggedIn) {
                     alert("You need to log in or sign up to access that feature!");
                     return;
@@ -125,7 +129,7 @@
                             // other user's matches list
                             db.collection('users').doc(otherUserPro.user_id)
                                 .update({
-                                    // "likes": firebase.firestore.FieldValue.arrayRemove(userIdx),
+                                    "likes": firebase.firestore.FieldValue.arrayRemove(userIdx),
                                     "matches": firebase.firestore.FieldValue.arrayUnion({
                                         [loggedInUid]: docRef.id
                                     })
@@ -139,6 +143,8 @@
                                         })
                                     }).then(function () {
                                     console.log("Document successfully updated and like REMOVED! from")
+                                    // that.$store.dispatch('fetchUser')
+                                    that.$store.dispatch("fetchProfile", that.user.data.localId)
                                     alert("You have a new match!")
                                 })
                             }).catch(function (error) {
@@ -154,12 +160,14 @@
                         .update({
                             "likes": firebase.firestore.FieldValue.arrayUnion(otherUserUid)
                         }).then(function () {
+                        // that.$store.dispatch('fetchUser')
+                        that.$store.dispatch("fetchProfile", that.user.data.localId)
                         console.log("Document successfully updated and like ADDED!")
                     });
                 }
-                if (this.index === this.filteredProfiles.length - 1) this.index = 0;
-                else this.index++;
-                console.log(this.index);
+                // if (this.index === this.filteredProfiles.length - 1) this.index = 0;
+                // else this.index++;
+                // console.log(this.index);
                 let idx = this.index;
                 this.$emit("change-profile", idx);
             },
