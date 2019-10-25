@@ -45,9 +45,6 @@ body, html {
 }
 
 .profile {
-    /* background-image: url("joey.jpg"); */
-    /*background-size: cover;*/
-    /*background-position: center;*/
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -66,13 +63,11 @@ body, html {
 }
 
 .flip-enter-active {
-    transition: transform 0.5s ease;
+    transition: transform 1s cubic-bezier(0.04, 1.07, 0.89, 1.01);
 }
 
 .flip-enter {
     transform: rotateY(180deg);
-    transform-style: preserve-3d;
-    transition: all 200ms ease-in 0s;
 }
 
 .name-age {
