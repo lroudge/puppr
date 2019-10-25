@@ -321,6 +321,7 @@ body, html {
     justify-content: space-around;
     align-items: center;
     height: 70%;
+    color: #ffc5a1;
     text-align: center;
     padding: 1em !important;
 }

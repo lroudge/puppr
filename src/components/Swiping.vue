@@ -1,10 +1,14 @@
 <template>
     <div :key="hello" class="swiping" @change-profile="myMethod">
+        <div class="no-matches" v-if="filteredProfiles === undefined">
+            <h4>Sorry, there doesn't seem to be anything here...</h4>
+            <img src="../../public/icons/sad_puppr.png" class="sorry">
+        </div>
         <transition name="flip">
             <div
                     class="profileInfo"
                     v-on:click="hideInfo"
-                    v-if="profileInfo && dataLoaded && filteredProfiles[index]"
+                    v-if="profileInfo && dataLoaded && filteredProfiles"
             >
                 <h2>Fun Facts</h2>
                 <p>{{ filteredProfiles[index].dogInfo.fun_facts }}</p>
@@ -22,7 +26,7 @@
             <div
                     class="profile"
                     v-on:click="showInfo"
-                    v-if="dataLoaded && !profileInfo && filteredProfiles[index]"
+                    v-if="dataLoaded && !profileInfo && filteredProfiles"
             >
                 <img
                         class="profile-img"
@@ -31,14 +35,11 @@
                 />
             </div>
         </transition>
-        <!--    <profile :profiles-list="profilesList" :current-profile="currentProfile"></profile>-->
-        <div class="name-age" v-if="filteredProfiles[index]">
+        <div class="name-age" v-if="filteredProfiles && dataLoaded">
             <h1>{{ filteredProfiles[index].dogInfo.name }}, {{ filteredProfiles[index].dogInfo.age }}</h1>
             <h2>{{ filteredProfiles[index].city }}</h2>
         </div>
-        <!--    <name-age :profiles-list="profilesList" :current-profile="currentProfile"></name-age>-->
-        <!--   <derps @change-profile="myMethod" /> we need to un-nest components to make everything a part of swiping-->
-        <div class="action">
+        <div class="action" v-if="filteredProfiles && dataLoaded">
             <img :class="realPassName" src="./../../public/icons/pass02.png" @click="nextProfile"/>
             <img :class="realReverseName" src="./../../public/icons/previous_new.png" @click="previousProfile"/>
             <img :class="realLikeName" src="./../../public/icons/like02.png" @click="likeProfile"/>
@@ -170,9 +171,6 @@
                         console.log("Document successfully updated and like ADDED!")
                     });
                 }
-                // if (this.index === this.filteredProfiles.length - 1) this.index = 0;
-                // else this.index++;
-                // console.log(this.index);
                 let idx = this.index;
                 this.$emit("change-profile", idx);
                 setTimeout(function () {
@@ -231,12 +229,8 @@
             }
         },
         created() {
-            //   console.log(this.user)
             this.getMatches();
         },
-        // updated() {
-        //     this.getMatches();
-        // },
         computed: {
             ...mapGetters({
                 user: "user"
@@ -282,15 +276,4 @@
             }
         }
     }
-    // beforeRouteEnter (f, t, next) {
-    //   next( async (vm) => {
-    //     await this.$store.dispatch('fetchUser');
-    //   })
-    // },
-    // firestore () {
-    //   return {
-    //     profilesList: db.collection("users")
-    //   };
-    // }
-    
 </script>

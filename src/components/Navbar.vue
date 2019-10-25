@@ -84,8 +84,10 @@
                     this.transitionName = 'slide-right';
                 else
                     this.transitionName = 'slide-left';
-                next();
             }
         }
+        //   next( async (vm) => {
+        //     await this.$store.dispatch('fetchUser');
+        //   })
     };
 </script>
