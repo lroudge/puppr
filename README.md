@@ -25,12 +25,12 @@ Follow us on Twitter for more dog and tech related awesomeness!
 
 # Tutorial
 
-## Take a tour of the deployed version
-[**PuppR**](https://puppr-rbzq4ojnta-uc.a.run.app/)
+## Take a tour of the deployed version at puppr.best
+-> [**PuppR**](https://puppr.best/)
 
 Here is a simple flow for the user experience on PuppR:
 
-![user-flow](https://i.imgur.com/xTcJZBE.jpg)
+![user-flow](https://i.imgur.com/hRxU79B.jpg)
 
 ## Run PuppR with Vue-CLI
 Installing the programs necessary to view this project is pretty simple!
