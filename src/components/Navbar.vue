@@ -1,28 +1,57 @@
 <template>
+    <div class="nav-bar-root" style="width: 100%;">
     <transition :name="transitionName">
-        <div class="nav-bar">
-            <div class="empty" v-if="routeName === 'settings' || routeName === 'login' || routeName === 'signup'"></div>
-            <router-link :to="{ name: 'settings' }" class="setting-icon"
-                         v-if="routeName === 'settings' || routeName === 'myprofile'">
-                <img class="setting-icon" src="./../../public/icons/settings.png"></router-link>
-            <router-link :to="{ name: 'myprofile' }"
-                         class="profile-icon"
-                         v-if="routeName === 'swiping' || routeName === 'myprofile' || routeName === 'settings'">
+        <div class="nav-bar" v-if="routeName === 'login' || routeName === 'signup'">
+            <div class="empty"></div>
+            <div class="logo" style="width: 8em; height: 5.5em;">
+                <img class="logo-image" src="./../../public/icons/logo.png" style="width: 8em; height: 5.5em;">
+            </div>
+            <div class="empty"></div>
+        </div>
+    </transition>
+    <transition :name="transitionName">
+        <div class="nav-bar" v-if="routeName === 'swiping'">
+            <router-link :to="{ name: 'myprofile' }" class="profile-icon">
                 <img class="profile-icon" src="./../../public/icons/profile blue.png">
             </router-link>
-            <router-link :to="{ name: 'swiping' }" class="logo"
-                         v-if="routeName === 'swiping' || routeName === 'myprofile' ||  routeName === 'matches' || routeName === 'login' || routeName === 'signup'">
-                <img class="logo-image" src="./../../public/icons/logo.png"></router-link>
-            <router-link :to="{ name: 'matches' }"
-                         class="match-icon"
-                         v-if="routeName === 'swiping' || routeName === 'matches'">
-                <img class="match-icon" src="./../../public/icons/matches.png"></router-link>
-            <div class="empty" v-if="routeName === 'matches'"></div>
-            <router-link :to="{ name: 'login'}" v-if="!userLoggedIn">
-                <button>Log In</button>
+            <div class="logo" style="width: 8em; height: 5.5em;">
+                <img class="logo-image" src="./../../public/icons/logo.png" style="width: 8em; height: 5.5em;">
+            </div>
+            <router-link :to="{ name: 'matches' }" class="match-icon">
+                <img class="match-icon" src="./../../public/icons/matches.png">
             </router-link>
         </div>
     </transition>
+    <transition :name="transitionName">
+        <div class="nav-bar" v-if="routeName === 'myprofile'">
+            <router-link :to="{ name: 'settings' }" class="setting-icon">
+                <img class="setting-icon" src="./../../public/icons/settings.png">
+            </router-link>
+            <img class="profile-icon" src="./../../public/icons/profile blue.png" style="width: 6em; height: 5.5em;">
+            <router-link :to="{ name: 'swiping' }" class="logo">
+                <img class="logo-image" src="./../../public/icons/logo.png">
+            </router-link>
+        </div>
+    </transition>
+    <transition :name="transitionName">
+        <div class="nav-bar" v-if="routeName === 'settings'">
+            <div class="empty"></div>
+            <img class="setting-icon" src="./../../public/icons/settings.png" style="width: 6em; height: 5.5em;">
+            <router-link :to="{ name: 'myprofile' }" class="profile-icon">
+                <img class="profile-icon" src="./../../public/icons/profile blue.png">
+            </router-link>
+        </div>
+    </transition>
+    <transition :name="transitionName">
+        <div class="nav-bar" v-if="routeName === 'matches'">
+            <router-link :to="{ name: 'swiping' }" class="logo">
+                <img class="logo-image" src="./../../public/icons/logo.png">
+            </router-link>
+            <img class="match-icon" src="./../../public/icons/matches.png" style="width: 6em; height: 5.5em;">
+            <div class="empty"></div>
+        </div>
+    </transition>
+    </div>
 </template>
 <script>
     import {mapGetters} from "vuex";
@@ -37,37 +66,14 @@
         computed: {
             // map `this.user` to `this.$store.getters.user`
             routeName() {
-                console.log(this.$route)
                 return this.$route.name
             },
             ...mapGetters({
                 user: "user"
-            }),
-            userLoggedIn() {
-                return this.user.loggedIn
-            }
-        },
-        beforeRouteLeave(to, from, next) {
-            if (!this.user.loggedIn && this.dontMove) {
-                next(false);
-                console.log('the next was falsed');
-            }
-        },
-        methods: {
-            signOut() {
-                firebase
-                    .auth()
-                    .signOut()
-                    .then(() => {
-                        console.log("Logged Out")
-                        // this.$router.replace({
-                        //   name: "home"
-                        // });
-                    });
-            }
+            })
         },
         watch: {
-            '$route' (to, from, next) {
+            '$route'(to, from, next) {
                 const toPath = to.path;
                 const fromPath = from.path;
                 if (fromPath === '/swiping' && toPath === '/myprofile')
@@ -78,7 +84,7 @@
                     this.transitionName = 'slide-right';
                 else
                     this.transitionName = 'slide-left';
-                //setTimeout(function() { next()}, 1000);
+                next();
             }
         }
     };

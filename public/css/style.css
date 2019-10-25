@@ -100,8 +100,8 @@ body, html {
 .nav-bar {
     display: flex;
     justify-content: space-between;
-    /*align-items: center;*/
-    height: 5em;
+    align-items: center;
+    height: 6em;
     width: 100%;
     padding: 0.3em !important;
 }
