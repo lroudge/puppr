@@ -210,7 +210,8 @@
                         breed: this.form.dogBreed,
                         fun_facts: this.form.funfacts,
                         likes: this.form.likes,
-                        dislikes: this.form.dislikes
+                        dislikes: this.form.dislikes,
+                        sex: this.form.dogSex
                     },
                     likes: [],
                     matches: {}
