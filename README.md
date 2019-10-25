@@ -26,7 +26,9 @@ Follow us on Twitter for more dog and tech related awesomeness!
 # Tutorial
 
 ## Take a tour of the deployed version
-**PuppR** has not yet been deployed, but stay tuned as it will be very soon! Here is a simple flow for the user experience on PuppR:
+[**PuppR**](https://puppr-rbzq4ojnta-uc.a.run.app/)
+
+Here is a simple flow for the user experience on PuppR:
 
 ![user-flow](https://i.imgur.com/xTcJZBE.jpg)
 
