@@ -45,9 +45,6 @@ body, html {
 }
 
 .profile {
-    /* background-image: url("joey.jpg"); */
-    /*background-size: cover;*/
-    /*background-position: center;*/
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -66,13 +63,11 @@ body, html {
 }
 
 .flip-enter-active {
-    transition: transform 0.5s ease;
+    transition: transform 1s cubic-bezier(0.04, 1.07, 0.89, 1.01);
 }
 
 .flip-enter {
     transform: rotateY(180deg);
-    transform-style: preserve-3d;
-    transition: all 200ms ease-in 0s;
 }
 
 .name-age {
@@ -105,8 +100,8 @@ body, html {
 .nav-bar {
     display: flex;
     justify-content: space-between;
-    /*align-items: center;*/
-    height: 5em;
+    align-items: center;
+    height: 6em;
     width: 100%;
     padding: 0.3em !important;
 }
@@ -326,6 +321,7 @@ body, html {
     justify-content: space-around;
     align-items: center;
     height: 70%;
+    color: #ffc5a1;
     text-align: center;
     padding: 1em !important;
 }
@@ -358,12 +354,15 @@ body, html {
 .my-pictures {
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .my-pictures img {
-    height: 100%;
-    width: 25%;
+    height: 10em;
+    width: 10em;
+    border-radius: 15px;
+    box-shadow: 0px 3px 3px grey;
 }
 
 .user-form, .settings-form {
@@ -384,7 +383,6 @@ body, html {
     font-family: "Arial Rounded MT Bold";
     font-size: small;
     color: #ffc5a1;
-    background-color: #FCF9EA;
     text-align: start;
 }
 
@@ -474,7 +472,6 @@ textarea:focus::placeholder {
     padding: .2em !important;
     margin-top: 1em !important;
     margin-bottom: 1em !important;
-    background-color: #FCF9EA !important;
 }
 
 .form-group h4 {
@@ -576,6 +573,14 @@ textarea:focus::placeholder {
     height: 70% !important;
     width: 100% !important;
     padding: 1em !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.image-form h4 {
+    margin: .5em !important;
 }
 
 button {
