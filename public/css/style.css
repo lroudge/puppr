@@ -354,12 +354,15 @@ body, html {
 .my-pictures {
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
+    align-items: center;
 }
 
 .my-pictures img {
-    height: 100%;
-    width: 25%;
+    height: 10em;
+    width: 10em;
+    border-radius: 15px;
+    box-shadow: 0px 3px 3px grey;
 }
 
 .user-form, .settings-form {
@@ -380,7 +383,6 @@ body, html {
     font-family: "Arial Rounded MT Bold";
     font-size: small;
     color: #ffc5a1;
-    background-color: #FCF9EA;
     text-align: start;
 }
 
@@ -470,7 +472,6 @@ textarea:focus::placeholder {
     padding: .2em !important;
     margin-top: 1em !important;
     margin-bottom: 1em !important;
-    background-color: #FCF9EA !important;
 }
 
 .form-group h4 {
@@ -572,6 +573,14 @@ textarea:focus::placeholder {
     height: 70% !important;
     width: 100% !important;
     padding: 1em !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.image-form h4 {
+    margin: .5em !important;
 }
 
 button {
