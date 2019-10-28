@@ -5,8 +5,12 @@
             <img :src="image">
             <form action="#" class="image-form">
                 <h4>Update my picture</h4>
-                <b-form-group placeholder="Choose a file...">
-                    <b-form-file id="file-large" size="lg" @change="onFileChanged"></b-form-file>
+                <b-form-group label="" label-for="file-small" label-cols-sm="1" label-size="sm">
+                    <b-form-file 
+                    @change="onFileChanged"
+                    id="file-small" 
+                    size="sm">
+                    </b-form-file>
                 </b-form-group>
                 <b-button type="button" @click.prevent="onUpload">Upload</b-button>
             </form>
@@ -15,28 +19,28 @@
             <div class="age-name">
                 <div>
                     <h3>Name</h3>
-                    <textarea v-model="dogName" rows="1" placeholder="Rintintin"></textarea>
+                    <textarea v-model="dogName" rows="1" :placeholder="this.user.profile.dogInfo.name"></textarea>
                 </div>
                 <div>
                     <h3>Age</h3>
-                    <textarea v-model="dogAge" rows="1" placeholder="5"></textarea>
+                    <textarea v-model="dogAge" rows="1" :placeholder="this.user.profile.dogInfo.age"></textarea>
                 </div>
                 <div>
                     <h3>Sex</h3>
-                    <textarea v-model="dogSex" rows="1" placeholder="Male"></textarea>
+                    <textarea v-model="dogSex" rows="1" :placeholder="this.user.profile.dogInfo.sex"></textarea>
                 </div>
             </div>
             <div>
                 <h3>Likes</h3>
-                <textarea v-model="likes" rows="2" placeholder="Peanut butter, running after pigeons..."></textarea>
+                <textarea v-model="likes" rows="2" :placeholder="this.user.profile.dogInfo.likes"></textarea>
             </div>
             <div>
                 <h3>Dislikes</h3>
-                <textarea v-model="dislikes" rows="2" placeholder="The mailman, cats..."></textarea>
+                <textarea v-model="dislikes" rows="2" :placeholder="this.user.profile.dogInfo.dislikes"></textarea>
             </div>
             <div>
                 <h3>Fun Facts</h3>
-                <textarea v-model="bio" rows="4" placeholder="I eat veggies and fruits!"></textarea>
+                <textarea v-model="bio" rows="4" :placeholder="this.user.profile.dogInfo.fun_facts"></textarea>
             </div>
             <div class="save-logout">
                 <div class="submit">
@@ -46,6 +50,9 @@
                     <router-link :to="{ name: 'login' }"><input value="Log Out" v-on:click="signOut"/></router-link>
                 </div>
             </div>
+        </div>
+        <div class="myspinner" v-if="spinnerOn">
+                <b-spinner label="Loading..."></b-spinner>
         </div>
     </div>
 </template>
@@ -58,6 +65,15 @@
     export default {
         data() {
             return {
+                dogName: "",
+                dogAge: "",
+                dogSex: "",
+                likes: "",
+                dislikes: "",
+                bio: "",
+                spinnerOn: false,
+                selectedFile: null,
+                newImage: null
             }
         },
         computed: {
@@ -69,6 +85,33 @@
             }
         },
         methods: {
+            submit() {
+                let that = this
+                let uid = this.user.data.localId
+                this.spinnerOn = true
+                return db.collection("users")
+                    .doc(uid)
+                    .update({ 
+                        "dogInfo.name": this.dogName,
+                        "dogInfo.age": this.dogAge,
+                        "dogInfo.sex": this.dogSex,
+                        "dogInfo.likes": this.likes,
+                        "dogInfo.dislikes": this.dislikes,
+                        "dogInfo.fun_facts": this.bio
+                    })
+                    .then(function () {
+                        // Set the db and then set the store
+                        // that.$store.commit('SET_PROFILE', docData);
+                        console.log("Document successfully updated!");
+                        that.$store.dispatch("fetchProfile", that.user.data.localId)
+                        that.spinnerOn = false
+                        that.$router.replace({name: "swiping"})
+                    })
+                    .catch(function (error) {
+                        console.error("Error writing document: ", error);
+                        that.spinnerOn = false
+                    });
+            },
             signOut() {
                 firebase
                     .auth()
@@ -77,6 +120,82 @@
                         console.log("Logged Out");
                     });
             },
+            onFileChanged(event) {
+                if (event.target.files[0].size < 4000000) {
+                    this.selectedFile = event.target.files[0];
+                    console.log(this.selectedFile.name)
+                } else {
+                    alert("Image size must be 4MB or smaller");
+                }
+            },
+            onUpload() {
+                const that = this;
+                let storageRef = firebase.storage().ref();
+                let uploadTask = storageRef
+                    .child(this.user.data.localId + "/" + this.selectedFile.name)
+                    .put(this.selectedFile);
+                // Register three observers:
+                // 1. 'state_changed' observer, called any time the state changes
+                // 2. Error observer, called on failure
+                // 3. Completion observer, called on successful completion
+                uploadTask.on(
+                    "state_changed",
+                    function (snapshot) {
+                        // Observe state change events such as progress, pause, and resume
+                        // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+                        let progress =
+                            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        console.log("Upload is " + progress + "% done");
+                        that.spinnerOn = true
+                        switch (snapshot.state) {
+                            case firebase.storage.TaskState.PAUSED: // or 'paused'
+                                console.log("Upload is paused");
+                                break;
+                            case firebase.storage.TaskState.RUNNING: // or 'running'
+                                console.log("Upload is running");
+                                break;
+                        }
+                    },
+                    function (error) {
+                        // Handle unsuccessful uploads
+                        that.spinnerOn = false;
+                        alert(error);
+                    },
+                    function () {
+                        // Handle successful uploads on complete
+                        // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+                        uploadTask.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+                            // api call to store DownloadURL to user profile
+                            console.log("File available at", downloadURL);
+                            that.newImage = downloadURL;
+                            let userRef = db.collection("users").doc(that.user.data.localId);
+                            return userRef
+                                .update({
+                                    images:
+                                        [downloadURL]
+                                })
+                                .then(function () {
+                                    that.spinnerOn = false;
+                                    console.log("Document successfully updated!");
+                                    that.$store.dispatch("fetchProfile", that.user.data.localId)
+                                })
+                                .catch(function (error) {
+                                    // The document probably doesn't exist.
+                                    that.spinnerOn = false;
+                                    console.error("Error updating document: ", error);
+                                });
+                        });
+                    }
+                );
+            }
         }
     }
 </script>
+<style  scoped>
+    .myspinner {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        z-index: 100;
+    }
+</style>
