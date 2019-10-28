@@ -2,9 +2,14 @@
     <div class="user-profile">
         <h1>My Dog's Profile</h1>
         <div class="my-pictures">
-            <img src="./../static/images/joey.jpg">
-            <img src="./../static/images/joey.jpg">
-            <img src="./../static/images/joey.jpg">
+            <img :src="image">
+            <form action="#" class="image-form">
+                <h4>Update my picture</h4>
+                <b-form-group placeholder="Choose a file...">
+                    <b-form-file id="file-large" size="lg" @change="onFileChanged"></b-form-file>
+                </b-form-group>
+                <b-button type="button" @click.prevent="onUpload">Upload</b-button>
+            </form>
         </div>
         <div class="user-form">
             <div class="age-name">
@@ -52,7 +57,16 @@
 
     export default {
         data() {
-            return {}
+            return {
+            }
+        },
+        computed: {
+            ...mapGetters({
+                user: "user"
+            }),
+            image() {
+                return this.user.profile.images[0];
+            }
         },
         methods: {
             signOut() {
@@ -60,10 +74,7 @@
                     .auth()
                     .signOut()
                     .then(() => {
-                        console.log("Logged Out")
-                        // this.$router.replace({
-                        //   name: "home"
-                        // });
+                        console.log("Logged Out");
                     });
             },
         }

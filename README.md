@@ -25,12 +25,12 @@ Follow us on Twitter for more dog and tech related awesomeness!
 
 # Tutorial
 
-## Take a tour of the deployed version
-[**PuppR**](https://puppr-rbzq4ojnta-uc.a.run.app/)
+## Take a tour of the deployed version at puppr.best
+-> [**PuppR**](https://puppr.best/)
 
 Here is a simple flow for the user experience on PuppR:
 
-![user-flow](https://i.imgur.com/xTcJZBE.jpg)
+![user-flow](https://i.imgur.com/hRxU79B.jpg)
 
 ## Run PuppR with Vue-CLI
 Installing the programs necessary to view this project is pretty simple!
@@ -46,6 +46,7 @@ In case there are any missing dependencies, please execute `puppr$ npm install` 
 Once this is all done you're ready to run **PuppR**! Still in the root of this directory, simply execute `puppr$ npm run serve` and give it a few seconds to get started. Once it's up, you can open your web browser and enter `localhost:8080`. This will allow you to try out **PuppR**!
 
 When you are finished simply go back to your terminal and hit `ctrl + c` to quit the program.
+
 ## Known bugs
 * We're working out an issue with filtering profiles. Ideally we want the user to be able to refresh their browser or be able to navigate to a different vue without them seeing the same profiles they've seen before. There are some issues with correctly displaying a dog that occur when the browser is refreshed.
 * Issue when viewing on mobile. Many of the assets become squished vertically.
@@ -54,6 +55,8 @@ When you are finished simply go back to your terminal and hit `ctrl + c` to quit
 
 ## Overview
 Our web app is a single-page app, coded mainly in Node.js. **PuppR** is front-end heavy, meaning that we focused our time and energy in developping a simple but easy to use and fun app. We designed most of the User Interface, using plain CSS and some native Vue transitions and animations. We also incorporated some BootstrapVue elements which offered a simple solution for some features like image uploading.
+
+![infra](https://i.imgur.com/fSbo6ho.jpg)
 
 ## Vue.js
 For this project, we decided to focus on learning a new front-end framework. Following the advice of mentors and professionals, we chose to learn and use Vue.js.
