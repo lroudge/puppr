@@ -10,7 +10,6 @@ body, html {
     justify-content: center !important;
     align-items: center !important;
     font-family: "Arial Rounded MT Bold" !important;
-    /*background-color: #FCF9EA !important;*/
     position: fixed;
     top: 0;
     bottom: 0;
@@ -20,6 +19,7 @@ body, html {
     overflow-x: hidden;
     height: 100%;
     width: 100%;
+    background-image: linear-gradient(to top, #dfe9f3 0%, white 100%) !important;
 }
 
 #app {
