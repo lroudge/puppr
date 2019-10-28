@@ -4,37 +4,42 @@
             <h4>Sorry, there doesn't seem to be anything here...</h4>
             <img src="../../public/icons/sad_puppr.png" class="sorry">
         </div>
-        <transition name="flip">
-            <div
-                    class="profileInfo"
-                    v-on:click="hideInfo"
-                    v-if="profileInfo && dataLoaded && filteredProfiles"
-            >
-                <h2>Fun Facts</h2>
-                <p>{{ filteredProfiles[index].dogInfo.fun_facts }}</p>
-                <h2>Likes</h2>
-                <p>{{ filteredProfiles[index].dogInfo.likes }}</p>
-                <h2>Dislikes</h2>
-                <p>{{ filteredProfiles[index].dogInfo.dislikes }}</p>
-                <h2>Sex</h2>
-                <p>{{ filteredProfiles[index].dogInfo.sex }}</p>
-                <h2>Breed</h2>
-                <p>{{ filteredProfiles[index].dogInfo.breed }}</p>
+        <div class="back" :style="{ backgroundImage: 'url(' + backImage + ')'}"
+             v-if="filteredProfiles">
+            <div :class="transitionName">
+                <transition name="flip">
+                    <div
+                            class="profileInfo"
+                            v-on:click="hideInfo"
+                            v-if="profileInfo && dataLoaded && filteredProfiles"
+                    >
+                        <h2>Fun Facts</h2>
+                        <p>{{ filteredProfiles[index].dogInfo.fun_facts }}</p>
+                        <h2>Likes</h2>
+                        <p>{{ filteredProfiles[index].dogInfo.likes }}</p>
+                        <h2>Dislikes</h2>
+                        <p>{{ filteredProfiles[index].dogInfo.dislikes }}</p>
+                        <h2>Sex</h2>
+                        <p>{{ filteredProfiles[index].dogInfo.sex }}</p>
+                        <h2>Breed</h2>
+                        <p>{{ filteredProfiles[index].dogInfo.breed }}</p>
+                    </div>
+                </transition>
+                <transition name="flip">
+                    <div
+                            class="profile"
+                            v-on:click="showInfo"
+                            v-if="dataLoaded && !profileInfo && filteredProfiles"
+                    >
+                        <img
+                                class="profile-img"
+                                :src="filteredProfiles[index].images[0]"
+                                v-if="filteredProfiles[index].images[0]"
+                        />
+                    </div>
+                </transition>
             </div>
-        </transition>
-        <transition name="flip">
-            <div
-                    class="profile"
-                    v-on:click="showInfo"
-                    v-if="dataLoaded && !profileInfo && filteredProfiles"
-            >
-                <img
-                        class="profile-img"
-                        :src="filteredProfiles[index].images[0]"
-                        v-if="filteredProfiles[index].images[0]"
-                />
-            </div>
-        </transition>
+        </div>
         <div class="name-age" v-if="filteredProfiles && dataLoaded">
             <h1>{{ filteredProfiles[index].dogInfo.name }}, {{ filteredProfiles[index].dogInfo.age }}</h1>
             <h2>{{ filteredProfiles[index].city }}</h2>
@@ -62,7 +67,8 @@
                 dataLoaded: false,
                 likeName: "like",
                 passName: "pass",
-                reverseName: "reverse"
+                reverseName: "reverse",
+                transitionName: "profiles"
             };
         },
         methods: {
@@ -83,18 +89,23 @@
             },
             nextProfile() {
                 this.passName = "shake-it";
+                this.transitionName = "rotate-90-left-ccw";
                 let that = this;
-                if (this.index === this.filteredProfiles.length - 1) this.index = 0;
-                else this.index++;
-                console.log(this.index);
+                setTimeout(function () {
+                    if (that.index === that.filteredProfiles.length - 1) that.index = 0;
+                    else that.index++;
+                }, 500);
                 let idx = this.index;
+                console.log(idx);
                 this.$emit("change-profile", idx);
                 setTimeout(function () {
                     that.passName = "pass";
+                    that.transitionName = "profiles";
                 }, 500);
             },
             likeProfile() {
                 this.likeName = "beating";
+                this.transitionName = "rotate-90-right-cw";
                 let that = this;
                 if (!this.user.loggedIn) {
                     alert("You need to log in or sign up to access that feature!");
@@ -172,13 +183,16 @@
                     });
                 }
                 let idx = this.index;
+                console.log(idx);
                 this.$emit("change-profile", idx);
                 setTimeout(function () {
                     that.likeName = "like";
-                }, 500);
+                    that.transitionName = "profiles";
+                }, 1000);
             },
             previousProfile() {
                 this.reverseName = "rotate";
+                this.transitionName = "rotate-90-back-ccw";
                 let that = this;
                 if (this.index === 0) this.index = this.filteredProfiles.length - 1;
                 else this.index--;
@@ -187,7 +201,8 @@
                 this.$emit("change-profile", idx);
                 setTimeout(function () {
                     that.reverseName = "reverse";
-                }, 500);
+                    that.transitionName = "profiles";
+                }, 1000);
             },
             getMatches() {
                 let that = this;
@@ -238,8 +253,16 @@
             ...mapState({
                 user: state => state.user
             }),
+            backImage () {
+              if (this.profileInfo)
+                  return "none";
+              else if (this.filteredProfiles.length > 2 && (this.transitionName === "rotate-90-right-cw" || this.transitionName === "rotate-90-left-ccw" || this.transitionName === "rotate-90-back-ccw")) {
+                  let idx = this.index === this.filteredProfiles.length - 1 ? 0 : this.index + 1;
+                  return this.filteredProfiles[idx].images[0];
+              }
+            },
             realLikeName() {
-              return this.likeName;
+                return this.likeName;
             },
             realPassName() {
                 return this.passName;
@@ -268,10 +291,10 @@
                             filterMatchList.push(Object.keys(item)[0]);
                         })
                     }
-                    list = list.filter(function(item) {
+                    list = list.filter(function (item) {
                         return !(filterMatchList.includes(item.user_id))
                     })
-                return list
+                    return list
                 }
             }
         }
