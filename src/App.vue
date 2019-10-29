@@ -1,13 +1,13 @@
 <template>
     <div id="app">
-<!--        <nav-bar v-show="$route.path === '/' ? false : true"></nav-bar>-->
+
         <transition :name="transitionName">
             <router-view></router-view>
         </transition>
     </div>
 </template>
 <script>
-    import navBar from "./components/Navbar";
+
 
     export default {
         // components: {

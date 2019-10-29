@@ -87,6 +87,7 @@
                     // })
                     .catch(err => {
                         console.log(this.error = err.message);
+                        alert("Incorrect login and/or password")
                     });
             }
         },
