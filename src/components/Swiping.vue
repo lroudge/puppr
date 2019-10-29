@@ -1,5 +1,16 @@
 <template>
     <div :key="hello" class="swiping" @change-profile="myMethod">
+        <div class="nav-bar">
+            <router-link :to="{ name: 'myprofile' }" class="profile-icon">
+                <img class="profile-icon" src="./../../public/icons/profile blue.png">
+            </router-link>
+            <div class="logo" style="width: 8em; height: 5.5em;">
+                <img class="logo-image" src="./../../public/icons/logo.png" style="width: 8em; height: 5.5em;">
+            </div>
+            <router-link :to="{ name: 'matches' }" class="match-icon">
+                <img class="match-icon" src="./../../public/icons/matches.png">
+            </router-link>
+        </div>
         <div class="no-matches" v-if="filteredProfiles === undefined">
             <h4>Sorry, there doesn't seem to be anything here...</h4>
             <img src="../../public/icons/sad_puppr.png" class="sorry">
