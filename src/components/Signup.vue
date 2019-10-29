@@ -1,14 +1,14 @@
 <template>
     <div class="signup">
         <transition :name="transitionName">
-            <div class="nav-bar">
-                <div class="empty"></div>
-                <div class="logo" style="width: 8em; height: 5.5em;">
-                    <img class="logo-image" src="./../../public/icons/logo.png" style="width: 8em; height: 5.5em;">
-                </div>
-                <div class="empty"></div>
-            </div>
             <div class="signup-0" v-if="signup0">
+                <div class="nav-bar">
+                    <div class="empty"></div>
+                    <div class="logo" style="width: 8em; height: 5.5em;">
+                        <img class="logo-image" src="./../../public/icons/logo.png" style="width: 8em; height: 5.5em;">
+                    </div>
+                    <div class="empty"></div>
+                </div>
                 <h1>Sign Up</h1>
                 <form action="#" @submit.prevent="submit">
                     <div class="form-group">
@@ -41,6 +41,13 @@
         </transition>
         <transition :name="transitionName">
             <div class="signup-user-profile signup-1" v-if="signup1">
+                <div class="nav-bar">
+                    <div class="empty"></div>
+                    <div class="logo" style="width: 8em; height: 5.5em;">
+                        <img class="logo-image" src="./../../public/icons/logo.png" style="width: 8em; height: 5.5em;">
+                    </div>
+                    <div class="empty"></div>
+                </div>
                 <h2>My Dog's Profile</h2>
                 <div class="user-form">
 
@@ -106,8 +113,18 @@
         </transition>
         <transition :name="transitionName">
             <div class="signup-2" v-if="signup2">
+                <div class="nav-bar">
+                    <div class="empty"></div>
+                    <div class="logo" style="width: 8em; height: 5.5em;">
+                        <img class="logo-image" src="./../../public/icons/logo.png" style="width: 8em; height: 5.5em;">
+                    </div>
+                    <div class="empty"></div>
+                </div>
                 <div class="upload">
                     <h1>Upload your image</h1>
+                    <div class="myspinner" v-if="spinnerOn">
+                        <b-spinner label="Loading..."></b-spinner>
+                    </div>
                     <div class="uploaded-image" v-if="form.image">
                         <img :src="form.image">
                     </div>
@@ -117,9 +134,6 @@
                         </b-form-group>
                         <b-button type="button" @click.prevent="onUpload">Upload</b-button>
                     </form>
-                    <div class="myspinner" v-if="spinnerOn">
-                        <b-spinner label="Loading..."></b-spinner>
-                    </div>
                 </div>
                 <div class="previous-next">
                     <button @click="goBack1">Previous</button>
