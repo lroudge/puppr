@@ -1,6 +1,5 @@
 <template>
     <div id="app">
-
         <transition :name="transitionName">
             <router-view></router-view>
         </transition>
@@ -10,9 +9,6 @@
 
 
     export default {
-        // components: {
-        //     navBar
-        // },
         data() {
             return {
                 transitionName: "slide-left"
