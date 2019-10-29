@@ -1,58 +1,69 @@
 <template>
     <div class="user-profile">
-        <h1>My Dog's Profile</h1>
-        <div class="my-pictures">
-            <img :src="image">
-            <form action="#" class="image-form">
-                <h4>Update my picture</h4>
-                <b-form-group label="" label-for="file-small" label-cols-sm="1" label-size="sm">
-                    <b-form-file 
-                    @change="onFileChanged"
-                    id="file-small" 
-                    size="sm">
-                    </b-form-file>
-                </b-form-group>
-                <b-button type="button" @click.prevent="onUpload">Upload</b-button>
-            </form>
+        <div class="nav-bar">
+            <router-link :to="{ name: 'settings' }" class="setting-icon">
+                <img class="setting-icon" src="./../../public/icons/settings.png">
+            </router-link>
+            <img class="profile-icon" src="./../../public/icons/profile blue.png" style="width: 6em; height: 5.5em;">
+            <router-link :to="{ name: 'swiping' }" class="logo">
+                <img class="logo-image" src="./../../public/icons/logo.png">
+            </router-link>
         </div>
-        <div class="user-form">
-            <div class="age-name">
-                <div>
-                    <h3>Name</h3>
-                    <textarea v-model="dogName" rows="1" :placeholder="this.user.profile.dogInfo.name"></textarea>
+        <div class="profile-container">
+            <h1>My Dog's Profile</h1>
+            <div class="my-pictures">
+                <img :src="image">
+                <form action="#" class="image-form">
+                    <h4>Update my picture</h4>
+                    <b-form-group label="" label-for="file-small" label-cols-sm="1" label-size="sm">
+                        <b-form-file
+                                @change="onFileChanged"
+                                id="file-small"
+                                size="sm">
+                        </b-form-file>
+                    </b-form-group>
+                    <b-button type="button" @click.prevent="onUpload">Upload</b-button>
+                </form>
+            </div>
+            <div class="user-form">
+                <div class="age-name">
+                    <div>
+                        <h3>Name</h3>
+                        <textarea v-model="dogName" rows="1" :placeholder="this.user.profile.dogInfo.name"></textarea>
+                    </div>
+                    <div>
+                        <h3>Age</h3>
+                        <textarea v-model="dogAge" rows="1" :placeholder="this.user.profile.dogInfo.age"></textarea>
+                    </div>
+                    <div>
+                        <h3>Sex</h3>
+                        <textarea v-model="dogSex" rows="1" :placeholder="this.user.profile.dogInfo.sex"></textarea>
+                    </div>
                 </div>
                 <div>
-                    <h3>Age</h3>
-                    <textarea v-model="dogAge" rows="1" :placeholder="this.user.profile.dogInfo.age"></textarea>
+                    <h3>Likes</h3>
+                    <textarea v-model="likes" rows="2" :placeholder="this.user.profile.dogInfo.likes"></textarea>
                 </div>
                 <div>
-                    <h3>Sex</h3>
-                    <textarea v-model="dogSex" rows="1" :placeholder="this.user.profile.dogInfo.sex"></textarea>
+                    <h3>Dislikes</h3>
+                    <textarea v-model="dislikes" rows="2" :placeholder="this.user.profile.dogInfo.dislikes"></textarea>
+                </div>
+                <div>
+                    <h3>Fun Facts</h3>
+                    <textarea v-model="bio" rows="4" :placeholder="this.user.profile.dogInfo.fun_facts"></textarea>
+                </div>
+                <div class="save-logout">
+                    <div class="submit">
+                        <input type="submit" value="Save my changes" v-on:click="submit"/>
+                    </div>
+                    <div class="submit">
+                        <router-link :to="{ name: 'login' }"><input value="Log Out" v-on:click="signOut"/></router-link>
+                    </div>
                 </div>
             </div>
-            <div>
-                <h3>Likes</h3>
-                <textarea v-model="likes" rows="2" :placeholder="this.user.profile.dogInfo.likes"></textarea>
-            </div>
-            <div>
-                <h3>Dislikes</h3>
-                <textarea v-model="dislikes" rows="2" :placeholder="this.user.profile.dogInfo.dislikes"></textarea>
-            </div>
-            <div>
-                <h3>Fun Facts</h3>
-                <textarea v-model="bio" rows="4" :placeholder="this.user.profile.dogInfo.fun_facts"></textarea>
-            </div>
-            <div class="save-logout">
-                <div class="submit">
-                    <input type="submit" value="Save my changes" v-on:click="submit"/>
-                </div>
-                <div class="submit">
-                    <router-link :to="{ name: 'login' }"><input value="Log Out" v-on:click="signOut"/></router-link>
-                </div>
-            </div>
-        </div>
-        <div class="myspinner" v-if="spinnerOn">
+            <div class="myspinner" v-if="spinnerOn">
                 <b-spinner label="Loading..."></b-spinner>
+            </div>
         </div>
     </div>
 </template>
@@ -91,7 +102,7 @@
                 this.spinnerOn = true
                 return db.collection("users")
                     .doc(uid)
-                    .update({ 
+                    .update({
                         "dogInfo.name": (this.dogName || this.user.profile.dogInfo.name),
                         "dogInfo.age": (this.dogAge || this.user.profile.dogInfo.age),
                         "dogInfo.sex": (this.dogSex || this.user.profile.dogInfo.sex),
@@ -191,7 +202,7 @@
         }
     }
 </script>
-<style  scoped>
+<style scoped>
     .myspinner {
         position: fixed;
         top: 50%;

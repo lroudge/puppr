@@ -1,6 +1,13 @@
 <template>
     <div class="signup">
         <transition :name="transitionName">
+            <div class="nav-bar">
+                <div class="empty"></div>
+                <div class="logo" style="width: 8em; height: 5.5em;">
+                    <img class="logo-image" src="./../../public/icons/logo.png" style="width: 8em; height: 5.5em;">
+                </div>
+                <div class="empty"></div>
+            </div>
             <div class="signup-0" v-if="signup0">
                 <h1>Sign Up</h1>
                 <form action="#" @submit.prevent="submit">

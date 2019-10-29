@@ -1,5 +1,12 @@
 <template>
     <div class="matches">
+        <div class="nav-bar">
+            <router-link :to="{ name: 'swiping' }" class="logo">
+                <img class="logo-image" src="./../../public/icons/logo.png">
+            </router-link>
+            <img class="match-icon" src="./../../public/icons/matches.png" style="width: 6em; height: 5.5em;">
+            <div class="empty"></div>
+        </div>
         <div class="my-matches">
             <h1>My matches</h1>
         </div>
