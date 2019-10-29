@@ -92,12 +92,12 @@
                 return db.collection("users")
                     .doc(uid)
                     .update({ 
-                        "dogInfo.name": this.dogName,
-                        "dogInfo.age": this.dogAge,
-                        "dogInfo.sex": this.dogSex,
-                        "dogInfo.likes": this.likes,
-                        "dogInfo.dislikes": this.dislikes,
-                        "dogInfo.fun_facts": this.bio
+                        "dogInfo.name": (this.dogName || this.user.profile.dogInfo.name),
+                        "dogInfo.age": (this.dogAge || this.user.profile.dogInfo.age),
+                        "dogInfo.sex": (this.dogSex || this.user.profile.dogInfo.sex),
+                        "dogInfo.likes": (this.likes || this.user.profile.dogInfo.likes),
+                        "dogInfo.dislikes": (this.dislikes || this.user.profile.dogInfo.dislikes),
+                        "dogInfo.fun_facts": (this.bio || this.user.profile.dogInfo.fun_facts)
                     })
                     .then(function () {
                         // Set the db and then set the store
