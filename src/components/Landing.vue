@@ -19,23 +19,49 @@
                         class="intro"
                         v-if="intro && !features && !about"
                 >
-                    <h3>Meet friendly doggos in your area!</h3>
-                    <p>PuppR is the best place on the internet to meet amazing pups and their owners!</p>
-                    <p>Browse through local dogs and connect with their owners to set up a playdate or a walk.</p>
-                    <p>If you like a dog and their owner likes your dog back, then you will match!</p>
+                    <div class="intro-top">
+                        <h3>Meet friendly doggos in your area!</h3>
+                        <p>PuppR is the best place on the internet to meet amazing pups and their owners!</p>
+                        <p>Browse through local dogs and connect with their owners to set up a playdate or a walk.</p>
+                        <p>If you like a dog and their owner likes your dog back, then you will match!</p>
+                    </div>
+                    <div class="intro-bot">
+                        <img src="./../../public/images/our-wonderful-dogs.png">
+                        <div class="try">
+                            <h3>Try it out for yourself!</h3>
+                            <p>Website: puppr.best</p>
+                            <p>Login: 'testuser@test.com'</p>
+                            <p>Password: 'password'</p>
+                        </div>
+                    </div>
                 </div>
                 <div
                         v-if="!intro && features && !about"
                         class="features">
-                    <h3>Sign up</h3>
-                    <p>Make a profile that shows off your pup and their personality! Upload a picture to show the
-                        world.</p>
-                    <h3>Browse</h3>
-                    <p>Use a familiar and intuitive interface to see dogs in your area and express interest in
-                        connecting. You can like, pass or rewind profiles of dogs in your are.</p>
-                    <h3>Matches</h3>
-                    <p>Keep track of your matches in one convenient location.</p>
-                    <p>Hover over a match to display their contact email and communicate plans to connect.</p>
+                    <div class="row1">
+                        <img class="signin-ss" src="./../../public/icons/signin_screen.png">
+                        <div class="column1">
+                            <h3>Sign up</h3>
+                            <p>Make a profile that shows off your pup and their personality!<p>
+                            <p>Upload a picture to show the world.</p>
+                        </div>
+                    </div>
+                    <div class="row2">
+                        <div class="column2">
+                            <h3>Browse</h3>
+                            <p>Use a familiar and intuitive interface to see dogs in your area</p>
+                                <p>and express interest in connecting.</p>
+                        </div>
+                        <img class="browse-ss" src="./../../public/icons/browse_no_text.png">
+                    </div>
+                    <div class="row3">
+                            <img class="match-ss" src="./../../public/icons/match_screen.png">
+                        <div class="column3">
+                            <h3>Matches</h3>
+                            <p>Keep track of your matches in one convenient location.</p>
+                            <p>Display the contact email for matched dogs and make plans to connect.</p>
+                        </div>
+                    </div>
                 </div>
                 <div
                         v-if="!intro && !features && about"
@@ -173,7 +199,80 @@
         .intro h3, .features h3, .about h3, .about h4 {
             color: #f8a978;
         }
+        .intro-bot {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            margin-top: 4em !important;
+        }
+        .intro-bot p {
+            font-size: 25px;
+            color: #ffc5a1;
+        }
 
+        .intro-bot img {
+            height: 12em !important;
+            margin-right: 1em !important;
+            margin-top: 1em !important;
+        }
+        .try {
+            margin-top: 1em !important;
+            margin-left: 8em !important;
+            text-align: center;
+            width: 80%;
+            border: 3px solid #f8a978;
+            border-radius: 8px;
+            padding: 1.5em !important;
+        }   
+        .signin-ss {
+            height: 10em;
+        }
+        .match-ss {
+            height: 12em;
+            margin-top: -1em !important;
+        }
+        
+        .browse-ss {
+            height: 12em;
+            margin-top: -4em !important;
+            /* margin-right: 2em !important; */
+        }
+
+        .row1, .row2 {
+            width: 100%; 
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-start;
+        }
+        .row3 {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            justify-content: flex-start;
+            margin-top: -2em !important;
+        }
+        .column1 {
+            display: flex;
+            flex-direction: column;
+            margin-left: 2em !important;
+            margin-left: 20em;
+            width: 100%;
+        }
+        .column2 {
+            display: flex;
+            flex-direction: column;
+            margin-top: -1em !important;
+            margin-right: 2em !important;
+            width: 100%;
+            text-align: right;
+        }
+        .column3 {
+            display: flex;
+            flex-direction:column;
+            margin-top: 2em !important;
+            margin-left: 2em !important;
+        }
+        
         .upper-container {
             width: 100%;
             height: 70%;
@@ -191,12 +290,15 @@
             justify-content: space-evenly;
             width: 90%;
             height: 90%;
-            background-color: #ffffffb3;
+            background-color: #ffffffc9;
             border-radius: 15px;
             -webkit-box-shadow: 0px 0px 26px -6px rgba(0,0,0,0.45);
             text-shadow: 1px 1px #6361613b;
         }
-
+        .intro {
+            display: flex;
+            flex-direction: column;
+        }
         .intro, .features, .about {
             display: flex;
             flex-direction: column;
