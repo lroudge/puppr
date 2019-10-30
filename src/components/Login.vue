@@ -1,5 +1,12 @@
 <template>
     <div class="login">
+        <div class="nav-bar">
+            <div class="empty"></div>
+            <div class="logo" style="width: 8em; height: 5.5em;">
+                <img class="logo-image" src="./../../public/icons/logo.png" style="width: 8em; height: 5.5em;">
+            </div>
+            <div class="empty"></div>
+        </div>
         <h1>Sign In</h1>
         <form action="#" @submit.prevent="submit">
             <div class="form-group row">
@@ -80,6 +87,7 @@
                     // })
                     .catch(err => {
                         console.log(this.error = err.message);
+                        alert("Incorrect login and/or password")
                     });
             }
         },
