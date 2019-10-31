@@ -20,19 +20,13 @@
                         v-if="intro && !features && !about"
                 >
                     <div class="intro-top">
-                        <h3>Meet friendly doggos in your area!</h3>
+                        <h1>Welcome to PuppR!</h1>
+                        <img class="my-logo" src="./../../public/icons/logo.png">
+                        <h3><i>Anything is pawssible</i></h3>
+                        <br>
                         <p>PuppR is the best place on the internet to meet amazing pups and their owners!</p>
                         <p>Browse through local dogs and connect with their owners to set up a playdate or a walk.</p>
                         <p>If you like a dog and their owner likes your dog back, then you will match!</p>
-                    </div>
-                    <div class="intro-bot">
-                        <img src="./../../public/images/our-wonderful-dogs.png">
-                        <div class="try">
-                            <h3>Try it out for yourself!</h3>
-                            <p>Website: puppr.best</p>
-                            <p>Login: 'testuser@test.com'</p>
-                            <p>Password: 'password'</p>
-                        </div>
                     </div>
                 </div>
                 <div
@@ -196,15 +190,25 @@
             color: #ffc5a1;
         }
 
-        .intro h3, .features h3, .about h3, .about h4 {
+        .intro h3, .intro h1, .features h3, .about h3, .about h4 {
             color: #f8a978;
         }
-        .intro-bot {
+
+        .intro-top {
             display: flex;
-            flex-direction: row;
-            justify-content: flex-start;
-            margin-top: 4em !important;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
         }
+
+        .my-logo {
+            height: 15em;
+            width: 22em;
+            margin: 1em 0 !important;
+        }
+
         .intro-bot p {
             font-size: 25px;
             color: #ffc5a1;
@@ -215,18 +219,11 @@
             margin-right: 1em !important;
             margin-top: 1em !important;
         }
-        .try {
-            margin-top: 1em !important;
-            margin-left: 8em !important;
-            text-align: center;
-            width: 80%;
-            border: 3px solid #f8a978;
-            border-radius: 8px;
-            padding: 1.5em !important;
-        }   
+
         .signin-ss {
             height: 10em;
         }
+
         .match-ss {
             height: 12em;
             margin-top: -1em !important;
@@ -244,6 +241,7 @@
             flex-direction: row;
             justify-content: flex-start;
         }
+
         .row3 {
             display: flex;
             flex-direction: row;
@@ -251,6 +249,7 @@
             justify-content: flex-start;
             margin-top: -2em !important;
         }
+
         .column1 {
             display: flex;
             flex-direction: column;
@@ -258,6 +257,7 @@
             margin-left: 20em;
             width: 100%;
         }
+
         .column2 {
             display: flex;
             flex-direction: column;
@@ -266,6 +266,7 @@
             width: 100%;
             text-align: right;
         }
+
         .column3 {
             display: flex;
             flex-direction:column;
@@ -290,15 +291,18 @@
             justify-content: space-evenly;
             width: 90%;
             height: 90%;
-            background-color: #ffffffc9;
+            background-color: #fffffff0;
             border-radius: 15px;
             -webkit-box-shadow: 0px 0px 26px -6px rgba(0,0,0,0.45);
             text-shadow: 1px 1px #6361613b;
         }
+
         .intro {
             display: flex;
             flex-direction: column;
+            height: 100%;
         }
+
         .intro, .features, .about {
             display: flex;
             flex-direction: column;
@@ -344,42 +348,42 @@
     }
 
     /* FOR MOBILE */
-    /*@media screen and (max-width: 566px) {*/
+    @media screen and (max-width: 566px) {
 
-    /*    * {*/
-    /*        box-sizing: border-box;*/
-    /*        margin: 0;*/
-    /*        padding: 0;*/
-    /*    }*/
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    /*    .landing_page {*/
-    /*        background-image: url('./../../public/icons/landing_page_mobile.png');*/
-    /*        background-repeat: no-repeat;*/
-    /*        background-size: cover;*/
-    /*        background-position: center;*/
-    /*        display: flex;*/
-    /*        flex-direction: column;*/
-    /*        justify-content: center;*/
-    /*        align-items: center;*/
-    /*        font-family: "Arial Rounded MT Bold";*/
-    /*        background-color: #FCF9EA;*/
-    /*        position: fixed;*/
-    /*        top: 0;*/
-    /*        bottom: 0;*/
-    /*        right: 0;*/
-    /*        left: 0;*/
-    /*        margin: 0 auto;*/
-    /*        overflow-x: hidden;*/
-    /*        height: 100%;*/
-    /*        width: 100%;*/
-    /*    }*/
+        .landing_page {
+            background-image: url('./../../public/icons/landing_page_mobile.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: "Arial Rounded MT Bold";
+            background-color: #FCF9EA;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            margin: 0 auto;
+            overflow-x: hidden;
+            height: 100%;
+            width: 100%;
+        }
 
-    /*    .login-button {*/
-    /*        margin-bottom: -400px !important;*/
-    /*        opacity: 0.9;*/
-    /*        height: 60px;*/
-    /*    }*/
-    /*}*/
+        .login-button {
+            margin-bottom: -400px !important;
+            opacity: 0.9;
+            height: 60px;
+        }
+    }
 
 
 </style>
