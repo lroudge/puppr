@@ -90,7 +90,7 @@
                         <h2>My Info</h2>
                         <div>
                             <h4>Display Name</h4>
-                            <textarea required autofocus v-model="form.displayname" placeholder="JaneDoe"
+                            <textarea required autofocus v-model="form.displayName" placeholder="JaneDoe"
                                       rows="1"></textarea>
                         </div>
                         <div>
@@ -172,7 +172,7 @@
                     funfacts: "",
                     firstname: "",
                     lastname: "",
-                    displayname: "",
+                    displayName: "",
                     city: "",
                     image: ""
                 }
@@ -221,7 +221,7 @@
                 const docData = {
                     email: this.form.email,
                     zipcode: Number(this.form.zipcode),
-                    displayname: this.form.displayname,
+                    displayName: this.form.displayName,
                     // first_name: this.form.firstname,
                     // last_name: this.form.lastname,
                     city: this.form.city,

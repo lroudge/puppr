@@ -65,7 +65,7 @@
                 return db.collection("users")
                     .doc(uid)
                     .update({
-                        displayName: (this.displayName || this.user.profile.displayName),
+                        displayName: (this.displayName || this.user.profile.displayname),
                         email: (this.email || this.user.profile.email),
                         zipcode: (Number(this.zipcode) || Number(this.user.profile.zipcode)),
                         city: (this.city || this.user.profile.city),
