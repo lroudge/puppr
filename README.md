@@ -48,7 +48,7 @@ Once this is all done you're ready to run **PuppR**! Still in the root of this d
 When you are finished simply go back to your terminal and hit `ctrl + c` to quit the program.
 
 ## Known bugs
-* We're working out an issue with filtering profiles. Ideally we want the user to be able to refresh their browser or be able to navigate to a different vue without them seeing the same profiles they've seen before. There are some issues with correctly displaying a dog that occur when the browser is refreshed.
+* Some transitions are not as fluid as expected, and due to API calls lag can be a bit off.
 * Issue when viewing on mobile. Many of the assets become squished vertically.
 
 # Architecture
