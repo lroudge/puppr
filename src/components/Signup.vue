@@ -308,6 +308,7 @@
                                 })
                                 .then(function () {
                                     that.spinnerOn = false;
+                                    that.$store.dispatch("fetchProfile", that.user.data.localId)
                                     console.log("Document successfully updated!");
                                 })
                                 .catch(function (error) {
