@@ -22,7 +22,7 @@
                     <div class="intro-top">
                         <h1>Welcome to PuppR!</h1>
                         <img class="my-logo" src="./../../public/icons/logo.png">
-                        <h3><i>Asnything is pawssible</i></h3>
+                        <h3><i>Anything is pawssible</i></h3>
                         <br>
                         <p>PuppR is the best place on the internet to meet amazing pups and their owners!</p>
                         <p>Browse through local dogs and connect with their owners to set up a playdate or a walk.</p>
