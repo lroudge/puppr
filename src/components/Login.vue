@@ -87,7 +87,14 @@
                     // })
                     .catch(err => {
                         console.log(this.error = err.message);
-                        alert("Incorrect login and/or password")
+                        // alert("Incorrect login and/or password")
+                        this.$fire({
+                            title: "Invalid email or password!",
+                            type: "info",
+                            width: "30rem"
+                        }).then(r => {
+                            console.log(r.value);
+                        });
                     });
             }
         },
