@@ -7,9 +7,11 @@ import * as firebase from "firebase";
 import store from "./store";
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import VueSimpleAlert from "vue-simple-alert";
 
 Vue.config.productionTip = false;
 Vue.use(firestorePlugin)
+Vue.use(VueSimpleAlert);
 
 const configOptions = {
     apiKey: "AIzaSyCxE9roondfXx86qpiV94hMK5v6NI7_G1g",
