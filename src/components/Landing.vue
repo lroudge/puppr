@@ -1,5 +1,15 @@
 <template>
+
     <div class="landing-page">
+        <div class="on-mobile">
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+            <div class="mobile-table">
+                <h3>Check back soon for the mobile version!</h3>
+                <img class="no-mobile" src="./../../public/icons/sad_puppr.png">
+            </div>
+        </div>
         <div class="header-landing">
             <img class="puppr-logo" src="./../../public/icons/logo.png">
             <p :class="choice1" v-on:click="showIntro">
@@ -136,6 +146,10 @@
 <style scoped>
     /* FOR BROWSER */
     @media screen and (min-width: 567px) {
+
+        .on-mobile {
+            display: none;
+        }
 
         * {
             box-sizing: border-box;
@@ -350,13 +364,18 @@
     /* FOR MOBILE */
     @media screen and (max-width: 566px) {
 
-        * {
+
+        .header-landing, .upper-container, .login-button {
+            display: none;       
+        }
+
+        /* .landing-page {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-        }
+        } */
 
-        .landing_page {
+        .on-mobile {
             background-image: url('./../../public/icons/landing_page_mobile.png');
             background-repeat: no-repeat;
             background-size: cover;
@@ -378,10 +397,25 @@
             width: 100%;
         }
 
-        .login-button {
-            margin-bottom: -400px !important;
-            opacity: 0.9;
-            height: 60px;
+        .mobile-table {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 80%;
+            height: 20%;
+            background-color: #fffffff0;
+            border-radius: 15px;
+            text-shadow: 1px 1px #6361613b;
+        }
+
+        .on-mobile h3 {
+            text-align: center;
+            color: #f8a978;
+        }
+
+        .no-mobile {
+            height: 3em;
         }
     }
 
