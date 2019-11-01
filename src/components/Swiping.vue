@@ -173,7 +173,15 @@
                                     console.log("Document successfully updated and like REMOVED! from")
                                     // that.$store.dispatch('fetchUser')
                                     that.$store.dispatch("fetchProfile", that.user.data.localId)
-                                    alert("You have a new match!")
+                                    // alert("You have a new match!")
+                                }).then(function () {
+                                    that.$fire({
+                                        title: "You've got a match!",
+                                        type: "info",
+                                        width: "20rem"
+                                    }).then(r => {
+                                        console.log(r.value);
+                                    });
                                 })
                             }).catch(function (error) {
                                 console.error("Error updating like in document: ", error);
