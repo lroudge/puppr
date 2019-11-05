@@ -13,10 +13,10 @@
         <div class="match-list">
             <ul v-if="profiles.length">
                 <li v-for="profile in profiles">
-                    <div class="dropdown-match">
-                        <img :src="profile.images[0]" class="image-icon"/>
+                    <div class="match-element">
+                        <img :src="profile.images[0]" class="match-image"/>
                         <p>{{ profile.dogInfo.name }}</p>
-                        <div class="popover-match">{{ profile.email }}</div>
+                        <div class="match-email">{{ profile.email }}</div>
                     </div>
                 </li>
             </ul>
