@@ -69,8 +69,7 @@
 </template>
 <script>
     import firebase from "firebase";
-    import {db, eventHub} from "../main";
-
+    import {db} from "../main";
     import {mapGetters} from "vuex";
 
     export default {
@@ -88,18 +87,22 @@
             }
         },
         computed: {
+            // This gets the current logged in user from the store
             ...mapGetters({
                 user: "user"
             }),
             image() {
+                // Select the first image of the images list for the current logged in user
                 return this.user.profile.images[0];
             }
         },
         methods: {
+            // Fires when the user clicks "save my changes"
+            // Updates their info in the store and in the db
             submit() {
-                let that = this
-                let uid = this.user.data.localId
-                this.spinnerOn = true
+                let that = this;
+                let uid = this.user.data.localId;
+                this.spinnerOn = true;
                 return db.collection("users")
                     .doc(uid)
                     .update({
@@ -112,15 +115,13 @@
                     })
                     .then(function () {
                         // Set the db and then set the store
-                        // that.$store.commit('SET_PROFILE', docData);
-                        console.log("Document successfully updated!");
-                        that.$store.dispatch("fetchProfile", that.user.data.localId)
-                        that.spinnerOn = false
-                        that.$router.replace({name: "swiping"})
+                        that.$store.dispatch("fetchProfile", that.user.data.localId);
+                        that.spinnerOn = false;
+                        that.$router.replace({name: "swiping"});
                     })
                     .catch(function (error) {
                         console.error("Error writing document: ", error);
-                        that.spinnerOn = false
+                        that.spinnerOn = false;
                     });
             },
             signOut() {
@@ -134,11 +135,11 @@
             onFileChanged(event) {
                 if (event.target.files[0].size < 4000000) {
                     this.selectedFile = event.target.files[0];
-                    console.log(this.selectedFile.name)
                 } else {
                     alert("Image size must be 4MB or smaller");
                 }
             },
+            // This uploads the selected image to the db
             onUpload() {
                 const that = this;
                 let storageRef = firebase.storage().ref();
@@ -157,7 +158,7 @@
                         let progress =
                             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                         console.log("Upload is " + progress + "% done");
-                        that.spinnerOn = true
+                        that.spinnerOn = true;
                         switch (snapshot.state) {
                             case firebase.storage.TaskState.PAUSED: // or 'paused'
                                 console.log("Upload is paused");
@@ -186,8 +187,8 @@
                                         [downloadURL]
                                 })
                                 .then(function () {
+                                    // Success of the upload
                                     that.spinnerOn = false;
-                                    console.log("Document successfully updated!");
                                     that.$store.dispatch("fetchProfile", that.user.data.localId)
                                 })
                                 .catch(function (error) {
