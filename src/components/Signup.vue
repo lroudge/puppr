@@ -145,8 +145,7 @@
 </template>
 <script>
     import firebase from "firebase";
-    import {db, storage} from "../main";
-    import {router} from "../routes/index";
+    import {db} from "../main";
     import {mapGetters} from "vuex"
 
     export default {
@@ -155,9 +154,13 @@
                 transitionName: "slide-left",
                 selectedFile: null,
                 spinnerOn: false,
+                // For the user auth screen
                 signup0: true,
+                // For the dog profile screen
                 signup1: false,
+                // For the image upload screen
                 signup2: false,
+                // Form for the user's profile info
                 form: {
                     email: "",
                     password: "",
@@ -179,11 +182,13 @@
             };
         },
         computed: {
+            // This gets the current logged in user from the store
             ...mapGetters({
                 user: "user"
             })
         },
         methods: {
+            // Go back from dog profile screen to user authentication screen
             goBack0() {
                 this.transitionName = "slide-right";
                 const that = this;
@@ -193,6 +198,7 @@
                     }, 500);
                 setTimeout(function() { that.transitionName = "slide-left";}, 1000);
             },
+            // Go back from image upload screen to dog profile screen
             goBack1() {
                 this.transitionName = "slide-right";
                 const that = this;
@@ -202,6 +208,7 @@
                 }, 500);
                 setTimeout(function() { that.transitionName = "slide-left";}, 1000);
             },
+            // Creates a user with firebase auth
             submit() {
                 let that = this;
                 that.signup0 = false;
@@ -217,13 +224,12 @@
                         console.log(err.message);
                     });
             },
+            // On signing in, the store is updated with current user data
             signUp() {
                 const docData = {
                     email: this.form.email,
                     zipcode: Number(this.form.zipcode),
                     displayName: this.form.displayName,
-                    // first_name: this.form.firstname,
-                    // last_name: this.form.lastname,
                     city: this.form.city,
                     dogInfo: {
                         name: this.form.dogName,
@@ -253,6 +259,7 @@
                         console.error("Error writing document: ", error);
                     });
             },
+            // Sets a limit on the uploaded image size
             onFileChanged(event) {
                 if (event.target.files[0].size < 4000000) {
                     this.selectedFile = event.target.files[0];
@@ -260,6 +267,7 @@
                     alert("Image size must be 4MB or smaller");
                 }
             },
+            // This uploads the selected image to the db
             onUpload() {
                 const that = this;
                 let storageRef = firebase.storage().ref();
@@ -278,7 +286,7 @@
                         let progress =
                             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
                         console.log("Upload is " + progress + "% done");
-                        that.spinnerOn = true
+                        that.spinnerOn = true;
                         switch (snapshot.state) {
                             case firebase.storage.TaskState.PAUSED: // or 'paused'
                                 console.log("Upload is paused");
@@ -307,8 +315,9 @@
                                         [downloadURL]
                                 })
                                 .then(function () {
+                                    // Image was successfully uploaded
                                     that.spinnerOn = false;
-                                    that.$store.dispatch("fetchProfile", that.user.data.localId)
+                                    that.$store.dispatch("fetchProfile", that.user.data.localId);
                                     console.log("Document successfully updated!");
                                 })
                                 .catch(function (error) {
@@ -330,8 +339,4 @@
         left: 50%;
         z-index: 100;
     }
-    /* :not(.myspinner) {
-        opacity: .5;
-    } */
-
 </style>

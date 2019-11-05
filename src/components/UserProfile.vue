@@ -124,6 +124,7 @@
                         that.spinnerOn = false;
                     });
             },
+            // Signing out
             signOut() {
                 firebase
                     .auth()
@@ -132,6 +133,7 @@
                         console.log("Logged Out");
                     });
             },
+            // Sets a limit on the uploaded image size
             onFileChanged(event) {
                 if (event.target.files[0].size < 4000000) {
                     this.selectedFile = event.target.files[0];
