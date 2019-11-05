@@ -65,32 +65,32 @@
             };
         },
         methods: {
+            // Fires when the user logs in
+            // Updates their info in the store and in the db
             submit() {
-                const that = this
+                const that = this;
                 firebase
                     .auth()
                     .signInWithEmailAndPassword(this.form.email, this.form.password)
                     .then((data) => {
                         // load the profile of the user in Vuex store
-                        console.log(data.user.uid)
-                        const ref = db.collection('users').doc(data.user.uid)
+                        const ref = db.collection('users').doc(data.user.uid);
                         ref.get().then(function (doc) {
-                            that.$store.commit('SET_PROFILE', doc.data())
+                            that.$store.commit('SET_PROFILE', doc.data());
                             that.$router.replace({name: "swiping"})
                             .then(() => {
-                                console.log('Promise returned from replace');
+                                console.log('Successfully logged in!');
                             })
                         })
                     })
-                    // .then(() => {
-                    //     console.log('Promise returned from replace');
-                    // })
                     .catch(err => {
                         console.log(this.error = err.message);
                         alert("Incorrect login and/or password")
                     });
             }
         },
+        // Makes sure that the vuex store is updated with the current user info
+        // Before going to another route
         beforeRouteEnter(f, t, next) {
             next(async (vm) => {
                 await this.$store.dispatch('fetchUser');

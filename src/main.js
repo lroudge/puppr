@@ -8,8 +8,10 @@ import store from "./store";
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
+// General configuration for the Vue app
+// And Firebase
+
 Vue.config.productionTip = false;
-Vue.use(firestorePlugin)
 
 const configOptions = {
     apiKey: "AIzaSyCxE9roondfXx86qpiV94hMK5v6NI7_G1g",
@@ -28,12 +30,16 @@ firebase.auth().onAuthStateChanged(user => {
     store.dispatch("fetchUser", user);
 });
 
-Vue.use(firestorePlugin)
-Vue.use(BootstrapVue)
-export const db = firebase.firestore()
+// Tell Vue the plugins it needs to use
+Vue.use(firestorePlugin);
+Vue.use(BootstrapVue);
 
+// Export the database object to the components
+export const db = firebase.firestore();
+
+// Initialisation of the Vue app
 new Vue({
     router,
     store,
     render: h => h(App)
-}).$mount("#app")
+}).$mount("#app");

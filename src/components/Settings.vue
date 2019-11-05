@@ -37,9 +37,7 @@
     </div>
 </template>
 <script>
-    import firebase from "firebase";
-    import {db, eventHub} from "../main";
-
+    import {db} from "../main";
     import {mapGetters} from "vuex";
 
     export default {
@@ -53,15 +51,18 @@
             }
         },
         computed: {
+            // This gets the current logged in user from the store
             ...mapGetters({
                 user: "user"
             }),
         },
         methods: {
+            // Fires when the user clicks "save my changes"
+            // Updates their info in the store and in the db
             submit() {
-                let that = this
-                let uid = this.user.data.localId
-                this.spinnerOn = true
+                let that = this;
+                let uid = this.user.data.localId;
+                this.spinnerOn = true;
                 return db.collection("users")
                     .doc(uid)
                     .update({
@@ -72,11 +73,9 @@
                     })
                     .then(function () {
                         // Set the db and then set the store
-                        // that.$store.commit('SET_PROFILE', docData);
-                        console.log("Document successfully updated!");
-                        that.$store.dispatch("fetchProfile", that.user.data.localId)
-                        that.spinnerOn = false
-                        that.$router.replace({name: "myprofile"})
+                        that.$store.dispatch("fetchProfile", that.user.data.localId);
+                        that.spinnerOn = false;
+                        that.$router.replace({name: "myprofile"});
                     })
                     .catch(function (error) {
                         console.error("Error writing document: ", error);
@@ -84,23 +83,8 @@
                     });
             }
         }
-//       profiles: profiles
-//     };
-//   },
-//   computed: {
-//     name() {
-//       return this.profilesList[this.index].name;
-//     },
-//     age() {
-//       return this.profilesList[this.currentProfile].age;
-//     },
-//     city() {
-//       return this.profilesList[this.currentProfile].city;
-//     }
-        // }
     };
 </script>
-
 <style scoped>
     .myspinner {
         position: fixed;
