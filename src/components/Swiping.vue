@@ -1,24 +1,31 @@
 <template>
     <div :key="hello" class="swiping" @change-profile="myMethod">
+        <!-- Navigation bar that appears on the Swiping page -->
         <div class="nav-bar">
+            <!-- Link to profile -->
             <router-link :to="{ name: 'myprofile' }" class="profile-icon">
                 <img class="profile-icon" src="./../../public/icons/profile blue.png">
             </router-link>
+            <!-- Logo that shows user is on Swiping -->
             <div class="logo" style="width: 8em; height: 5.5em;">
                 <img class="logo-image" src="./../../public/icons/logo.png" style="width: 8em; height: 5.5em;">
             </div>
+            <!-- Link to matches -->
             <router-link :to="{ name: 'matches' }" class="match-icon">
                 <img class="match-icon" src="./../../public/icons/matches.png">
             </router-link>
         </div>
+        <!-- If a user has no matches -->
         <div class="no-matches" v-if="filteredProfiles === undefined">
             <h4>Sorry, there doesn't seem to be anything here...</h4>
             <img src="../../public/icons/sad_puppr.png" class="sorry">
         </div>
+        <!-- Section containing the image/profile info -->
         <div class="back" :style="{ backgroundImage: 'url(' + backImage + ')'}"
              v-if="filteredProfiles">
             <div :class="transitionName">
-                <transition name="flip">
+                <transition name="flip"> <!-- the card flips when a user clicks on it -->
+                    <!-- user info (likes, dislikes, fun facts) -->
                     <div
                             class="profileInfo"
                             v-on:click="hideInfo"
@@ -37,6 +44,7 @@
                     </div>
                 </transition>
                 <transition name="flip">
+                    <!-- dog image -->
                     <div
                             class="profile"
                             v-on:click="showInfo"
@@ -51,10 +59,12 @@
                 </transition>
             </div>
         </div>
+        <!-- shows the name, age, and location of the dog -->
         <div class="name-age" v-if="filteredProfiles && dataLoaded">
             <h1>{{ filteredProfiles[index].dogInfo.name }}, {{ filteredProfiles[index].dogInfo.age }}</h1>
             <h2>{{ filteredProfiles[index].city }}</h2>
         </div>
+        <!-- Options to like, pass, or rewind to the previous dog -->
         <div class="action" v-if="filteredProfiles && dataLoaded">
             <img :class="realPassName" src="./../../public/icons/pass02.png" @click="nextProfile"/>
             <img :class="realReverseName" src="./../../public/icons/previous_new.png" @click="previousProfile"/>
@@ -69,6 +79,7 @@
     import {mapGetters, mapState} from "vuex";
 
     export default {
+        // default info
         data: function () {
             return {
                 hello: 0,
@@ -85,11 +96,13 @@
         methods: {
             showInfo() {
                 if (!this.user.loggedIn) {
+                    // This is code left over from anonymous browsing. This shouldn't be accessible
                     alert("You need to log in or sign up to access that feature!");
                     return;
                 }
                 this.profileInfo = true;
             },
+            // Hide dog profile info
             hideInfo() {
                 this.profileInfo = false;
             },
@@ -98,12 +111,15 @@
                 this.index = idx;
                 this.hello++;
             },
+            // Move to next dog profile
             nextProfile() {
                 this.passName = "shake-it";
                 this.transitionName = "rotate-90-left-ccw";
                 let that = this;
                 setTimeout(function () {
+                    // Reset dog list if user is at the end
                     if (that.index === that.filteredProfiles.length - 1) that.index = 0;
+                    // Increment dog list
                     else that.index++;
                 }, 500);
                 let idx = this.index;
@@ -114,6 +130,7 @@
                     that.transitionName = "profiles";
                 }, 500);
             },
+            // Method if a user likes a dog
             likeProfile() {
                 this.likeName = "beating";
                 this.transitionName = "rotate-90-right-cw";
@@ -122,18 +139,18 @@
                     alert("You need to log in or sign up to access that feature!");
                     return;
                 }
-                // check the other user's profile for likes
+                // Check the other user's profile for likes
                 const otherUserPro = this.filteredProfiles[this.index];
                 const loggedInPro = this.user.profile;
                 const otherUserUid = this.filteredProfiles[this.index].user_id;
                 const otherUserLikes = this.filteredProfiles[this.index].likes;
                 const loggedInUid = this.user.data.localId;
                 const loggedInLikes = this.user.profile.likes;
-                // returns -1 if index is not found
+                // Return -1 if index is not found
                 let userIdx = otherUserLikes.indexOf(loggedInUid);
-                // if logged in user in other user's likes --> create match
+                // If logged in user in other user's likes then creates a new match
                 if (userIdx !== -1) {
-                    // create new match in matches collection
+                    // Create new match in matches collection
                     db.collection("matches")
                         .add({
                             user1: {
@@ -153,7 +170,7 @@
                         })
                         .then(function (docRef) {
                             console.log("Document written with ID: ", docRef.id);
-                            // remove like from other user like list and add match object to
+                            // Remove like from other user like list and add match object to
                             // other user's matches list
                             db.collection('users').doc(otherUserPro.user_id)
                                 .update({
@@ -161,7 +178,7 @@
                                     "matches": firebase.firestore.FieldValue.arrayUnion({
                                         [loggedInUid]: docRef.id
                                     })
-                                    // add match object to both user's profiles match list
+                                    // Add match object to both user's profiles match list
                                     // key: other user's uid, value: matchId
                                 }).then(function () {
                                 db.collection('users').doc(loggedInUid)
@@ -183,7 +200,7 @@
                                 });
                         })
                 } else {
-                    // add other otherUserId to loggedInUser likes
+                    // Add other otherUserId to loggedInUser likes
                     db.collection('users').doc(loggedInUid)
                         .update({
                             "likes": firebase.firestore.FieldValue.arrayUnion(otherUserUid)
@@ -201,6 +218,7 @@
                     that.transitionName = "profiles";
                 }, 1000);
             },
+            // Rewinds to previous profile
             previousProfile() {
                 this.reverseName = "rotate";
                 this.transitionName = "rotate-90-back-ccw";
@@ -215,7 +233,8 @@
                     that.transitionName = "profiles";
                 }, 1000);
             },
-            getMatches() {
+            // Filters what profiles to show a user based on zip code
+            zipFilter() {
                 let that = this;
                 if (that.user.loggedIn) {
                     const retList = [];
@@ -255,12 +274,14 @@
             }
         },
         created() {
-            this.getMatches();
+            this.zipFilter();
         },
         computed: {
+            // Getter for user
             ...mapGetters({
                 user: "user"
             }),
+            // Defines and sets up state
             ...mapState({
                 user: state => state.user
             }),
@@ -272,28 +293,32 @@
                   return this.filteredProfiles[idx].images[0];
               }
             },
+            // Adds functionality such as animations for liking a profile
             realLikeName() {
                 return this.likeName;
             },
+            // Adds functionality such as animations for passing a profile
             realPassName() {
                 return this.passName;
             },
+            // Adds functionality such as animations for reversing a profile
             realReverseName() {
                 return this.reverseName;
             },
+            // Filters out a user's own profile, liked profiles, and matched profiles
             filteredProfiles() {
-                const that = this
-                let list = []
+                const that = this   // 'that' is a closure we need since 'this' isn't manipulatable
+                let filterList = []
                 if (this.profilesList.length > 0) {
-                    // filter out my profile
-                    list = this.profilesList.filter(function (item) {
+                    // Filter out a user's own profile
+                    filterList = this.profilesList.filter(function (item) {
                         return (item.user_id !== that.user.data.localId)
                     })
-                    // filter out my likes
-                    list = list.filter(function (item) {
+                    // Filter out profiles a user has already liked
+                    filterList = filterList.filter(function (item) {
                         return !(that.user.profile.likes.includes(item.user_id))
                     })
-                    // filter out my matches
+                    // Filter out profiles a user has already matched with
                     let user = this.$store.getters.user;
                     let matchList = user.profile.matches;
                     let filterMatchList = []
@@ -302,10 +327,10 @@
                             filterMatchList.push(Object.keys(item)[0]);
                         })
                     }
-                    list = list.filter(function (item) {
+                    filterList = filterList.filter(function (item) {
                         return !(filterMatchList.includes(item.user_id))
                     })
-                    return list
+                    return filterList
                 }
             }
         }
