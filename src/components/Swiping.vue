@@ -66,9 +66,9 @@
         </div>
         <!-- Options to like, pass, or rewind to the previous dog -->
         <div class="action" v-if="filteredProfiles && dataLoaded">
-            <img :class="realPassName" src="./../../public/icons/pass02.png" @click="nextProfile"/>
-            <img :class="realReverseName" src="./../../public/icons/previous_new.png" @click="previousProfile"/>
-            <img :class="realLikeName" src="./../../public/icons/like02.png" @click="likeProfile"/>
+            <img :class="this.passName" src="./../../public/icons/pass02.png" @click="nextProfile"/>
+            <img :class="this.reverseName" src="./../../public/icons/previous_new.png" @click="previousProfile"/>
+            <img :class="this.likeName" src="./../../public/icons/like02.png" @click="likeProfile"/>
         </div>
     </div>
 </template>
@@ -294,17 +294,17 @@
               }
             },
             // Adds functionality such as animations for liking a profile
-            realLikeName() {
-                return this.likeName;
-            },
+            // this.likeName() {
+            //     return this.likeName;
+            // },
             // Adds functionality such as animations for passing a profile
-            realPassName() {
-                return this.passName;
-            },
+            // realPassName() {
+            //     return this.passName;
+            // },
             // Adds functionality such as animations for reversing a profile
-            realReverseName() {
-                return this.reverseName;
-            },
+            // realReverseName() {
+            //     return this.reverseName;
+            // },
             // Filters out a user's own profile, liked profiles, and matched profiles
             filteredProfiles() {
                 const that = this   // 'that' is a closure we need since 'this' isn't manipulatable
