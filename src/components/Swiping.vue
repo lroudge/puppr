@@ -141,11 +141,11 @@
                 }
                 // Check the other user's profile for likes
                 const otherUserPro = this.filteredProfiles[this.index];
-                const loggedInPro = this.user.profile;
                 const otherUserUid = this.filteredProfiles[this.index].user_id;
                 const otherUserLikes = this.filteredProfiles[this.index].likes;
                 const loggedInUid = this.user.data.localId;
                 const loggedInLikes = this.user.profile.likes;
+                const loggedInPro = this.user.profile;
                 // Return -1 if index is not found
                 let userIdx = otherUserLikes.indexOf(loggedInUid);
                 // If logged in user in other user's likes then creates a new match

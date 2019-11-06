@@ -369,12 +369,6 @@
             display: none;       
         }
 
-        /* .landing-page {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        } */
-
         .on-mobile {
             background-image: url('./../../public/icons/landing_page_mobile.png');
             background-repeat: no-repeat;
