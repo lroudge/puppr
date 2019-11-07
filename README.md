@@ -24,9 +24,9 @@ We are three dog enthusiasts who are passionate about coding but also like to ke
 Follow us on Twitter for more dog and tech related awesomeness!
 
 ## Blog posts
-After the developing phase, we each wrote a blog post to reflect on the PuppR journey.
+After the development phase, we each wrote a blog post to reflect on the PuppR journey.
 
-* Marc's article:
+* Marc's article: https://medium.com/@mcavigli/puppr-its-like-tinder-for-dogs-c498bf4bdd9b
 * Drew's article:
 * Laura's article:
 
