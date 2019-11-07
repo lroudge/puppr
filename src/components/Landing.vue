@@ -145,7 +145,7 @@
 
 <style scoped>
     /* FOR BROWSER */
-    @media screen and (min-width: 567px) {
+    @media screen and (min-width: 821px) {
 
         .on-mobile {
             display: none;
@@ -362,18 +362,12 @@
     }
 
     /* FOR MOBILE */
-    @media screen and (max-width: 566px) {
+    @media screen and (max-width: 820px) {
 
 
         .header-landing, .upper-container, .login-button {
             display: none;       
         }
-
-        /* .landing-page {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        } */
 
         .on-mobile {
             background-image: url('./../../public/icons/landing_page_mobile.png');

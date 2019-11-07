@@ -8,7 +8,7 @@ import Settings from '../components/Settings'
 import Matches from '../components/Matches'
 import Landing from '../components/Landing'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
     mode: 'history',

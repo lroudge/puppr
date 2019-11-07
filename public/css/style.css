@@ -1,3 +1,4 @@
+/* ---------- GENERAL ---------- */
 * {
     box-sizing: border-box !important;
     margin: 0 !important;
@@ -35,14 +36,89 @@ body, html {
     box-shadow: 0 0 7px #636161;
 }
 
+/* nav-bar is common to all components */
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 6em;
+    width: 100%;
+    padding: 0.3em !important;
+}
+
+.logo {
+    height: 4em;
+    width: 6em;
+    color: #badfdb;
+}
+
+.logo-image {
+    height: 4em;
+    width: 100%;
+}
+
+.profile-icon {
+    height: 4em;
+}
+
+.match-icon, .setting-icon {
+    height: 4em;
+}
+
+.empty {
+    height: 100%;
+    width: 20%;
+}
+
+button {
+    font-family: inherit !important;
+    color: #f8a978;
+    border: 1px solid #f8a978;
+    border-radius: 15px !important;
+    padding: .7em !important;
+    background-color: #badfdb91;
+    font-size: large !important;
+}
+
+a {
+    color: #8bd6ce !important;
+    text-decoration: underline !important;
+}
+
+a:hover {
+    color: #f8a978 !important;
+}
+
+/* Sliding animation between routes */
+.slide-left-enter-active,
+.slide-left-leave-active,
+.slide-right-enter-active,
+.slide-right-leave-active {
+    transition: transform 0.5s ease;
+    height: 100%;
+}
+
+.slide-left-enter,
+.slide-right-leave-active {
+    transform: translateX(100%);
+    transition: all 200ms ease-in 0s;
+    height: 100%;
+}
+
+.slide-left-leave-active,
+.slide-right-enter {
+    transform: translateX(-100%);
+    transition: all 200ms ease-in 0s;
+    height: 100%;
+}
+/* -----------------------------------------*/
+
+
+/* ---------- SWIPING ---------- */
 .swiping, .matches {
     height: 100%;
     width: 100%;
 }
-
-/*.swiping {*/
-/*    transform-style: preserve-3d;*/
-/*}*/
 
 .profile {
     display: flex;
@@ -62,6 +138,26 @@ body, html {
     box-shadow: 0px 3px 3px grey;
 }
 
+.profileInfo {
+    color: #ffc5a1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    border: 2px solid;
+    font-size: 2vh;
+    border-radius: 15px;
+    box-shadow: 0px 3px 3px grey;
+    padding: .7em !important;
+}
+
+.profileInfo h2 {
+    color: #f8a978;
+}
+
+/* Transitions for the profile image to the profile info */
 .flip-enter-active {
     transition: transform 1s cubic-bezier(0.04, 1.07, 0.89, 1.01);
 }
@@ -101,6 +197,7 @@ body, html {
     height: 100%;
 }
 
+/* This is the background of each profile image */
 .back {
     height: 60%;
     background-repeat: no-repeat;
@@ -110,6 +207,7 @@ body, html {
     box-shadow: 0px 3px 3px grey;
 }
 
+/* This is when a user clicks "rewind" on a profile */
 .rotate-90-back-ccw {
     -webkit-animation: rotate-90-left-ccw 0.6s cubic-bezier(0.680, -0.550, 0.265, 1.550) reverse both;
     animation: rotate-90-left-ccw 0.6s cubic-bezier(0.680, -0.550, 0.265, 1.550) reverse both;
@@ -130,6 +228,7 @@ body, html {
         transform-origin: left;
     }
 }
+
 @keyframes rotate-90-back-ccw {
     0% {
         -webkit-transform: rotate(0);
@@ -145,6 +244,7 @@ body, html {
     }
 }
 
+/* This is when a user clicks "pass" on a profile */
 .rotate-90-left-ccw {
     -webkit-animation: rotate-90-left-ccw 0.6s cubic-bezier(0.680, -0.550, 0.265, 1.550) forwards;
     animation: rotate-90-left-ccw 0.6s cubic-bezier(0.680, -0.550, 0.265, 1.550) forwards;
@@ -185,6 +285,7 @@ body, html {
     }
 }
 
+/* This is when a user clicks "like" on a profile */
 .rotate-90-right-cw {
     -webkit-animation: rotate-90-right-cw 0.6s cubic-bezier(0.680, -0.550, 0.265, 1.550) forwards;
     animation: rotate-90-right-cw 0.6s cubic-bezier(0.680, -0.550, 0.265, 1.550) forwards;
@@ -207,6 +308,7 @@ body, html {
         opacity: 0;
     }
 }
+
 @keyframes rotate-90-right-cw {
     0% {
         -webkit-transform: rotate(0);
@@ -223,35 +325,7 @@ body, html {
         opacity: 0;
     }
 }
-
-.nav-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 6em;
-    width: 100%;
-    padding: 0.3em !important;
-}
-
-.logo {
-    height: 4em;
-    width: 6em;
-    color: #badfdb;
-}
-
-.logo-image {
-    height: 4em;
-    width: 100%;
-}
-
-.profile-icon {
-    height: 4em;
-}
-
-.match-icon, .setting-icon {
-    height: 4em;
-}
-
+ /* Div containing pass, rewind and like */
 .action {
     display: flex;
     height: 13%;
@@ -351,26 +425,9 @@ body, html {
         transform: translate(1px, -2px) rotate(-1deg);
     }
 }
+/* -----------------------------------------*/
 
-.profileInfo {
-    color: #ffc5a1;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    flex-direction: column;
-    border: 2px solid;
-    font-size: 2vh;
-    border-radius: 15px;
-    box-shadow: 0px 3px 3px grey;
-    padding: .7em !important;
-}
-
-.profileInfo h2 {
-    color: #f8a978;
-}
-
+/* ---------- MATCHES ---------- */
 .matches {
     display: flex;
     flex-direction: column;
@@ -415,14 +472,14 @@ body, html {
     margin-bottom: 0 !important;
 }
 
-.dropdown-match {
+.match-element {
     width: 100%;
     display: flex;
     justify-content: flex-start;
     align-items: center;
 }
 
-.dropdown-match:hover .popover-match {
+.match-element:hover .match-email {
     width: 60%;
     height: 100%;
     text-align: end;
@@ -431,7 +488,7 @@ body, html {
     color: #8bd6ce;
 }
 
-.popover-match {
+.match-email {
     opacity: 0;
     z-index: 1;
     margin-right: 1em !important;
@@ -440,6 +497,11 @@ body, html {
     width: 60%;
     height: 100%;
     text-align: end;
+}
+
+.match-image {
+    width: 5em;
+    height: 5em;
 }
 
 .no-matches {
@@ -457,17 +519,9 @@ body, html {
     height: 15em;
     width: 16em;
 }
+/* -----------------------------------------*/
 
-.image-icon {
-    width: 5em;
-    height: 5em;
-}
-
-.empty {
-    height: 100%;
-    width: 20%;
-}
-
+/* ---------- MYPROFILE & SETTINGS ---------- */
 .user-profile, .settings {
     width: 100%;
     height: 100%;
@@ -566,7 +620,9 @@ textarea:focus::placeholder {
     flex-direction: column;
     align-items: center;
 }
+/* -----------------------------------------*/
 
+/* ---------- LOGIN ---------- */
 .login {
     height: 100%;
     width: 100%;
@@ -628,7 +684,9 @@ textarea:focus::placeholder {
     text-align: center;
     align-items: center;
 }
+/* -----------------------------------------*/
 
+/* ---------- SIGNUP ---------- */
 .signup {
     width: 100%;
     height: 100%;
@@ -679,7 +737,6 @@ textarea:focus::placeholder {
 
 .uploaded-image img {
     height: 100%;
-    /*width: 100%;*/
     border-radius: 15px;
 }
 
@@ -707,47 +764,6 @@ textarea:focus::placeholder {
     margin: .5em !important;
 }
 
-button {
-    font-family: inherit !important;
-    color: #f8a978;
-    border: 1px solid #f8a978;
-    border-radius: 15px !important;
-    padding: .7em !important;
-    background-color: #badfdb91;
-    font-size: large !important;
-}
-
-a {
-    color: #8bd6ce !important;
-    text-decoration: underline !important;
-}
-
-a:hover {
-    color: #f8a978 !important;
-}
-
-.slide-left-enter-active,
-.slide-left-leave-active,
-.slide-right-enter-active,
-.slide-right-leave-active {
-    transition: transform 0.5s ease;
-    height: 100%;
-}
-
-.slide-left-enter,
-.slide-right-leave-active {
-    transform: translateX(100%);
-    transition: all 200ms ease-in 0s;
-    height: 100%;
-}
-
-.slide-left-leave-active,
-.slide-right-enter {
-    transform: translateX(-100%);
-    transition: all 200ms ease-in 0s;
-    height: 100%;
-}
-
 .signup-0, .signup-1, .signup-2 {
     width: 100%;
     height: 90%;
@@ -756,3 +772,4 @@ a:hover {
     align-items: center;
     justify-content: flex-start;
 }
+/* -----------------------------------------*/

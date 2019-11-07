@@ -13,10 +13,10 @@
         <div class="match-list">
             <ul v-if="profiles.length">
                 <li v-for="profile in profiles">
-                    <div class="dropdown-match">
-                        <img :src="profile.images[0]" class="image-icon"/>
+                    <div class="match-element">
+                        <img :src="profile.images[0]" class="match-image"/>
                         <p>{{ profile.dogInfo.name }}</p>
-                        <div class="popover-match">{{ profile.email }}</div>
+                        <div class="match-email">{{ profile.email }}</div>
                     </div>
                 </li>
             </ul>
@@ -28,7 +28,6 @@
     </div>
 </template>
 <script>
-    import firebase from "firebase";
     import {db} from "../main";
     import {mapGetters} from "vuex";
 
@@ -42,19 +41,22 @@
             this.loadProfiles();
         },
         computed: {
+            // This gets the current logged in user from the store
             ...mapGetters({
                 user: "user"
             })
         },
         methods: {
+            // Gets the current user from the store and its matches list
+            // Loops over these ids to retrieve the corresponding profiles
+            // Stores those profiles in the profiles property
+            // This method gets called at creation of component
             loadProfiles: function () {
                 const that = this;
                 let user = this.$store.getters.user;
                 let matchList = user.profile.matches;
-                console.log(JSON.stringify(matchList));
                 if (matchList.length > 0) {
                     matchList.forEach((item) => {
-                        console.log(Object.keys(item)[0]);
                         let currentUser;
                         db.collection("users").doc(Object.keys(item)[0]).get().then(function (doc) {
                             currentUser = doc.data();
