@@ -26,7 +26,7 @@ Follow us on Twitter for more dog and tech related awesomeness!
 ## Blog posts
 After the development phase, we each wrote a blog post to reflect on the PuppR journey.
 
-* Marc's article: https://medium.com/@mcavigli/puppr-its-like-tinder-for-dogs-c498bf4bdd9b
+* Marc's article: [PuppR: It’s Like Tinder For Dogs](https://medium.com/@mcavigli/puppr-its-like-tinder-for-dogs-c498bf4bdd9b)
 * Drew's article:
 * Laura's article:
 
