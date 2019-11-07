@@ -27,7 +27,7 @@ Follow us on Twitter for more dog and tech related awesomeness!
 After the development phase, we each wrote a blog post to reflect on the PuppR journey.
 
 * Marc's article: [PuppR: It’s Like Tinder For Dogs](https://medium.com/@mcavigli/puppr-its-like-tinder-for-dogs-c498bf4bdd9b)
-* Drew's article:
+* Drew's article: [PuppR: The social app for dog people](https://medium.com/@andrew.maring/puppr-the-social-app-for-dog-people-dcdb1c496f29)
 * Laura's article:
 
 # Tutorial
@@ -65,7 +65,7 @@ When you are finished simply go back to your terminal and hit `ctrl + c` to quit
 # Architecture
 
 ## Overview
-Our web app is a single-page app, coded mainly in Node.js. **PuppR** is front-end heavy, meaning that we focused our time and energy in developping a simple but easy to use and fun app. We designed most of the User Interface, using plain CSS and some native Vue transitions and animations. We also incorporated some BootstrapVue elements which offered a simple solution for some features like image uploading.
+Our web app is a single-page app, coded mainly in Javascript. **PuppR** is front-end heavy, meaning that we focused our time and energy in developping a simple but easy to use and fun app. We designed most of the User Interface, using plain CSS and some native Vue transitions and animations. We also incorporated some BootstrapVue elements which offered a simple solution for some features like image uploading.
 
 ![infra](https://i.imgur.com/fSbo6ho.jpg)
 
