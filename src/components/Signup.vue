@@ -100,8 +100,9 @@
                         </div>
                         <div>
                             <h4 for="zipcode">Zip code</h4>
-                            <textarea id="zipcode" name="zipcode" required v-model="form.zipcode" placeholder="94117"
-                                      rows="1"></textarea>
+                            <textarea id="zipcode" name="zipcode" required v-model="form.zipcode"
+                                placeholder="Until PuppR has more users, please use 94107, 95062, or 58104"
+                                rows="1"></textarea>
                         </div>
                     </div>
                     <div class="previous-next">
