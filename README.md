@@ -28,7 +28,7 @@ After the development phase, we each wrote a blog post to reflect on the PuppR j
 
 * Marc's article: [PuppR: It’s Like Tinder For Dogs](https://medium.com/@mcavigli/puppr-its-like-tinder-for-dogs-c498bf4bdd9b)
 * Drew's article: [PuppR: The social app for dog people](https://medium.com/@andrew.maring/puppr-the-social-app-for-dog-people-dcdb1c496f29)
-* Laura's article:
+* Laura's article: [PuppR: Learnings from building a dating site for dogs](https://medium.com/@laura.derohan/learnings-from-building-a-dating-site-for-dogs-70f4d649f2b3)
 
 # Tutorial
 
