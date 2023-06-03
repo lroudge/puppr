@@ -20,6 +20,7 @@ We are three dog enthusiasts who are passionate about coding but also like to ke
 * **Marc Cavigli** [@MarcCavigli](https://twitter.com/MarcCavigli) - Singer, Musician, song-writer and composer, but also a very talented Software Engineer.
 * **Drew Maring** [@drewmaring](https://twitter.com/drewmaring) - Dog owner and great Software Engineer, formerly working at Docker as a Solutions Architect / Technical Account Manager.
 * **Laura Roudge** [@LRoudge](https://twitter.com/LRoudge) - Former Dancer and Comedian, the "french touch" Software Engineer of the team.
+* **MIKE LEKARAM** [@mikelekaram(https://twitter.com/SayankaMike) new software engineer
 
 Follow us on Twitter for more dog and tech related awesomeness!
 
